@@ -16,7 +16,7 @@ export interface Stats {
 		publicEventsCompleted: number; //publicEventsCompleted.basic.value
 	};
 	pvp: { //allPvP.allTime
-		activitesWon: number; //activitesWon.basic.value
+		activitiesWon: number; //activitesWon.basic.value
 		assists: number; //assists.basic.value
 		kills: number; //kills.basic.value
 		timePlayed: string; //secondsPlayed.basic.displayValue

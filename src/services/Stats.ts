@@ -22,7 +22,7 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 
 			let temp = JSON.parse(body);
 			let values = temp.Response.mergedAllCharacters.results;
-			
+			console.log(values);
 			// Creating a stats interface 'inline'
 			resolve({
 				pve: {
@@ -35,7 +35,7 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 					publicEventsCompleted: values.allPvE.allTime.publicEventsCompleted.basic.value,
 				},
 				pvp: {
-					activitesWon: values.allPvP.allTime.activitesWon.basic.value,
+					activitiesWon: values.allPvP.allTime.activitiesWon.basic.value,
 					assists: values.allPvP.allTime.assists.basic.value,
 					kills: values.allPvP.allTime.kills.basic.value,
 					timePlayed: values.allPvP.allTime.secondsPlayed.basic.displayValue,
