@@ -3,11 +3,17 @@ import { GetClanMembers } from "./services/Clan";
 import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
+const initialState = {
+	members: [],
+	stats: []
+};
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
-class First extends React.Component<{} ,{}> {
+class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 	constructor(props : any) {
 		super(props);
+		
+		this.state = initialState;
 
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -17,15 +23,19 @@ class First extends React.Component<{} ,{}> {
 
 		let clanProm = GetClanMembers();
 
-		clanProm.then((value : any) => {
-			console.log(value);
+		clanProm.then((members : Member[]) => {
+			console.log(members);
 			let statsProm: Promise<Stats>[] = [];
-			value.forEach((member: Member) => {
+			members.forEach((member: Member) => {
 				statsProm.push(GetHistoricalStats(member));
 			});
 
-			Promise.all(statsProm).then((values) => {
-				console.log(values);
+			Promise.all(statsProm).then((stats) => {
+				console.log(stats);
+				this.setState({
+					members: members,
+					stats: stats,
+				});
 			});
 		});
 	}
@@ -35,6 +45,13 @@ class First extends React.Component<{} ,{}> {
 		<div>
 			Hi there
 			<button onClick={this.handleClick}>Click me</button>
+			{this.state.members.length > 0 &&
+				<ul>
+
+				</ul>
+
+			}
+
 		</div>
 		);
 	}
