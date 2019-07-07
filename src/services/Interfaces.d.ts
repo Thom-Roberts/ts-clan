@@ -6,7 +6,7 @@ export interface Member {
 
 export interface Stats {
 	// Response.mergedAllCharacters.results
-	pve: { //allPvE.allTime
+	pve?: { //allPvE.allTime
 		activitiesCleared: number; //activitiesCleared.basic.value
 		assists: number; //assists.basic.value
 		kills: number; //kills.basic.value
@@ -15,7 +15,7 @@ export interface Stats {
 		kdRatio: string; //killsDeathsRatio.basic.displayValue
 		publicEventsCompleted: number; //publicEventsCompleted.basic.value
 	};
-	pvp: { //allPvP.allTime
+	pvp?: { //allPvP.allTime
 		activitiesWon: number; //activitesWon.basic.value
 		assists: number; //assists.basic.value
 		kills: number; //kills.basic.value

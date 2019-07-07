@@ -23,9 +23,10 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 			let temp = JSON.parse(body);
 			let values = temp.Response.mergedAllCharacters.results;
 			
-			// Creating a stats interface 'inline'
-			resolve({
-				pve: {
+			let returnStats: Stats = {};
+			if(Object.keys(values.allPvE).length !== 0) {
+				//append the PvE stuff
+				returnStats.pve = {
 					activitiesCleared: values.allPvE.allTime.activitiesCleared.basic.value,
 					assists: values.allPvE.allTime.assists.basic.value,
 					kills: values.allPvE.allTime.kills.basic.value,
@@ -33,8 +34,11 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 					deaths: values.allPvE.allTime.deaths.basic.value,
 					kdRatio: values.allPvE.allTime.killsDeathsRatio.basic.displayValue,
 					publicEventsCompleted: values.allPvE.allTime.publicEventsCompleted.basic.value,
-				},
-				pvp: {
+				};
+			}
+			if(Object.keys(values.allPvP).length !== 0) {
+				//append the PvP stuff
+				returnStats.pvp = {
 					activitiesWon: values.allPvP.allTime.activitiesWon.basic.value,
 					assists: values.allPvP.allTime.assists.basic.value,
 					kills: values.allPvP.allTime.kills.basic.value,
@@ -46,8 +50,11 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 					kdRatio: values.allPvP.allTime.killsDeathsRatio.basic.displayValue,
 					winLossRatio: values.allPvP.allTime.winLossRatio.basic.displayValue,
 					longestKillSpree: values.allPvP.allTime.longestKillSpree.basic.value,
-				},
-			});
+				};
+			}
+			console.log(values);
+			// Creating a stats interface 'inline'
+			resolve(returnStats);
 		});
 	});
 }

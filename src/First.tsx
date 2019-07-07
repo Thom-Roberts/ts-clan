@@ -1,5 +1,8 @@
 import React, { SyntheticEvent } from 'react';
 import { GetClanMembers } from "./services/Clan";
+import { GetHistoricalStats } from "./services/Stats";
+import { Member } from "./services/Interfaces";
+import { Stats } from "./services/Interfaces";
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
 class First extends React.Component<{} ,{}> {
@@ -12,10 +15,18 @@ class First extends React.Component<{} ,{}> {
 	private handleClick(event: SyntheticEvent) {
 		event.preventDefault();
 
-		let prom = GetClanMembers();
+		let clanProm = GetClanMembers();
 
-		prom.then((value : any) => {
+		clanProm.then((value : any) => {
 			console.log(value);
+			let statsProm: Promise<Stats>[] = [];
+			value.forEach((member: Member) => {
+				statsProm.push(GetHistoricalStats(member));
+			});
+
+			Promise.all(statsProm).then((values) => {
+				console.log(values);
+			});
 		});
 	}
 
