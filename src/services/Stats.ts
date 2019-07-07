@@ -22,7 +22,7 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 
 			let temp = JSON.parse(body);
 			let values = temp.Response.mergedAllCharacters.results;
-			console.log(values);
+			
 			// Creating a stats interface 'inline'
 			resolve({
 				pve: {
