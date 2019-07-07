@@ -19,14 +19,14 @@ export interface Stats {
 		activitesWon: number; //activitesWon.basic.value
 		assists: number; //assists.basic.value
 		kills: number; //kills.basic.value
-		timePlayed: string; //secondPlayed.basic.displayValue
+		timePlayed: string; //secondsPlayed.basic.displayValue
 		deaths: number; //deaths.basic.value
 		bestSingleGameKils: number; //bestSingleGameKills.basic.value
 		opponentsDefeated: number; //opponentsDefeated.basic.value
 		efficiency: string; //efficiency.basic.displayValue
 		kdRatio: string; //killsDeathsRatio.basic.displayValue
 		winLossRatio: string; //winLossRatio.basic.displayValue
-		longestKillStreak: number; //longestKillSpree.basic.value
+		longestKillSpree: number; //longestKillSpree.basic.value
 
 	};
 }
