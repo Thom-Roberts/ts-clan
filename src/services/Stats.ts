@@ -53,7 +53,6 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 					longestKillSpree: values.allPvP.allTime.longestKillSpree.basic.value,
 				};
 			}
-			console.log(values);
 			// Creating a stats interface 'inline'
 			resolve(returnStats);
 		});
