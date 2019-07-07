@@ -8,7 +8,7 @@ export function GetClanMembers() : Promise<Member[]> {
 		const options = {
          'url': `https://www.bungie.net/Platform/GroupV2/${ClanId}/Members/`,
          'headers': {
-            'x-api-key': BUNGIEAPIKEY,
+            'x-api-key': BUNGIEAPIKEY(),
          },
       };
 

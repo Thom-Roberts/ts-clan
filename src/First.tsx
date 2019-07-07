@@ -3,6 +3,7 @@ import { GetClanMembers } from "./services/Clan";
 import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
+
 const initialState = {
 	members: [] as Member[],
 	stats: [] as Stats[],
@@ -43,7 +44,7 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 	render() {
 		return (
 		<div>
-			Hi there
+			Hi there, {process.env.APIKEY}
 			<button onClick={this.handleClick}>Click me</button>
 			{this.state.members.length > 0 &&
 				this.state.stats.length > 0 &&
