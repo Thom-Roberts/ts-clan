@@ -51,7 +51,16 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 					{this.state.members.map((member, index) => {
 						return (
 							<li key={member.membershipId}>
-								{member.displayName}:
+								{member.displayName}: 
+								{(function() {
+									switch(member.membershipType) {
+										case 2: return " PlayStation";
+										case 3: return " Xbox";
+										case 4: return " PC";
+										default: return ` Invalid Membership type: ${member.membershipType}`;
+									}
+								})()
+							}
 								<ul> 
 									<li> PvE:
 										<ul>
