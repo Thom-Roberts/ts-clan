@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import { GetClanMembers } from "./services/Clan";
+import "./First";
+import First from './First';
 
 const App: React.FC = () => {
   
   return (
     <div>
       This is working
+      <First />
     </div>
   );
 }

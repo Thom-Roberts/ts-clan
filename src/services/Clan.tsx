@@ -5,15 +5,15 @@ const ClanId = '407685';
 
 export function GetClanMembers() : Promise<Member[]> {
 	return new Promise((resolve, reject) => {
-		let members: Member[];
 		const options = {
-         'url': `http://bungie.net/Platform/GroupV2/${ClanId}/Members/`,
+         'url': `https://www.bungie.net/Platform/GroupV2/${ClanId}/Members/`,
          'headers': {
             'x-api-key': BUNGIEAPIKEY,
          },
       };
 
 		request.get(options, (err, res, body) => {
+			let members: Member[] = [];
 			if(err) {
 				reject(err);
 			}
@@ -28,6 +28,7 @@ export function GetClanMembers() : Promise<Member[]> {
 					members.push({
 						'membershipId': val['destinyUserInfo']['membershipId'],
 						'membershipType': val['destinyUserInfo']['membershipType'],
+						'displayName': val['destinyUserInfo']['displayName'],
 					});
 				}
 			});
