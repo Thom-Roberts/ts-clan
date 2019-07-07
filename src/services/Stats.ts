@@ -24,6 +24,7 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 			let values = temp.Response.mergedAllCharacters.results;
 			
 			let returnStats: Stats = {};
+			// Test if response has PvE/PvP stats
 			if(Object.keys(values.allPvE).length !== 0) {
 				//append the PvE stuff
 				returnStats.pve = {
