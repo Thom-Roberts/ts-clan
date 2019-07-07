@@ -40,6 +40,7 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 			if(Object.keys(values.allPvP).length !== 0) {
 				//append the PvP stuff
 				returnStats.pvp = {
+					activitiesPlayed: values.allPvP.allTime.activitiesEntered.basic.value,
 					activitiesWon: values.allPvP.allTime.activitiesWon.basic.value,
 					assists: values.allPvP.allTime.assists.basic.value,
 					kills: values.allPvP.allTime.kills.basic.value,
