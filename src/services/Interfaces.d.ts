@@ -27,6 +27,5 @@ export interface Stats {
 		kdRatio: string; //killsDeathsRatio.basic.displayValue
 		winLossRatio: string; //winLossRatio.basic.displayValue
 		longestKillSpree: number; //longestKillSpree.basic.value
-
 	};
 }
