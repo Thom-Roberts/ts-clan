@@ -4,6 +4,10 @@ import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
 import { Button } from "semantic-ui-react";
+import * as bnetIcon from './images/battleNet.png';
+import * as psnIcon from './images/psIcon.png';
+const xboxIcon = require('./images/xboxIcon.png');
+// import * as xboxIcon from './images/xboxIcon.png'; WHY DOES THIS NOT WORK??
 
 const initialState = {
 	members: [] as Member[],
@@ -48,24 +52,25 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 			Hi there, {process.env.APIKEY}
 			<Button onClick={this.handleClick}>Click me</Button>
 
-
 			{this.state.members.length > 0 &&
 				this.state.stats.length > 0 &&
 				<ul>
 					{this.state.members.map((member, index) => {
 						return (
 							<li key={member.membershipId}>
-								<img src={member.iconPath} alt="" style={{'width': '15px'}} />
-								{member.displayName}:
+								<img src=
 								{(function() {
 									switch(member.membershipType) {
-										case 2: return " PlayStation";
-										case 3: return " Xbox";
-										case 4: return " PC";
+										case 2: return psnIcon;
+										case 3: return xboxIcon;
+										case 4: return bnetIcon;
 										default: return ` Invalid Membership type: ${member.membershipType}`;
 									}
 								})()
-							}
+								}
+								alt="" style={{'width': '14px', 'position': 'relative', 'top': '2px'}} />
+								{member.displayName}:
+
 								<ul>
 									<li> PvE:
 										<ul>
