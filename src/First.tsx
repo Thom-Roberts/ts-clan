@@ -13,7 +13,7 @@ const initialState = {
 class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 	constructor(props : any) {
 		super(props);
-		
+
 		this.state = initialState;
 
 		this.handleClick = this.handleClick.bind(this);
@@ -52,7 +52,8 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 					{this.state.members.map((member, index) => {
 						return (
 							<li key={member.membershipId}>
-								{member.displayName}: 
+								<img src={member.iconPath} alt="" style={{'width': '15px'}} />
+								{member.displayName}:
 								{(function() {
 									switch(member.membershipType) {
 										case 2: return " PlayStation";
@@ -62,7 +63,7 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 									}
 								})()
 							}
-								<ul> 
+								<ul>
 									<li> PvE:
 										<ul>
 											<li> {/* Doing !. is a null assertion operator */}
@@ -100,7 +101,7 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 													Games played: {this.state.stats[index].pvp!.activitiesPlayed}
 												</li>
 												<li>
-													Games won: {this.state.stats[index].pvp!.activitiesWon} 
+													Games won: {this.state.stats[index].pvp!.activitiesWon}
 												</li>
 												<li>
 													Win/Loss Ratio: {this.state.stats[index].pvp!.winLossRatio}
@@ -132,7 +133,7 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 											</ul>
 										</li>
 									}
-									
+
 								</ul>
 							</li>
 						);
@@ -144,7 +145,7 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 		</div>
 		);
 	}
-	
+
 }
 
 export default First;

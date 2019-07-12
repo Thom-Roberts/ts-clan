@@ -28,6 +28,7 @@ export function GetClanMembers() : Promise<Member[]> {
 					members.push({
 						'membershipId': val['destinyUserInfo']['membershipId'],
 						'membershipType': val['destinyUserInfo']['membershipType'],
+						'iconPath': 'https://www.bungie.net' + val['destinyUserInfo']['iconPath'],
 						'displayName': val['destinyUserInfo']['displayName'],
 					});
 				}

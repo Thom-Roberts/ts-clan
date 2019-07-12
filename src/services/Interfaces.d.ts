@@ -1,6 +1,7 @@
 export interface Member {
 	membershipId: string;
 	membershipType: number;
+	iconPath: string;
 	displayName: string;
 };
 
