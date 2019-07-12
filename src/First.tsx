@@ -3,7 +3,7 @@ import { GetClanMembers } from "./services/Clan";
 import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
-import { Button } from "semantic-ui-react";
+import { Button, Segment } from "semantic-ui-react";
 import * as bnetIcon from './images/battleNet.png';
 import * as psnIcon from './images/psIcon.png';
 const xboxIcon = require('./images/xboxIcon.png');
@@ -54,10 +54,12 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 
 			{this.state.members.length > 0 &&
 				this.state.stats.length > 0 &&
-				<ul>
+
+
+				<Segment.Group>
 					{this.state.members.map((member, index) => {
 						return (
-							<li key={member.membershipId}>
+							<Segment key={member.membershipId}>
 								<img src=
 								{(function() {
 									switch(member.membershipType) {
@@ -143,10 +145,12 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 									}
 
 								</ul>
-							</li>
+							</Segment>
 						);
 					})}
-				</ul>
+				</Segment.Group>
+
+
 
 			}
 
