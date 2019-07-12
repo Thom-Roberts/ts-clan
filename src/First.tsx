@@ -3,6 +3,7 @@ import { GetClanMembers } from "./services/Clan";
 import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
+import { Button } from "semantic-ui-react";
 
 const initialState = {
 	members: [] as Member[],
@@ -45,7 +46,9 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 		return (
 		<div>
 			Hi there, {process.env.APIKEY}
-			<button onClick={this.handleClick}>Click me</button>
+			<Button onClick={this.handleClick}>Click me</Button>
+
+
 			{this.state.members.length > 0 &&
 				this.state.stats.length > 0 &&
 				<ul>
