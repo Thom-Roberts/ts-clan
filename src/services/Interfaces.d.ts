@@ -1,4 +1,4 @@
-declare module '*.png'
+declare module '*.png' // Allows png's to be imported
 
 export interface Member {
 	membershipId: string;
