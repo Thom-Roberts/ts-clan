@@ -4,7 +4,7 @@ import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
 import { Button } from "semantic-ui-react";
-import * as bnetIcon from './images/battlenet.png';
+import * as bnetIcon from './images/battleNet.png';
 import * as psnIcon from './images/psIcon.png';
 const xboxIcon = require('./images/xboxIcon.png');
 // import * as xboxIcon from './images/xboxIcon.png'; //WHY DOES THIS NOT WORK??
