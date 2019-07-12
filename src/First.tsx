@@ -3,9 +3,12 @@ import { GetClanMembers } from "./services/Clan";
 import { GetHistoricalStats } from "./services/Stats";
 import { Member } from "./services/Interfaces";
 import { Stats } from "./services/Interfaces";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, Segment, Table } from "semantic-ui-react";
+import "./PvETable";
+import _ from 'lodash';
 import * as bnetIcon from './images/battleNet.png';
 import * as psnIcon from './images/psIcon.png';
+import PvETable from './PvETable';
 const xboxIcon = require('./images/xboxIcon.png');
 // import * as xboxIcon from './images/xboxIcon.png'; //WHY DOES THIS NOT WORK??
 
@@ -57,6 +60,12 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 
 
 				<Segment.Group>
+
+				<PvETable
+					members={this.state.members}
+					stats={this.state.stats}
+				/>
+
 					{this.state.members.map((member, index) => {
 						return (
 							<Segment key={member.membershipId}>
