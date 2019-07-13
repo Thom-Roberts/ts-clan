@@ -56,6 +56,9 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 					if(clickedColumn === 'timePlayed') {
 						return item['timePlayed'].timePlayedNumber;
 					}
+					else if(clickedColumn === 'kdRatio') {
+						return parseInt(item['kdRatio']);
+					}
 					else {
 						return item[clickedColumn].toLowerCase();
 					}
@@ -86,6 +89,9 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						<Table.HeaderCell sorted={column === 'timePlayed' ? direction : null} onClick={this.handleSort('timePlayed')}>
 							Time Played
 						</Table.HeaderCell>
+						<Table.HeaderCell sorted={column === 'kdRatio' ? direction : null} onClick={this.handleSort('kdRatio')}>
+							KD Ratio
+						</Table.HeaderCell>
 					</Table.Row>
 				</Table.Header>
 
@@ -96,6 +102,7 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 							<Table.Row key={member.kdRatio}>
 								<Table.Cell>{member.name}</Table.Cell>
 								<Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
+								<Table.Cell>{member.kdRatio}</Table.Cell>
 							</Table.Row>
 						);
 					})}
