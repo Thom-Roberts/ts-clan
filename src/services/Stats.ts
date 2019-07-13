@@ -32,6 +32,7 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 					assists: values.allPvE.allTime.assists.basic.value,
 					kills: values.allPvE.allTime.kills.basic.value,
 					timePlayed: values.allPvE.allTime.secondsPlayed.basic.displayValue,
+					timePlayedNumber: values.allPvE.allTime.secondsPlayed.basic.value,
 					deaths: values.allPvE.allTime.deaths.basic.value,
 					kdRatio: values.allPvE.allTime.killsDeathsRatio.basic.displayValue,
 					publicEventsCompleted: values.allPvE.allTime.publicEventsCompleted.basic.value,

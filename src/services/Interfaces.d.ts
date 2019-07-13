@@ -13,6 +13,7 @@ export interface Stats {
 		assists: number; //assists.basic.value
 		kills: number; //kills.basic.value
 		timePlayed: string; //secondsPlayed.basic.displayValue
+		timePlayedNumber: number; // secondsPlayed.basic.value
 		deaths: number; //deaths.basic.value
 		kdRatio: string; //killsDeathsRatio.basic.displayValue
 		publicEventsCompleted: number; //publicEventsCompleted.basic.value

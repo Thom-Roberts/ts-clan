@@ -16,7 +16,10 @@ interface PvETableState {
 
 interface temp {
 	name: string;
-	timePlayed: string;
+	timePlayed: {
+		timePlayed: string;
+		timePlayedNumber: number;
+	};
 	kdRatio: string;
 }
 
@@ -30,7 +33,10 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 			data: this.props.members.map((member, index) => {
 				return {
 					'name': member.displayName,
-					'timePlayed': this.props.stats[index].pve!.timePlayed,
+					'timePlayed': {
+						'timePlayed': this.props.stats[index].pve!.timePlayed,
+						'timePlayedNumber': this.props.stats[index].pve!.timePlayedNumber,
+					},
 					'kdRatio': this.props.stats[index].pve!.kdRatio,
 				};
 			}),
@@ -46,7 +52,14 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 		if(column !== clickedColumn) {
 			this.setState({
 				column: clickedColumn,
-				data: _.sortBy(data, [(item: any) => item[clickedColumn].toLowerCase()]),
+				data: _.sortBy(data, [(item: any) => {
+					if(clickedColumn === 'timePlayed') {
+						return item['timePlayed'].timePlayedNumber;
+					}
+					else {
+						return item[clickedColumn].toLowerCase();
+					}
+				}]),
 				direction: 'ascending'
 			});
 			
@@ -82,7 +95,7 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						return (
 							<Table.Row key={member.kdRatio}>
 								<Table.Cell>{member.name}</Table.Cell>
-								<Table.Cell>{member.timePlayed}</Table.Cell>
+								<Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
 							</Table.Row>
 						);
 					})}
