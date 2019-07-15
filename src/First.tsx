@@ -62,11 +62,11 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 
 
 				<Segment.Group>
-
-				<PvETable
-					members={this.state.members}
-					stats={this.state.stats}
-				/>
+					PvE Stats
+					<PvETable
+						members={this.state.members}
+						stats={this.state.stats}
+					/>
 
 					{this.state.members.map((member, index) => {
 						return (
