@@ -1,8 +1,12 @@
 import React from 'react';
 import { Table } from "semantic-ui-react";
 import { Member, Stats } from "./services/Interfaces";
+// import * as psnIcon from './images/psIcon.png';
+// import * as pcIcon from './images/battleNet.png';
 import _ from 'lodash';
 
+const psnIcon = require('./images/psIcon.png');
+const pcIcon = require('./images/battleNet.png');
 interface PvETableProps {
 	members: Member[];
 	stats: Stats[];
@@ -15,6 +19,7 @@ interface PvETableState {
 }
 
 interface temp {
+	membershipType: number;
 	name: string;
 	timePlayed: {
 		timePlayed: string;
@@ -32,6 +37,7 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 			column: null,
 			data: this.props.members.map((member, index) => {
 				return {
+					'membershipType': member.membershipType,
 					'name': member.displayName,
 					'timePlayed': {
 						'timePlayed': this.props.stats[index].pve!.timePlayed,
