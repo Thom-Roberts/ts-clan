@@ -19,44 +19,47 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 			if(res.statusCode !== 200) {
 				reject(`Stats request failed: ${res.statusCode} ${body}`);
 			}
-
-			let temp = JSON.parse(body);
-			let values = temp.Response.mergedAllCharacters.results;
+			else {
+				let temp = JSON.parse(body);
 			
-			let returnStats: Stats = {};
-			// Test if response has PvE/PvP stats
-			if(Object.keys(values.allPvE).length !== 0) {
-				//append the PvE stuff
-				returnStats.pve = {
-					activitiesCleared: values.allPvE.allTime.activitiesCleared.basic.value,
-					assists: values.allPvE.allTime.assists.basic.value,
-					kills: values.allPvE.allTime.kills.basic.value,
-					timePlayed: values.allPvE.allTime.secondsPlayed.basic.displayValue,
-					timePlayedNumber: values.allPvE.allTime.secondsPlayed.basic.value,
-					deaths: values.allPvE.allTime.deaths.basic.value,
-					kdRatio: values.allPvE.allTime.killsDeathsRatio.basic.displayValue,
-					publicEventsCompleted: values.allPvE.allTime.publicEventsCompleted.basic.value,
-				};
+				let values = temp.Response.mergedAllCharacters.results;
+				
+				let returnStats: Stats = {};
+				// Test if response has PvE/PvP stats
+				if(Object.keys(values.allPvE).length !== 0) {
+					//append the PvE stuff
+					returnStats.pve = {
+						activitiesCleared: values.allPvE.allTime.activitiesCleared.basic.value,
+						assists: values.allPvE.allTime.assists.basic.value,
+						kills: values.allPvE.allTime.kills.basic.value,
+						timePlayed: values.allPvE.allTime.secondsPlayed.basic.displayValue,
+						timePlayedNumber: values.allPvE.allTime.secondsPlayed.basic.value,
+						deaths: values.allPvE.allTime.deaths.basic.value,
+						kdRatio: values.allPvE.allTime.killsDeathsRatio.basic.displayValue,
+						publicEventsCompleted: values.allPvE.allTime.publicEventsCompleted.basic.value,
+					};
+				}
+				if(Object.keys(values.allPvP).length !== 0) {
+					//append the PvP stuff
+					returnStats.pvp = {
+						activitiesPlayed: values.allPvP.allTime.activitiesEntered.basic.value,
+						activitiesWon: values.allPvP.allTime.activitiesWon.basic.value,
+						assists: values.allPvP.allTime.assists.basic.value,
+						kills: values.allPvP.allTime.kills.basic.value,
+						timePlayed: values.allPvP.allTime.secondsPlayed.basic.displayValue,
+						deaths: values.allPvP.allTime.deaths.basic.value,
+						bestSingleGameKils: values.allPvP.allTime.bestSingleGameKills.basic.value,
+						opponentsDefeated: values.allPvP.allTime.opponentsDefeated.basic.value,
+						efficiency: values.allPvP.allTime.efficiency.basic.displayValue,
+						kdRatio: values.allPvP.allTime.killsDeathsRatio.basic.displayValue,
+						winLossRatio: values.allPvP.allTime.winLossRatio.basic.displayValue,
+						longestKillSpree: values.allPvP.allTime.longestKillSpree.basic.value,
+					};
+				}
+				// Creating a stats interface 'inline'
+				resolve(returnStats);
 			}
-			if(Object.keys(values.allPvP).length !== 0) {
-				//append the PvP stuff
-				returnStats.pvp = {
-					activitiesPlayed: values.allPvP.allTime.activitiesEntered.basic.value,
-					activitiesWon: values.allPvP.allTime.activitiesWon.basic.value,
-					assists: values.allPvP.allTime.assists.basic.value,
-					kills: values.allPvP.allTime.kills.basic.value,
-					timePlayed: values.allPvP.allTime.secondsPlayed.basic.displayValue,
-					deaths: values.allPvP.allTime.deaths.basic.value,
-					bestSingleGameKils: values.allPvP.allTime.bestSingleGameKills.basic.value,
-					opponentsDefeated: values.allPvP.allTime.opponentsDefeated.basic.value,
-					efficiency: values.allPvP.allTime.efficiency.basic.displayValue,
-					kdRatio: values.allPvP.allTime.killsDeathsRatio.basic.displayValue,
-					winLossRatio: values.allPvP.allTime.winLossRatio.basic.displayValue,
-					longestKillSpree: values.allPvP.allTime.longestKillSpree.basic.value,
-				};
-			}
-			// Creating a stats interface 'inline'
-			resolve(returnStats);
+			
 		});
 	});
 }
