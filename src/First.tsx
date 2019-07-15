@@ -14,10 +14,11 @@ const xboxIcon = require('./images/xboxIcon.png');
 const initialState = {
 	members: [] as Member[],
 	stats: [] as Stats[],
+	fetching: false,
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
-class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
+class First extends React.Component<{} ,{members: Member[], stats: Stats[], fetching: boolean}> {
 	constructor(props : any) {
 		super(props);
 
@@ -28,7 +29,9 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 
 	private handleClick(event: SyntheticEvent) {
 		event.preventDefault();
-
+		this.setState({
+			fetching: true,
+		});
 		let clanProm = GetClanMembers();
 
 		clanProm.then((members : Member[]) => {
@@ -47,15 +50,28 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 			}).catch(err => {
 				console.error(err);
 				alert(`Failed to fetch results, check error in the console`);
+			}).finally(() => {
+				this.setState({
+					fetching: false,
+				});
 			});
 		});
 	}
 
 	render() {
+		const { fetching } = this.state;
+		const temp = (<Button onClick={this.handleClick}>Click me</Button>);
+		const temp2 = (<Button loading>Click me</Button>);
+
 		return (
 		<div>
-			Hi there, {process.env.APIKEY}
-			<Button onClick={this.handleClick}>Click me</Button>
+			{(function() {
+				if(fetching) {
+					return temp2;
+				}
+				return temp;
+			})()}
+			
 
 			{this.state.members.length > 0 &&
 				this.state.stats.length > 0 &&
