@@ -17,7 +17,13 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 				reject(err);
 			}
 			if(res.statusCode !== 200) {
-				reject(`Stats request failed: ${res.statusCode} ${body}`);
+				let temp: any = JSON.parse(body);
+				if(temp.hasOwnProperty('ErrorCode') && temp['ErrorCode'] === 1652) { // Failed because of delay, resend
+					resolve(GetHistoricalStats(member));
+				}
+				else {
+					reject(`Stats request failed: ${res.statusCode} ${body}`);
+				}
 			}
 			else {
 				let temp = JSON.parse(body);
