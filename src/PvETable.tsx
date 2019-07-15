@@ -6,6 +6,7 @@ import { Member, Stats } from "./services/Interfaces";
 import _ from 'lodash';
 
 const psnIcon = require('./images/psIcon.png');
+const xboxIcon = require('./images/xboxIcon.png');
 const pcIcon = require('./images/battleNet.png');
 interface PvETableProps {
 	members: Member[];
@@ -65,8 +66,11 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 					else if(clickedColumn === 'kdRatio') {
 						return parseInt(item['kdRatio']);
 					}
-					else {
+					else if(clickedColumn === 'name') {
 						return item[clickedColumn].toLowerCase();
+					}
+					else {
+						return item[clickedColumn];
 					}
 				}]),
 				direction: 'ascending'
@@ -89,6 +93,9 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 			<Table sortable celled>
 				<Table.Header>
 					<Table.Row>
+						<Table.HeaderCell sorted={column === 'membershipType' ? direction : null} onClick={this.handleSort('membershipType')}>
+							Platform
+						</Table.HeaderCell>
 						<Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
 							Name
 						</Table.HeaderCell>
@@ -106,6 +113,22 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						data.map((member, index) => {
 						return (
 							<Table.Row key={member.kdRatio}>
+								<Table.Cell>
+									<img src={(function() {
+									switch(member.membershipType) {
+										case 2:
+											return psnIcon;
+										case 3:
+											return xboxIcon;
+										case 4:
+											return pcIcon;
+										default:
+											throw `Invalid membership type: ${member.membershipType}`;
+									}
+									})()}
+									style={{'width': '15px', 'height': '15px'}}
+									/>
+								</Table.Cell>
 								<Table.Cell>{member.name}</Table.Cell>
 								<Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
 								<Table.Cell>{member.kdRatio}</Table.Cell>
