@@ -123,9 +123,10 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 										case 4:
 											return pcIcon;
 										default:
-											throw `Invalid membership type: ${member.membershipType}`;
+											throw new Error(`Invalid membership type: ${member.membershipType}`);
 									}
 									})()}
+									alt={member.membershipType.toString()}
 									style={{'width': '15px', 'height': '15px'}}
 									/>
 								</Table.Cell>
