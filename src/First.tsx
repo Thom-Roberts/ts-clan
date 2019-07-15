@@ -44,6 +44,9 @@ class First extends React.Component<{} ,{members: Member[], stats: Stats[]}> {
 					members: members,
 					stats: stats,
 				});
+			}).catch(err => {
+				console.error(err);
+				alert(`Failed to fetch results, check error in the console`);
 			});
 		});
 	}
