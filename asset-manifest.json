@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.19393e92.chunk.css",
-    "main.js": "/static/js/main.7cb5395e.chunk.js",
-    "main.js.map": "/static/js/main.7cb5395e.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/css/2.bc4837a2.chunk.css": "/static/css/2.bc4837a2.chunk.css",
-    "static/js/2.414db241.chunk.js": "/static/js/2.414db241.chunk.js",
-    "static/js/2.414db241.chunk.js.map": "/static/js/2.414db241.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.0f620fff02ff0f12de839e56ef3920e6.js": "/precache-manifest.0f620fff02ff0f12de839e56ef3920e6.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.bc4837a2.chunk.css.map": "/static/css/2.bc4837a2.chunk.css.map",
-    "static/css/main.19393e92.chunk.css.map": "/static/css/main.19393e92.chunk.css.map",
-    "static/media/battleNet.png": "/static/media/battleNet.0183bab2.png",
-    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/ts-clan/static/css/main.19393e92.chunk.css",
+    "main.js": "/ts-clan/static/js/main.7d7bc00a.chunk.js",
+    "main.js.map": "/ts-clan/static/js/main.7d7bc00a.chunk.js.map",
+    "runtime~main.js": "/ts-clan/static/js/runtime~main.3ed0bf7c.js",
+    "runtime~main.js.map": "/ts-clan/static/js/runtime~main.3ed0bf7c.js.map",
+    "static/css/2.8df821e7.chunk.css": "/ts-clan/static/css/2.8df821e7.chunk.css",
+    "static/js/2.12e76237.chunk.js": "/ts-clan/static/js/2.12e76237.chunk.js",
+    "static/js/2.12e76237.chunk.js.map": "/ts-clan/static/js/2.12e76237.chunk.js.map",
+    "index.html": "/ts-clan/index.html",
+    "precache-manifest.d98a145c6deb27e004afb56bc202dd44.js": "/ts-clan/precache-manifest.d98a145c6deb27e004afb56bc202dd44.js",
+    "service-worker.js": "/ts-clan/service-worker.js",
+    "static/css/2.8df821e7.chunk.css.map": "/ts-clan/static/css/2.8df821e7.chunk.css.map",
+    "static/css/main.19393e92.chunk.css.map": "/ts-clan/static/css/main.19393e92.chunk.css.map",
+    "static/media/battleNet.png": "/ts-clan/static/media/battleNet.0183bab2.png",
+    "static/media/semantic.min.css": "/ts-clan/static/media/outline-icons.ef60a4f6.woff"
   }
 }
