@@ -65,7 +65,6 @@ export function GetHistoricalStats(member: Member): Promise<Stats> {
 				// Creating a stats interface 'inline'
 				resolve(returnStats);
 			}
-			
 		});
 	});
 }
