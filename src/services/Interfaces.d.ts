@@ -7,6 +7,7 @@ export interface Member {
 };
 
 export interface Stats {
+	membershipId: string;
 	// Response.mergedAllCharacters.results
 	pve?: { //allPvE.allTime
 		activitiesCleared: number; //activitiesCleared.basic.value
