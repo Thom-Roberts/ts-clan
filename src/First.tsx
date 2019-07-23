@@ -1,6 +1,4 @@
 import React, { SyntheticEvent } from 'react';
-import { GetClanMembers } from "./services/Clan";
-import { GetHistoricalStats } from "./services/Stats";
 import { GetMembers, GetStats } from "./services/dynamodb";
 import { Member, Stats } from "./services/Interfaces";
 import { Button, Segment, Menu } from "semantic-ui-react";
@@ -56,31 +54,6 @@ class First extends React.Component<{} ,FirstState> {
 				fetching: false,
 			});
 		});
-
-		// let clanProm = GetClanMembers();
-
-		// clanProm.then((members : Member[]) => {
-		// 	console.log(members);
-		// 	let statsProm: Promise<Stats>[] = [];
-		// 	members.forEach((member: Member) => {
-		// 		statsProm.push(GetHistoricalStats(member));
-		// 	});
-
-		// 	Promise.all(statsProm).then((stats) => {
-		// 		console.log(stats);
-		// 		this.setState({
-		// 			members: members,
-		// 			stats: stats,
-		// 		});
-		// 	}).catch(err => {
-		// 		console.error(err);
-		// 		alert(`Failed to fetch results, check error in the console`);
-		// 	}).finally(() => {
-		// 		this.setState({
-		// 			fetching: false,
-		// 		});
-		// 	});
-		// });
 	}
 
 	render() {

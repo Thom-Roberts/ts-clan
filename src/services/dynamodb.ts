@@ -19,7 +19,8 @@ export function GetMembers(): Promise<Member[]> {
 				reject(err);
 			}
 			else {
-				resolve(data.Items as unknown as Member[]);
+				let temp = ExtractMemberObjects(data.Items as any[]);
+				resolve(temp);
 			}
 		});
 	});
@@ -36,8 +37,35 @@ export function GetStats(): Promise<Stats[]> {
 				reject(err);
 			}
 			else {
-				resolve(data.Items as unknown as Stats[]);
+				let temp = ExtractStatsObject(data.Items as any[]);
+				resolve(temp);
 			}
 		});
+	});
+}
+
+function ExtractMemberObjects(dbMembers: any[]): Member[] {
+	return dbMembers.map((dbMember) : Member => {
+		return {
+			'displayName': dbMember.displayName.S,
+			'membershipId': dbMember.membershipId.S,
+			'membershipType': parseInt(dbMember.membershipType.S),
+		};
+	});
+}
+
+function ExtractStatsObject(dbStats: any[]): Stats[] {
+	return dbStats.map((dbStat) : Stats => {
+		let temp: Stats;
+		temp = {
+			'membershipId': dbStat.membershipId.S,
+		};
+		if(Object.prototype.hasOwnProperty.call(dbStat, 'pve')) {
+			temp.pve = JSON.parse(dbStat.pve.S);
+		}
+		if(Object.prototype.hasOwnProperty.call(dbStat, 'pvp')) {
+			temp.pvp = JSON.parse(dbStat.pvp.S);
+		}
+		return temp;
 	});
 }
