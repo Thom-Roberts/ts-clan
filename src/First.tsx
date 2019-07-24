@@ -6,6 +6,7 @@ import "./PvETable";
 import * as bnetIcon from './images/battleNet.png';
 import * as psnIcon from './images/psIcon.png';
 import PvETable from './PvETable';
+import PvPTable from './PvPTable';
 const xboxIcon = require('./images/xboxIcon.png');
 // import * as xboxIcon from './images/xboxIcon.png'; //WHY DOES THIS NOT WORK??
 
@@ -78,6 +79,10 @@ class First extends React.Component<{} ,FirstState> {
 					</Menu>
 					PvE Stats
 					<PvETable
+						members={members}
+						stats={stats}
+					/>
+					<PvPTable
 						members={members}
 						stats={stats}
 					/>

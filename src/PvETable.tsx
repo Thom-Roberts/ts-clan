@@ -1,13 +1,13 @@
 import React from 'react';
 import { Table } from "semantic-ui-react";
 import { Member, Stats } from "./services/Interfaces";
-// import * as psnIcon from './images/psIcon.png';
-// import * as pcIcon from './images/battleNet.png';
+import * as psnIcon from './images/psIcon.png';
+import * as pcIcon from './images/battleNet.png';
 import _ from 'lodash';
 
-const psnIcon = require('./images/psIcon.png');
+// const psnIcon = require('./images/psIcon.png');
 const xboxIcon = require('./images/xboxIcon.png');
-const pcIcon = require('./images/battleNet.png');
+// const pcIcon = require('./images/battleNet.png');
 interface PvETableProps {
 	members: Member[];
 	stats: Stats[];
@@ -27,6 +27,8 @@ interface temp {
 		timePlayedNumber: number;
 	};
 	kdRatio: string;
+	activitesCleared: number;
+	totalKills: number;
 }
 
 export default class PvETable extends React.Component<PvETableProps, PvETableState> {
@@ -45,6 +47,8 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						'timePlayedNumber': this.props.stats[index].pve!.timePlayedNumber,
 					},
 					'kdRatio': this.props.stats[index].pve!.kdRatio,
+					'activitesCleared': this.props.stats[index].pve!.activitiesCleared,
+					'totalKills': this.props.stats[index].pve!.kills,
 				};
 			}),
 			direction: null,
@@ -105,6 +109,12 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						<Table.HeaderCell sorted={column === 'kdRatio' ? direction : null} onClick={this.handleSort('kdRatio')}>
 							KD Ratio
 						</Table.HeaderCell>
+						<Table.HeaderCell sorted={column === 'activitesCleared' ? direction : null} onClick ={this.handleSort('activitesCleared')}>
+							Activites Cleared
+						</Table.HeaderCell>
+						<Table.HeaderCell sorted={column === 'totalKills' ? direction : null} onClick={this.handleSort('totalKills')}>
+							Total Kills
+						</Table.HeaderCell>
 					</Table.Row>
 				</Table.Header>
 
@@ -133,6 +143,8 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 								<Table.Cell>{member.name}</Table.Cell>
 								<Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
 								<Table.Cell>{member.kdRatio}</Table.Cell>
+								<Table.Cell>{member.activitesCleared}</Table.Cell>
+								<Table.Cell>{member.totalKills}</Table.Cell>
 							</Table.Row>
 						);
 					})}
@@ -140,5 +152,4 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 			</Table>
 		);
 	}
-
 }
