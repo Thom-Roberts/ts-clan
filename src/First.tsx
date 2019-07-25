@@ -23,7 +23,7 @@ const initialState = {
 	stats: [] as Stats[],
 	fetching: false,
 	activeItem: 'pve',
-	animation: 'fly left',
+	animation: 'fade left',
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
@@ -61,9 +61,9 @@ class First extends React.Component<{} ,FirstState> {
 	}
 
 	private handleMenuClick(event: SyntheticEvent, { name }: any) {
-		let animation = 'fly right';
+		let animation = 'fade right';
 		if(name === 'pve') {
-			animation = 'fly left';
+			animation = 'fade left';
 		}
 		this.setState({
 			activeItem: name,
