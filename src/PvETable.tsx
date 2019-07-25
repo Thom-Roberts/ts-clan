@@ -28,6 +28,7 @@ interface temp {
 	};
 	kdRatio: string;
 	activitesCleared: number;
+	publicEventsCompleted: number;
 	totalKills: number;
 }
 
@@ -48,6 +49,7 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 					},
 					'kdRatio': this.props.stats[index].pve!.kdRatio,
 					'activitesCleared': this.props.stats[index].pve!.activitiesCleared,
+					'publicEventsCompleted': this.props.stats[index].pve!.publicEventsCompleted,
 					'totalKills': this.props.stats[index].pve!.kills,
 				};
 			}),
@@ -112,6 +114,9 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						<Table.HeaderCell sorted={column === 'activitesCleared' ? direction : null} onClick ={this.handleSort('activitesCleared')}>
 							Activites Cleared
 						</Table.HeaderCell>
+						<Table.HeaderCell sorted={column === 'publicEventsCompleted' ? direction : null} onClick={this.handleSort('publicEventsCompleted')}>
+							Public Events Completed
+						</Table.HeaderCell>
 						<Table.HeaderCell sorted={column === 'totalKills' ? direction : null} onClick={this.handleSort('totalKills')}>
 							Total Kills
 						</Table.HeaderCell>
@@ -144,6 +149,7 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 								<Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
 								<Table.Cell>{member.kdRatio}</Table.Cell>
 								<Table.Cell>{member.activitesCleared}</Table.Cell>
+								<Table.Cell>{member.publicEventsCompleted}</Table.Cell>
 								<Table.Cell>{member.totalKills}</Table.Cell>
 							</Table.Row>
 						);
