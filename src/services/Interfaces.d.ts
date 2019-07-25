@@ -44,5 +44,14 @@ export interface ClanInfo { // Response
 	founder: { // founder
 		isOnline: boolean; // isOnline
 		destinyInfo: Member; // destinyUserInfo.membershipType, etc.
+	};
+	flag: { // detail.clanInfo.clanBannerData
+		decalId: number; // decalId
+		decalColorId: number; // decalColorId
+		decalBackgroundColorId: number; // decalBackgroundColorId
+		gonfalonId: number; // gonfalonId
+		gonfalonColorId: number; // gonfalonColorId
+		gonfalonDetailId: number; // gonfalonDetailId
+		gonfalonDetailColorId: number; // gonfalonDetailColorId
 	}
 }

@@ -69,6 +69,15 @@ export function GetClanInfo() : Promise<ClanInfo> {
 							displayName: temp.Response.founder.destinyUserInfo.displayName,
 						},
 					},
+					flag: {
+						decalId: temp.Response.detail.clanInfo.clanBannerData.decalId,
+						decalColorId: temp.Response.detail.clanInfo.clanBannerData.decalColorId,
+						decalBackgroundColorId: temp.Response.detail.clanInfo.clanBannerData.decalBackgroundColorId,
+						gonfalonId: temp.Response.detail.clanInfo.clanBannerData.gonfalonId,
+						gonfalonColorId: temp.Response.detail.clanInfo.clanBannerData.gonfalonColorId,
+						gonfalonDetailId: temp.Response.detail.clanInfo.clanBannerData.gonfalonDetailId,
+						gonfalonDetailColorId: temp.Response.detail.clanInfo.clanBannerData.gonfalonDetailColorId,
+					},
 				});
 
 			}
