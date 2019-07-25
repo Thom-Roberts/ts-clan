@@ -25,7 +25,7 @@ interface temp {
 	name: string;
 	timePlayed: {
 		timePlayed: string;
-		// timePlayedNumber: number;
+		timePlayedNumber: number;
 	};
 	kdRatio: string;
 	activitiesWon: number;
@@ -45,7 +45,7 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
                   'name': member.displayName,
                   'timePlayed': {
                      'timePlayed': this.props.stats[index].pvp!.timePlayed,
-                     // 'timePlayedNumber': this.props.stats[index].pvp!.timePlayed
+                     'timePlayedNumber': this.props.stats[index].pvp!.timePlayedNumber
                   },
                   'kdRatio': this.props.stats[index].pvp!.kdRatio,
                   'activitiesWon': this.props.stats[index].pvp!.activitiesWon,
@@ -58,7 +58,7 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
                   'name': member.displayName,
                   'timePlayed': {
                      'timePlayed': 'null',
-                     // 'timePlayedNumber': this.props.stats[index].pvp!.timePlayed
+                     'timePlayedNumber': 0
                   },
                   'kdRatio': 'null',
                   'activitiesWon': 0,
@@ -115,6 +115,9 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
                   <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
 							Name
 						</Table.HeaderCell>
+                  <Table.HeaderCell sorted={column === 'timePlayed' ? direction : null} onClick={this.handleSort('timePlayed')}>
+							Time Played
+						</Table.HeaderCell>
 						<Table.HeaderCell sorted={column === 'kdRatio' ? direction : null} onClick={this.handleSort('kdRatio')}>
 							KD Ratio
 						</Table.HeaderCell>
@@ -150,6 +153,7 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
                               />
                            </Table.Cell>
                            <Table.Cell>{member.name}</Table.Cell>
+                           <Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
                            <Table.Cell>{member.kdRatio}</Table.Cell>
                            <Table.Cell>{member.activitiesWon}</Table.Cell>
                            <Table.Cell>{member.totalKills}</Table.Cell>
