@@ -5,32 +5,26 @@ interface HomeProps {
 	Info: ClanInfo;
 }
 
-export default class Home extends React.Component<HomeProps, {}> {
-	constructor(props: any) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<div>
-				<ul>
-					<li>Name: {this.props.Info.name}</li>
-					<li>Creation Date: {this.props.Info.creationDate.toString()}</li>
-					<li>About: {this.props.Info.about}</li>
-					<li>Motto: {this.props.Info.motto}</li>
-					<li>
-						Founder:
-						<ul>
-							<li>
-								Display name: {this.props.Info.founder.destinyInfo.displayName}
-							</li>
-							<li>
-								Is Online: {this.props.Info.founder.isOnline.toString()}
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		);
-	}
+export default function Home(props: HomeProps) {
+	return (
+		<div>
+			<ul>
+				<li>Name: {props.Info.name}</li>
+				<li>Creation Date: {props.Info.creationDate.toString()}</li>
+				<li>About: {props.Info.about}</li>
+				<li>Motto: {props.Info.motto}</li>
+				<li>
+					Founder:
+					<ul>
+						<li>
+							Display name: {props.Info.founder.destinyInfo.displayName}
+						</li>
+						<li>
+							Is Online: {props.Info.founder.isOnline.toString()}
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	);
 } 
