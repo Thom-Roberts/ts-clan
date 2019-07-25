@@ -3,10 +3,10 @@ import { GetMembers, GetStats } from "./services/dynamodb";
 import { GetClanInfo } from "./services/Clan";
 import { Member, Stats, ClanInfo } from "./services/Interfaces";
 import { Button, Menu, Transition } from "semantic-ui-react";
-import "./PvETable";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
-
+import * as _ from 'lodash';
+import Home from './Home';
 
 interface FirstState {
 	members: Member[];
@@ -89,14 +89,19 @@ class First extends React.Component<{} ,FirstState> {
 	}
 
 	render() {
-		const { members, stats, fetching, activeItem, animation } = this.state;
+		const { members, stats, clanInfo, fetching, activeItem, animation } = this.state;
 
 		return (
 		<div>
 			{process.env.NODE_ENV !== 'production' && 
 				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
 			}
+			{
+				!(_.isEmpty(clanInfo)) && 
+				<Home Info={clanInfo} />
+			}
 			
+
 			{members.length > 0 && stats.length > 0 &&
 				<div>
 					<Menu pointing secondary>
