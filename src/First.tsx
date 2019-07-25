@@ -85,15 +85,25 @@ class First extends React.Component<{} ,FirstState> {
 						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
-					PvE Stats
-					<PvETable
-						members={members}
-						stats={stats}
-					/>
-					<PvPTable
-						members={members}
-						stats={stats}
-					/>
+					{activeItem === 'pve' && 
+						<div>
+						PvE Stats
+						<PvETable
+							members={members}
+							stats={stats}
+						/>
+						</div>
+					}
+					{activeItem === 'pvp' && 
+						<div>
+							PvP Stats
+							<PvPTable
+								members={members}
+								stats={stats}
+							/>
+						</div>
+					}
+					
 					<Segment.Group>
 					{members.map((member, index) => {
 						return (
