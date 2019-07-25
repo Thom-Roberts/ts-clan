@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2d7e8b32ad63399a8e94cd106364bd2d",
+    "revision": "9323b0d1b1e6f722c28bcc31f7ed043e",
     "url": "/ts-clan/index.html"
   },
   {
-    "revision": "7bbee4c14850f125f4e2",
-    "url": "/ts-clan/static/css/2.fb4908fe.chunk.css"
+    "revision": "ca80b98037a609852f37",
+    "url": "/ts-clan/static/css/2.8df821e7.chunk.css"
   },
   {
-    "revision": "98bf1f2ff62cd59f8096",
+    "revision": "18e53518f37cdd435dd5",
     "url": "/ts-clan/static/css/main.19393e92.chunk.css"
   },
   {
-    "revision": "7bbee4c14850f125f4e2",
-    "url": "/ts-clan/static/js/2.21e71977.chunk.js"
+    "revision": "ca80b98037a609852f37",
+    "url": "/ts-clan/static/js/2.ad967821.chunk.js"
   },
   {
-    "revision": "98bf1f2ff62cd59f8096",
-    "url": "/ts-clan/static/js/main.82864c51.chunk.js"
+    "revision": "18e53518f37cdd435dd5",
+    "url": "/ts-clan/static/js/main.db052d21.chunk.js"
   },
   {
     "revision": "bd45939f6f7b8f1a611f",
