@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetStats } from "./services/dynamodb";
 import { Member, Stats } from "./services/Interfaces";
-import { Button, Segment, Menu } from "semantic-ui-react";
+import { Button, Segment, Menu, Transition } from "semantic-ui-react";
 import "./PvETable";
 import * as bnetIcon from './images/battleNet.png';
 import * as psnIcon from './images/psIcon.png';
@@ -15,6 +15,7 @@ interface FirstState {
 	stats: Stats[];
 	fetching: boolean;
 	activeItem: string;
+	animation: string;
 }
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
 	stats: [] as Stats[],
 	fetching: false,
 	activeItem: 'pve',
+	animation: 'fly left',
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
@@ -59,13 +61,18 @@ class First extends React.Component<{} ,FirstState> {
 	}
 
 	private handleMenuClick(event: SyntheticEvent, { name }: any) {
+		let animation = 'fly right';
+		if(name === 'pve') {
+			animation = 'fly left';
+		}
 		this.setState({
 			activeItem: name,
+			animation: animation
 		});
 	}
 
 	render() {
-		const { members, stats, fetching, activeItem } = this.state;
+		const { members, stats, fetching, activeItem, animation } = this.state;
 		const temp = (<Button onClick={this.handleClick}>Click me</Button>);
 		const temp2 = (<Button loading>Click me</Button>);
 
@@ -85,7 +92,9 @@ class First extends React.Component<{} ,FirstState> {
 						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
-					{activeItem === 'pve' && 
+					
+					<Transition.Group animation={animation} duration='500'>
+						{activeItem === 'pve' && 
 						<div>
 						PvE Stats
 						<PvETable
@@ -93,8 +102,8 @@ class First extends React.Component<{} ,FirstState> {
 							stats={stats}
 						/>
 						</div>
-					}
-					{activeItem === 'pvp' && 
+						}
+						{activeItem === 'pvp' && 
 						<div>
 							PvP Stats
 							<PvPTable
@@ -102,7 +111,9 @@ class First extends React.Component<{} ,FirstState> {
 								stats={stats}
 							/>
 						</div>
-					}
+						}
+					</Transition.Group>
+					
 					
 					<Segment.Group>
 					{members.map((member, index) => {
