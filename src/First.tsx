@@ -32,6 +32,7 @@ class First extends React.Component<{} ,FirstState> {
 		this.state = initialState;
 
 		this.handleClick = this.handleClick.bind(this);
+		this.handleMenuClick = this.handleMenuClick.bind(this);
 	}
 
 	private handleClick(event: SyntheticEvent) {
@@ -57,6 +58,12 @@ class First extends React.Component<{} ,FirstState> {
 		});
 	}
 
+	private handleMenuClick(event: SyntheticEvent, { name }: any) {
+		this.setState({
+			activeItem: name,
+		});
+	}
+
 	render() {
 		const { members, stats, fetching, activeItem } = this.state;
 		const temp = (<Button onClick={this.handleClick}>Click me</Button>);
@@ -75,7 +82,8 @@ class First extends React.Component<{} ,FirstState> {
 			{members.length > 0 && stats.length > 0 &&
 				<div>
 					<Menu pointing secondary>
-						<Menu.Item name='pve' active={activeItem === 'pve'}/>
+						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
+						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					PvE Stats
 					<PvETable
