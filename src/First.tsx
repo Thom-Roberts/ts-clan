@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetStats } from "./services/dynamodb";
-import { Member, Stats } from "./services/Interfaces";
+import { GetClanInfo } from "./services/Clan";
+import { Member, Stats, ClanInfo } from "./services/Interfaces";
 import { Button, Menu, Transition } from "semantic-ui-react";
 import "./PvETable";
 import PvETable from './PvETable';
@@ -10,6 +11,7 @@ import PvPTable from './PvPTable';
 interface FirstState {
 	members: Member[];
 	stats: Stats[];
+	clanInfo: ClanInfo;
 	fetching: boolean;
 	activeItem: string;
 	animation: string;
@@ -18,6 +20,7 @@ interface FirstState {
 const initialState = {
 	members: [] as Member[],
 	stats: [] as Stats[],
+	clanInfo: {} as ClanInfo,
 	fetching: false,
 	activeItem: 'pve',
 	animation: 'fade left',
@@ -46,6 +49,13 @@ class First extends React.Component<{} ,FirstState> {
 			});
 			
 			this.FetchFromDatabase();
+			GetClanInfo().then(value => {
+				this.setState({
+					clanInfo: value
+				});
+			}).catch(err => {
+				console.error(err);
+			});
 		}
 	}
 

@@ -35,3 +35,14 @@ export interface Stats {
 		longestKillSpree: number; //longestKillSpree.basic.value
 	};
 }
+
+export interface ClanInfo { // Response
+	name: string; // detail.name
+	creationDate: Date; // detail.creationDate
+	about: string; // detail.about
+	motto: string; // detail.motto
+	founder: { // founder
+		isOnline: boolean; // isOnline
+		destinyInfo: Member; // destinyUserInfo.membershipType, etc.
+	}
+}
