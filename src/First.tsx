@@ -46,7 +46,6 @@ class First extends React.Component<{} ,FirstState> {
 			});
 			
 			this.FetchFromDatabase();
-			
 		}
 	}
 
@@ -95,7 +94,7 @@ class First extends React.Component<{} ,FirstState> {
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					
-					<Transition.Group animation={animation} duration='500'>
+					<Transition.Group animation={animation} duration='600'>
 						{activeItem === 'pve' && 
 						<div>
 						PvE Stats
