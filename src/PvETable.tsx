@@ -122,7 +122,7 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 					{
 						data.map((member, index) => {
 						return (
-							<Table.Row key={member.kdRatio}>
+							<Table.Row key={'pve ' + this.props.members[index].membershipId}>
 								<Table.Cell>
 									<img src={(function() {
 									switch(member.membershipType) {
