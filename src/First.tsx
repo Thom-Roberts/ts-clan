@@ -30,6 +30,10 @@ class First extends React.Component<{} ,FirstState> {
 
 		this.state = initialState;
 
+		if(process.env.NODE_ENV === 'production') {
+			this.FetchFromDatabase();
+		}
+
 		this.handleClick = this.handleClick.bind(this);
 		this.handleMenuClick = this.handleMenuClick.bind(this);
 	}
@@ -40,22 +44,9 @@ class First extends React.Component<{} ,FirstState> {
 			this.setState({
 				fetching: true,
 			});
-	
-			let members = GetMembers();
-			let stats = GetStats();
-			Promise.all([members, stats]).then(values => {
-				console.log(values);
-				this.setState({
-					members: values[0],
-					stats: values[1],
-				});
-			}).catch(err => {
-				alert(`Failed to get information due to ${err}`);
-			}).finally(() => {
-				this.setState({
-					fetching: false,
-				});
-			});
+			
+			this.FetchFromDatabase();
+			
 		}
 	}
 
@@ -70,12 +61,32 @@ class First extends React.Component<{} ,FirstState> {
 		});
 	}
 
+	private FetchFromDatabase() {
+		let members = GetMembers();
+		let stats = GetStats();
+		Promise.all([members, stats]).then(values => {
+			console.log(values);
+			this.setState({
+				members: values[0],
+				stats: values[1],
+			});
+		}).catch(err => {
+			alert(`Failed to get information due to ${err}`);
+		}).finally(() => {
+			this.setState({
+				fetching: false,
+			});
+		});
+	}
+
 	render() {
 		const { members, stats, fetching, activeItem, animation } = this.state;
 
 		return (
 		<div>
-			<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
+			{process.env.NODE_ENV !== 'production' && 
+				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
+			}
 			
 			{members.length > 0 && stats.length > 0 &&
 				<div>
