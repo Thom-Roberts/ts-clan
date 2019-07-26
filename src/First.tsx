@@ -97,26 +97,32 @@ class First extends React.Component<{} ,FirstState> {
 				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
 			}
 			{
-				!(_.isEmpty(clanInfo)) && 
-				<Home Info={clanInfo} />
+				
 			}
 			
 
 			{members.length > 0 && stats.length > 0 &&
 				<div>
 					<Menu pointing secondary>
+						<Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					
+					
+
 					<Transition.Group animation={animation} duration='600'>
+						{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
+							<Home Info={clanInfo} />
+						}
+
 						{activeItem === 'pve' && 
 						<div>
-						PvE Stats
-						<PvETable
-							members={members}
-							stats={stats}
-						/>
+							PvE Stats
+							<PvETable
+								members={members}
+								stats={stats}
+							/>
 						</div>
 						}
 						{activeItem === 'pvp' && 
