@@ -64,6 +64,9 @@ class First extends React.Component<{} ,FirstState> {
 		if(name === 'pve') {
 			animation = 'fade left';
 		}
+		else if(name === 'home') {
+			animation = 'fade';
+		}
 		this.setState({
 			activeItem: name,
 			animation: animation
