@@ -1,5 +1,6 @@
 import React from 'react';
 import { ClanInfo } from "./services/Interfaces";
+const clanBanner = require('./images/banner.png');
 
 interface HomeProps {
 	Info: ClanInfo;
@@ -8,6 +9,7 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
 	return (
 		<div>
+			<img src={clanBanner} alt={props.Info.name} style={{width: '50px'}}/>
 			<ul>
 				<li>Name: {props.Info.name}</li>
 				<li>Creation Date: {props.Info.creationDate.toString()}</li>
