@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/ts-clan/static/css/main.19393e92.chunk.css",
-    "main.js": "/ts-clan/static/js/main.db052d21.chunk.js",
-    "main.js.map": "/ts-clan/static/js/main.db052d21.chunk.js.map",
+    "main.css": "/ts-clan/static/css/main.cc535bf0.chunk.css",
+    "main.js": "/ts-clan/static/js/main.a9841e37.chunk.js",
+    "main.js.map": "/ts-clan/static/js/main.a9841e37.chunk.js.map",
     "runtime~main.js": "/ts-clan/static/js/runtime~main.3ed0bf7c.js",
     "runtime~main.js.map": "/ts-clan/static/js/runtime~main.3ed0bf7c.js.map",
     "static/css/2.8df821e7.chunk.css": "/ts-clan/static/css/2.8df821e7.chunk.css",
-    "static/js/2.ad967821.chunk.js": "/ts-clan/static/js/2.ad967821.chunk.js",
-    "static/js/2.ad967821.chunk.js.map": "/ts-clan/static/js/2.ad967821.chunk.js.map",
+    "static/js/2.d68f5160.chunk.js": "/ts-clan/static/js/2.d68f5160.chunk.js",
+    "static/js/2.d68f5160.chunk.js.map": "/ts-clan/static/js/2.d68f5160.chunk.js.map",
     "index.html": "/ts-clan/index.html",
-    "precache-manifest.4cf9e232e7f20e6a59138c667baac6cf.js": "/ts-clan/precache-manifest.4cf9e232e7f20e6a59138c667baac6cf.js",
+    "precache-manifest.aa12d3bea51593889b9773999c218382.js": "/ts-clan/precache-manifest.aa12d3bea51593889b9773999c218382.js",
     "service-worker.js": "/ts-clan/service-worker.js",
     "static/css/2.8df821e7.chunk.css.map": "/ts-clan/static/css/2.8df821e7.chunk.css.map",
-    "static/css/main.19393e92.chunk.css.map": "/ts-clan/static/css/main.19393e92.chunk.css.map",
+    "static/css/main.cc535bf0.chunk.css.map": "/ts-clan/static/css/main.cc535bf0.chunk.css.map",
+    "static/media/banner.png": "/ts-clan/static/media/banner.fc7e81a9.png",
     "static/media/battleNet.png": "/ts-clan/static/media/battleNet.0183bab2.png",
     "static/media/semantic.min.css": "/ts-clan/static/media/outline-icons.ef60a4f6.woff"
   }
