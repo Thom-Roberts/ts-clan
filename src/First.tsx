@@ -35,6 +35,14 @@ class First extends React.Component<{} ,FirstState> {
 
 		if(process.env.NODE_ENV === 'production') {
 			this.FetchFromDatabase();
+
+			GetClanInfo().then(value => {
+				this.setState({
+					clanInfo: value
+				});
+			}).catch(err => {
+				console.error(err);
+			});
 		}
 
 		this.handleClick = this.handleClick.bind(this);
