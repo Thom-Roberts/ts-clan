@@ -6,6 +6,20 @@ export interface Member {
 	displayName: string;
 };
 
+export interface Profile {
+	Stats: Stats;
+	MostPlayedCharacter: Character;
+}
+
+// Just the most played character
+export interface Character { // Get profile
+	characterId: string; // Most played id
+	class: string; // Should be Titan, Hunter, or Warlock
+	minutesPlayed: number;
+	emblemLocation: string; // Append the https://www.bungie.net before pushing it up
+	currentLightLevel: number;
+}
+
 export interface Stats {
 	membershipId: string;
 	// Response.mergedAllCharacters.results
