@@ -1,5 +1,5 @@
 import * as AWS from 'aws-sdk';
-import { Member, Stats } from './Interfaces';
+import { Member, Character, Profile } from './Interfaces';
 // Configuring credentials to read/write from app (unauthorized user)
 AWS.config.region = 'us-east-1'; // Region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -26,7 +26,7 @@ export function GetMembers(): Promise<Member[]> {
 	});
 }
 
-export function GetStats(): Promise<Stats[]> {
+export function GetProfiles(): Promise<Profile[]> {
 	return new Promise((resolve, reject) => {
 		const tableName = "MemberStats";
 
@@ -37,7 +37,7 @@ export function GetStats(): Promise<Stats[]> {
 				reject(err);
 			}
 			else {
-				let temp = ExtractStatsObject(data.Items as any[]);
+				let temp = ExtractProfilesObject(data.Items as any[]);
 				resolve(temp);
 			}
 		});
@@ -54,17 +54,20 @@ function ExtractMemberObjects(dbMembers: any[]): Member[] {
 	});
 }
 
-function ExtractStatsObject(dbStats: any[]): Stats[] {
-	return dbStats.map((dbStat) : Stats => {
-		let temp: Stats;
+function ExtractProfilesObject(dbStats: any[]): Profile[] {
+	return dbStats.map((dbStat) : any => {
+		let temp: Profile;
 		temp = {
-			'membershipId': dbStat.membershipId.S,
+			Stats: {
+				membershipId: dbStat.membershipId.S,
+			},
+			MostPlayedCharacter: JSON.parse(dbStat.mostPlayedCharacter.S) as Character,
 		};
 		if(Object.prototype.hasOwnProperty.call(dbStat, 'pve')) {
-			temp.pve = JSON.parse(dbStat.pve.S);
+			temp.Stats.pve = JSON.parse(dbStat.pve.S);
 		}
 		if(Object.prototype.hasOwnProperty.call(dbStat, 'pvp')) {
-			temp.pvp = JSON.parse(dbStat.pvp.S);
+			temp.Stats.pvp = JSON.parse(dbStat.pvp.S);
 		}
 		return temp;
 	});
