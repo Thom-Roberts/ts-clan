@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
-import { GetMembers, GetStats } from "./services/dynamodb";
+import { GetMembers, GetProfiles } from "./services/dynamodb";
 import { GetClanInfo } from "./services/Clan";
-import { Member, Stats, ClanInfo } from "./services/Interfaces";
+import { Member, ClanInfo, Profile } from "./services/Interfaces";
 import { Button, Menu, Transition } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
@@ -10,7 +10,7 @@ import Home from './Home';
 
 interface FirstState {
 	members: Member[];
-	stats: Stats[];
+	profiles: Profile[];
 	clanInfo: ClanInfo;
 	fetching: boolean;
 	activeItem: string;
@@ -19,7 +19,7 @@ interface FirstState {
 
 const initialState = {
 	members: [] as Member[],
-	stats: [] as Stats[],
+	profiles: [] as Profile[],
 	clanInfo: {} as ClanInfo,
 	fetching: false,
 	activeItem: 'pve',
@@ -83,12 +83,12 @@ class First extends React.Component<{} ,FirstState> {
 
 	private FetchFromDatabase() {
 		let members = GetMembers();
-		let stats = GetStats();
-		Promise.all([members, stats]).then(values => {
+		let profiles = GetProfiles();
+		Promise.all([members, profiles]).then(values => {
 			console.log(values);
 			this.setState({
 				members: values[0],
-				stats: values[1],
+				profiles: values[1],
 			});
 		}).catch(err => {
 			alert(`Failed to get information due to ${err}`);
@@ -100,19 +100,15 @@ class First extends React.Component<{} ,FirstState> {
 	}
 
 	render() {
-		const { members, stats, clanInfo, fetching, activeItem, animation } = this.state;
+		const { members, profiles, clanInfo, fetching, activeItem, animation } = this.state;
 
 		return (
 		<div>
 			{process.env.NODE_ENV !== 'production' && 
 				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
 			}
-			{
-				
-			}
 			
-
-			{members.length > 0 && stats.length > 0 &&
+			{members.length > 0 && profiles.length > 0 &&
 				<div>
 					<Menu pointing secondary>
 						<Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleMenuClick}/>
@@ -132,7 +128,11 @@ class First extends React.Component<{} ,FirstState> {
 							PvE Stats
 							<PvETable
 								members={members}
-								stats={stats}
+								stats={(function() {
+									return profiles.map(value => {
+										return value.Stats;
+									});
+								})()}
 							/>
 						</div>
 						}
@@ -141,7 +141,11 @@ class First extends React.Component<{} ,FirstState> {
 							PvP Stats
 							<PvPTable
 								members={members}
-								stats={stats}
+								stats={(function() {
+									return profiles.map(value => {
+										return value.Stats;
+									});
+								})()}
 							/>
 						</div>
 						}
