@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ts-clan/static/css/main.cc535bf0.chunk.css",
-    "main.js": "/ts-clan/static/js/main.bfa842c7.chunk.js",
-    "main.js.map": "/ts-clan/static/js/main.bfa842c7.chunk.js.map",
+    "main.js": "/ts-clan/static/js/main.d1df2f55.chunk.js",
+    "main.js.map": "/ts-clan/static/js/main.d1df2f55.chunk.js.map",
     "runtime~main.js": "/ts-clan/static/js/runtime~main.3ed0bf7c.js",
     "runtime~main.js.map": "/ts-clan/static/js/runtime~main.3ed0bf7c.js.map",
     "static/css/2.8df821e7.chunk.css": "/ts-clan/static/css/2.8df821e7.chunk.css",
     "static/js/2.d68f5160.chunk.js": "/ts-clan/static/js/2.d68f5160.chunk.js",
     "static/js/2.d68f5160.chunk.js.map": "/ts-clan/static/js/2.d68f5160.chunk.js.map",
     "index.html": "/ts-clan/index.html",
-    "precache-manifest.83e4cb183d3d5a963ca2615beeed4df0.js": "/ts-clan/precache-manifest.83e4cb183d3d5a963ca2615beeed4df0.js",
+    "precache-manifest.90bf4752218e0afd4978a698e040a5a7.js": "/ts-clan/precache-manifest.90bf4752218e0afd4978a698e040a5a7.js",
     "service-worker.js": "/ts-clan/service-worker.js",
     "static/css/2.8df821e7.chunk.css.map": "/ts-clan/static/css/2.8df821e7.chunk.css.map",
     "static/css/main.cc535bf0.chunk.css.map": "/ts-clan/static/css/main.cc535bf0.chunk.css.map",
