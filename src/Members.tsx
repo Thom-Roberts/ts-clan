@@ -41,7 +41,7 @@ export default function Members(props: MembersProps) {
                         </li>
                      </ul>
                   </li>
-            );
+               );
             })}
          </ul>
       </div>
