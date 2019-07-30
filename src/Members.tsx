@@ -28,7 +28,7 @@ export default function Members(props: MembersProps) {
          <ul>
             {Members.map((member, index) => {
                return (
-                  <li> Name: {member.displayName}. Platform: {member.membershipType}
+                  <li key={`Members: ${member.membershipId}`}> Name: {member.displayName}. Platform: {member.membershipType}
                      <ul>
                         <li>
                            Favorite class: {Profiles[index].MostPlayedCharacter.class}
