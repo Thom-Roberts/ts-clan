@@ -49,10 +49,10 @@ export function GetClanInfo() : Promise<ClanInfo> {
 
 		request.get(options, (err, res, body) => {
 			if(err) {
-				reject(err);
+				reject(`err: ${res.body}`);
 			}
 			if(res.statusCode !== 200) {
-				reject(`Could not resolve status code: ${res.statusCode}`);
+				reject(`Could not resolve status code: ${res.statusCode}, ${res.body}`);
 			}
 			else {
 				let temp = JSON.parse(body);
