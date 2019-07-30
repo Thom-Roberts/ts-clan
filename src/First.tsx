@@ -5,6 +5,7 @@ import { Member, ClanInfo, Profile } from "./services/Interfaces";
 import { Button, Menu, Transition } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
+import Members from './Members';
 import * as _ from 'lodash';
 import Home from './Home';
 
@@ -112,15 +113,23 @@ class First extends React.Component<{} ,FirstState> {
 				<div>
 					<Menu pointing secondary>
 						<Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleMenuClick}/>
+						<Menu.Item name='members' active={activeItem === 'members'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					
-					
-
 					<Transition.Group animation={animation} duration='600'>
 						{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
 							<Home Info={clanInfo} />
+						}
+
+						{activeItem === 'members' && 
+							<div>
+								<Members 
+									Members={members} 
+									Profiles={profiles}
+								/>
+							</div>
 						}
 
 						{activeItem === 'pve' && 
