@@ -1,5 +1,6 @@
 import React from 'react';
 import { Member, Profile } from "./services/Interfaces";
+import { relative } from 'path';
 
 
 interface MembersProps {
@@ -38,6 +39,13 @@ export default function Members(props: MembersProps) {
                         </li>
                         <li>
                            Light level: {Profiles[index].MostPlayedCharacter.currentLightLevel}
+                        </li>
+                        <li>
+                           <div style={{position: 'relative', width: '300px'}}>
+                              <img src={Profiles[index].MostPlayedCharacter.emblemLocation} style={{width: '100%'}}/>
+                              <div style={{position: 'absolute', top: '30%', right: '5%', color: 'white'}}>{member.displayName}</div>
+                           </div>   
+                           
                         </li>
                      </ul>
                   </li>
