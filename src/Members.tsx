@@ -1,7 +1,5 @@
 import React from 'react';
 import { Member, Profile } from "./services/Interfaces";
-import { relative } from 'path';
-
 
 interface MembersProps {
    Members: Member[];
@@ -42,10 +40,14 @@ export default function Members(props: MembersProps) {
                         </li>
                         <li>
                            <div style={{position: 'relative', width: '300px'}}>
-                              <img src={Profiles[index].MostPlayedCharacter.emblemLocation} style={{width: '100%'}}/>
-                              <div style={{position: 'absolute', top: '30%', right: '5%', color: 'white'}}>{member.displayName}</div>
-                           </div>   
-                           
+                              <img src={Profiles[index].MostPlayedCharacter.emblemLocation} style={{width: '100%'}} alt={`${member.displayName} emblem`}/>
+                              <div style={{position: 'absolute', top: '15%', left: '20%', color: 'white', fontWeight: 'bold', fontSize: '15px'}}>{member.displayName}</div>
+                              <div style={{position: 'absolute', top: '15%', right: '3%', color: 'aqua', fontWeight: 'bold', fontSize: '22px'}}>
+                                 <div style={{display: 'inline-block', border: '2px solid aqua', transform: 'rotate(45deg)', width: '7px', height: '7px', marginRight: '2px', marginBottom: '7px'}}></div>
+                                 {Profiles[index].MostPlayedCharacter.currentLightLevel}
+                              </div>
+                              <div style={{position: 'absolute', top: '50%', right: '3%', color: 'white', fontWeight: 'normal', fontSize: '12px'}}>Level {Profiles[index].MostPlayedCharacter.currentLevel}</div>
+                           </div>      
                         </li>
                      </ul>
                   </li>
