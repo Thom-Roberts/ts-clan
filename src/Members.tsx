@@ -43,12 +43,12 @@ export default function Members(props: MembersProps) {
                               <div style={{display: 'inline-block', paddingTop: '10px', paddingLeft: '60px', width: '50%', textAlign: 'left', color: 'white', fontWeight: 'bold', fontSize: '15px', float: 'left',}}>
                                  {member.displayName}
                               </div>  
-                              <div style={{display: 'inline-block', width: '50%', textAlign: 'right',}}>
-                                 <div style={{position: 'relative', color: 'aqua', fontWeight: 'bold', fontSize: '22px',}}>
-                                    <div style={{display: 'inline-block', border: '2px solid aqua', transform: 'rotate(45deg)', width: '7px', height: '7px', marginRight: '2px', marginBottom: '7px'}}></div>
+                              <div style={{display: 'inline-block', width: '50%', height: '100%', textAlign: 'right', paddingRight: '7px',}}>
+                                 <div style={{position: 'relative', color: 'aqua', fontWeight: 'bold', fontSize: '22px', paddingTop: '10px',}}>
+                                    <div style={{display: 'inline-block', border: '2px solid aqua', transform: 'rotate(45deg)', width: '7px', height: '7px', marginRight: '2px', marginBottom: '7px',}}></div>
                                     {Profiles[index].MostPlayedCharacter.currentLightLevel}
                                  </div>
-                                 <div style={{position: 'relative', top: '50%', right: '3%', color: 'white', fontWeight: 'normal', fontSize: '12px'}}>Level {Profiles[index].MostPlayedCharacter.currentLevel}</div>  
+                                 <div style={{position: 'relative', color: 'white', fontWeight: 'normal', fontSize: '12px', paddingTop: '3px',}}>Level {Profiles[index].MostPlayedCharacter.currentLevel}</div>  
                               </div>
                            </div>      
                         </li>
