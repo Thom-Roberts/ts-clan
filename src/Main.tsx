@@ -9,7 +9,7 @@ import Members from './Members';
 import * as _ from 'lodash';
 import Home from './Home';
 
-interface FirstState {
+interface MainState {
 	members: Member[];
 	profiles: Profile[];
 	clanInfo: ClanInfo;
@@ -28,7 +28,7 @@ const initialState = {
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
-class First extends React.Component<{} ,FirstState> {
+class Main extends React.Component<{} ,MainState> {
 	constructor(props : any) {
 		super(props);
 
@@ -178,4 +178,4 @@ class First extends React.Component<{} ,FirstState> {
 
 }
 
-export default First;
+export default Main;

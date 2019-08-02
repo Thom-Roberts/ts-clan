@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import "./First";
-import First from './First';
+import "./Main";
+import Main from './Main';
 import { Container } from 'semantic-ui-react';
 
 const App: React.FC = () => {
@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <Container>
       This is working
-      <First />
+      <Main />
     </Container>
   );
 }
