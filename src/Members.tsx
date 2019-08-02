@@ -39,14 +39,17 @@ export default function Members(props: MembersProps) {
                            Light level: {Profiles[index].MostPlayedCharacter.currentLightLevel}
                         </li>
                         <li>
-                           <div style={{position: 'relative', width: '300px'}}>
-                              <img src={Profiles[index].MostPlayedCharacter.emblemLocation} style={{width: '100%'}} alt={`${member.displayName} emblem`}/>
-                              <div style={{position: 'absolute', top: '15%', left: '20%', color: 'white', fontWeight: 'bold', fontSize: '15px'}}>{member.displayName}</div>
-                              <div style={{position: 'absolute', top: '15%', right: '3%', color: 'aqua', fontWeight: 'bold', fontSize: '22px'}}>
-                                 <div style={{display: 'inline-block', border: '2px solid aqua', transform: 'rotate(45deg)', width: '7px', height: '7px', marginRight: '2px', marginBottom: '7px'}}></div>
-                                 {Profiles[index].MostPlayedCharacter.currentLightLevel}
+                           <div style={{position: 'relative', width: '300px', height: '60.75px', backgroundImage: `url(${Profiles[index].MostPlayedCharacter.emblemLocation})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover',}}>
+                              <div style={{display: 'inline-block', paddingTop: '10px', paddingLeft: '60px', width: '50%', textAlign: 'left', color: 'white', fontWeight: 'bold', fontSize: '15px',}}>
+                                 {member.displayName}
+                              </div>  
+                              <div style={{display: 'inline-block', width: '50%', textAlign: 'right',}}>
+                                 <div style={{position: 'relative', color: 'aqua', fontWeight: 'bold', fontSize: '22px',}}>
+                                    <div style={{display: 'inline-block', border: '2px solid aqua', transform: 'rotate(45deg)', width: '7px', height: '7px', marginRight: '2px', marginBottom: '7px'}}></div>
+                                    {Profiles[index].MostPlayedCharacter.currentLightLevel}
+                                 </div>
+                                 <div style={{position: 'relative', top: '50%', right: '3%', color: 'white', fontWeight: 'normal', fontSize: '12px'}}>Level {Profiles[index].MostPlayedCharacter.currentLevel}</div>  
                               </div>
-                              <div style={{position: 'absolute', top: '50%', right: '3%', color: 'white', fontWeight: 'normal', fontSize: '12px'}}>Level {Profiles[index].MostPlayedCharacter.currentLevel}</div>
                            </div>      
                         </li>
                      </ul>
