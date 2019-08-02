@@ -2,7 +2,7 @@ import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetProfiles } from "./services/dynamodb";
 import { GetClanInfo } from "./services/Clan";
 import { Member, ClanInfo, Profile } from "./services/Interfaces";
-import { Button, Menu, Transition } from "semantic-ui-react";
+import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
 import Members from './Members';
@@ -109,6 +109,16 @@ class First extends React.Component<{} ,FirstState> {
 				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
 			}
 			
+			{fetching && 
+				<div>
+					<Segment style={{height: '100px',}}>
+						<Dimmer active>
+							<Loader>Loading...</Loader>
+						</Dimmer>
+					</Segment>
+				</div>
+			}
+
 			{members.length > 0 && profiles.length > 0 &&
 				<div>
 					<Menu pointing secondary>
