@@ -40,7 +40,7 @@ export default function Members(props: MembersProps) {
                         </li>
                         <li>
                            <div style={{position: 'relative', width: '300px', height: '60.75px', backgroundImage: `url(${Profiles[index].MostPlayedCharacter.emblemLocation})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover',}}>
-                              <div style={{display: 'inline-block', paddingTop: '10px', paddingLeft: '60px', width: '50%', textAlign: 'left', color: 'white', fontWeight: 'bold', fontSize: '15px',}}>
+                              <div style={{display: 'inline-block', paddingTop: '10px', paddingLeft: '60px', width: '50%', textAlign: 'left', color: 'white', fontWeight: 'bold', fontSize: '15px', float: 'left',}}>
                                  {member.displayName}
                               </div>  
                               <div style={{display: 'inline-block', width: '50%', textAlign: 'right',}}>
