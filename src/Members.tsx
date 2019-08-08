@@ -1,14 +1,26 @@
 import React from 'react';
 import { Member, Profile } from "./services/Interfaces";
+import MemberList from "./MemberList";
 
 interface MembersProps {
    Members: Member[];
    Profiles: Profile[];
 }
 
+interface MemberListProps {
+   displayName: string;
+   membershipType: number;
+   favoriteClass: string;
+   totalTimePlayed: number;
+   onlineStatus: string;
+};
+
 export default function Members(props: MembersProps) {
    const { Members, Profiles } = props;
    
+   // The order that we grab display the accordions in
+   const SPLITORDER = ['Founder', 'Acting Founder', 'Admin', 'Member', 'Beginner', 'None']; 
+
    // Calculate the days and hours for displaying
    function GetStringForTimePlayed(minutesPlayed: number): string {
       let hoursPlayed = minutesPlayed / 60;
@@ -22,13 +34,54 @@ export default function Members(props: MembersProps) {
       return `${numDays}d ${numHours}h`;
    }
 
+   // Break up members by their types. 
+   function GetByRole(role: string): MemberListProps[] {
+      let returnVal: MemberListProps[] = [];
+
+      Members.forEach((member, index) => {
+         if(member.clanMemberType === role) {
+            returnVal.push({
+               'displayName': member.displayName,
+               'favoriteClass': Profiles[index].MostPlayedCharacter.class,
+               'membershipType': member.membershipType,
+               'onlineStatus': 'offline', // TODO: Change to valid online status
+               'totalTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed, // TODO: Change to be the sum of player time
+            });
+         }
+      });
+
+      return returnVal;
+   }
+   
+
+
    return (
       <div>
+         {SPLITORDER.map(role => {
+            let roleCount = GetByRole(role);
+            if(roleCount.length > 0) {
+               return (
+                  <div>
+                     {role}: 
+                     <MemberList MemberList={roleCount} />
+                  </div>
+               );
+            }
+            else {
+               return null;
+            }
+         })}
+
+
+
          <ul>
             {Members.map((member, index) => {
                return (
                   <li key={`Members: ${member.membershipId}`}> Name: {member.displayName}. Platform: {member.membershipType}
                      <ul>
+                        <li>
+                           Member Type: {member.clanMemberType}
+                        </li>
                         <li>
                            Favorite class: {Profiles[index].MostPlayedCharacter.class}
                         </li>

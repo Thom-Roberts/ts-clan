@@ -50,6 +50,7 @@ function ExtractMemberObjects(dbMembers: any[]): Member[] {
 			'displayName': dbMember.displayName.S,
 			'membershipId': dbMember.membershipId.S,
 			'membershipType': parseInt(dbMember.membershipType.S),
+			'clanMemberType': dbMember.clanMemberType.S,
 		};
 	});
 }

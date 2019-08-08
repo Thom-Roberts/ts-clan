@@ -1,9 +1,13 @@
-declare module '*.png' // Allows png's to be imported
+declare module '*.png'{ // Allows png's to be imported
+	const value: any;
+	export = value;
+}
 
 export interface Member {
 	membershipId: string;
 	membershipType: number;
 	displayName: string;
+	clanMemberType: string;
 };
 
 export interface Profile {
