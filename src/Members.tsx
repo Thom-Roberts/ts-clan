@@ -13,6 +13,7 @@ interface MemberListProps {
    favoriteClass: string;
    totalTimePlayed: number;
    onlineStatus: string;
+   getStringForTimePlayed: Function;
 };
 
 export default function Members(props: MembersProps) {
@@ -46,6 +47,7 @@ export default function Members(props: MembersProps) {
                'membershipType': member.membershipType,
                'onlineStatus': 'offline', // TODO: Change to valid online status
                'totalTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed, // TODO: Change to be the sum of player time
+               'getStringForTimePlayed': GetStringForTimePlayed,
             });
          }
       });

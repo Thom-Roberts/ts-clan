@@ -13,6 +13,7 @@ interface MemberListProps {
    favoriteClass: string;
    totalTimePlayed: number;
    onlineStatus: string;
+   getStringForTimePlayed: Function;
 };
 
 interface MemberListState {
@@ -42,7 +43,6 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
    render() {
       const { MemberList } = this.props;
       const { activeIndex } = this.state;
-      // TODO: Update to map function for each Member of that type, updating index and stuff as needed
       return (
          <div>
             <Accordion styled>
@@ -65,11 +65,12 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                        throw new Error(`Invalid membership type: ${memberprops.membershipType}`);
                                  }
                               })()} alt="Temp" style={{width: '15px', height: '15px',}}/>
+                              {memberprops.onlineStatus}
                            </span>
                         </Accordion.Title>
                         <Accordion.Content active={activeIndex === index}>
                            <p>
-                              A dog is temporary
+                              {memberprops.favoriteClass}: {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}
                            </p>
                         </Accordion.Content>
                      </div>
