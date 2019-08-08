@@ -46,29 +46,35 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       return (
          <div>
             <Accordion styled>
-               <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
-                  <Icon name='dropdown' />
-                  <span>
-                     {MemberList[0].displayName}
-                     <img src={(function() {
-                        switch(MemberList[0].membershipType) {
-                           case 2:
-                              return psnIcon;
-                           case 3:
-                              return xboxIcon;
-                           case 4:
-                              return pcIcon;
-                           default:
-                              throw new Error(`Invalid membership type: ${MemberList[0].membershipType}`);
-                        }
-                     })()} alt="Temp" style={{width: '15px', height: '15px',}}/>
-                  </span>
-               </Accordion.Title>
-               <Accordion.Content active={activeIndex === 0}>
-                  <p>
-                     A dog is temporary
-                  </p>
-               </Accordion.Content>
+               {MemberList.map((memberprops, index) => {
+                  return (
+                     <div>
+                        <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
+                           <Icon name='dropdown' />
+                           <span>
+                              {memberprops.displayName}
+                              <img src={(function() {
+                                 switch(memberprops.membershipType) {
+                                    case 2:
+                                       return psnIcon;
+                                    case 3:
+                                       return xboxIcon;
+                                    case 4:
+                                       return pcIcon;
+                                    default:
+                                       throw new Error(`Invalid membership type: ${memberprops.membershipType}`);
+                                 }
+                              })()} alt="Temp" style={{width: '15px', height: '15px',}}/>
+                           </span>
+                        </Accordion.Title>
+                        <Accordion.Content active={activeIndex === index}>
+                           <p>
+                              A dog is temporary
+                           </p>
+                        </Accordion.Content>
+                     </div>
+                  );
+               })}
             </Accordion>
          </div>
       );
