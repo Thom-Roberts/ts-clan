@@ -44,6 +44,22 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
    render() {
       const { MemberList } = this.props;
       const { activeIndex } = this.state;
+
+      const ONLINESTATUS = (
+         <span style={{display: 'inline-block', height: '100%',}}>
+            <span style={{display: 'inline-block', width: '15px', height: '15px', borderRadius: '15px', marginRight: '3px', backgroundColor: 'green', }}></span>
+            Online
+         </span>
+      );
+
+      const OFFLINESTATUS = (
+         <span style={{display: 'inline-block', height: '100%',}}>
+            <span style={{display: 'inline-block', width: '15px', height: '15px', borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',}}></span>
+            Offline
+         </span>
+      );
+
+
       return (
          <div>
             <Accordion styled>
@@ -68,7 +84,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                  }
                               })()} alt="Temp" style={{width: '15px', height: '15px',}}/>
                            </span>
-                           <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? 'Online' : 'Offline'}</span>
+                           <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? ONLINESTATUS : OFFLINESTATUS}
+                           </span>
                         </Accordion.Title>
                         <Accordion.Content active={activeIndex === index}>
                            <p>
