@@ -30,6 +30,7 @@ export function GetClanMembers() : Promise<Member[]> {
 						'membershipType': val['destinyUserInfo']['membershipType'],
 						'displayName': val['destinyUserInfo']['displayName'],
 						'clanMemberType': val['memberType'],
+						'onlineStatus': val['isOnline'],
 					});
 				}
 			});
@@ -69,6 +70,7 @@ export function GetClanInfo() : Promise<ClanInfo> {
 							membershipType: temp.Response.founder.destinyUserInfo.membershipType,
 							displayName: temp.Response.founder.destinyUserInfo.displayName,
 							clanMemberType: 'Founder',
+							onlineStatus: temp.Response.founder.isOnline,
 						},
 					},
 					flag: {

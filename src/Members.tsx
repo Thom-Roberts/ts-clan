@@ -8,11 +8,12 @@ interface MembersProps {
 }
 
 interface MemberListProps {
+   membershipId: string;
    displayName: string;
    membershipType: number;
    favoriteClass: string;
    totalTimePlayed: number;
-   onlineStatus: string;
+   onlineStatus: boolean;
    getStringForTimePlayed: Function;
 };
 
@@ -42,10 +43,11 @@ export default function Members(props: MembersProps) {
       Members.forEach((member, index) => {
          if(member.clanMemberType === role) {
             returnVal.push({
+               'membershipId': member.membershipId,
                'displayName': member.displayName,
                'favoriteClass': Profiles[index].MostPlayedCharacter.class,
                'membershipType': member.membershipType,
-               'onlineStatus': 'offline', // TODO: Change to valid online status
+               'onlineStatus': member.onlineStatus, // TODO: Change to valid online status
                'totalTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
             });
@@ -63,7 +65,7 @@ export default function Members(props: MembersProps) {
             let roleCount = GetByRole(role);
             if(roleCount.length > 0) {
                return (
-                  <div>
+                  <div key={`Role: ${role}`} style={{margin: '0 auto'}}>
                      {role}: 
                      <MemberList MemberList={roleCount} />
                   </div>

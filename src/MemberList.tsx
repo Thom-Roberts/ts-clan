@@ -8,11 +8,12 @@ const xboxIcon = require('./images/xboxIcon.png');
 const pcIcon = require('./images/battleNet.png');
 
 interface MemberListProps {
+   membershipId: string;
    displayName: string;
    membershipType: number;
    favoriteClass: string;
    totalTimePlayed: number;
-   onlineStatus: string;
+   onlineStatus: boolean;
    getStringForTimePlayed: Function;
 };
 
@@ -48,8 +49,9 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
             <Accordion styled>
                {MemberList.map((memberprops, index) => {
                   return (
-                     <div>
-                        <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
+                     <div key={`MemberList: ${memberprops.membershipId}`}>
+                        <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}
+                           style={{position: 'relative',}}>
                            <Icon name='dropdown' />
                            <span>
                               {memberprops.displayName}
@@ -65,8 +67,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                        throw new Error(`Invalid membership type: ${memberprops.membershipType}`);
                                  }
                               })()} alt="Temp" style={{width: '15px', height: '15px',}}/>
-                              {memberprops.onlineStatus}
                            </span>
+                           <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? 'Online' : 'Offline'}</span>
                         </Accordion.Title>
                         <Accordion.Content active={activeIndex === index}>
                            <p>
