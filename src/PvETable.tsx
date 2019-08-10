@@ -57,6 +57,20 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 		};
 	}
 
+	componentDidMount() {
+		// Set the initial column sort to descending
+		const { data } = this.state;
+		const temp = _.sortBy(data, [(item: any) => {
+			return item['timePlayed'].timePlayedNumber;
+		}]);
+
+		this.setState({
+			column: 'timePlayed',
+			data: temp.reverse(),
+			direction: 'descending',
+		});
+	}
+
 	// Double function here to make sure that set state isn't called continously
 	handleSort = (clickedColumn: string) => () => {
 
