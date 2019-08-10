@@ -8,7 +8,6 @@ const App: React.FC = () => {
 
   return (
     <Container>
-      This is working
       <Main />
     </Container>
   );
