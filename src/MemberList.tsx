@@ -47,14 +47,18 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
 
       const ONLINESTATUS = (
          <span style={{display: 'inline-block', height: '100%',}}>
-            <span style={{display: 'inline-block', width: '15px', height: '15px', borderRadius: '15px', marginRight: '3px', backgroundColor: 'green', }}></span>
+            <span style={{display: 'inline-block', width: '15px', height: '15px', 
+                           borderRadius: '15px', marginRight: '3px', backgroundColor: 'green', 
+                           position: 'relative', top: '2px',}}></span>
             Online
          </span>
       );
 
       const OFFLINESTATUS = (
          <span style={{display: 'inline-block', height: '100%',}}>
-            <span style={{display: 'inline-block', width: '15px', height: '15px', borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',}}></span>
+            <span style={{display: 'inline-block', width: '15px', height: '15px', 
+                           borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
+                           position: 'relative', top: '2px',}}></span>
             Offline
          </span>
       );
