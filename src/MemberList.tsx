@@ -8,6 +8,7 @@ const xboxIcon = require('./images/xboxIcon.png');
 const pcIcon = require('./images/battleNet.png');
 
 interface MemberListProps {
+   role: string;
    membershipId: string;
    displayName: string;
    membershipType: number;
@@ -40,6 +41,13 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       this.setState({ activeIndex: newIndex });
    }
 
+   private getPlayerOnlineCount(): number {
+      const { MemberList } = this.props;
+      // Condense the online count
+      return MemberList.reduce((total, curr): number => {
+         return curr.onlineStatus ? total + 1 : total;
+      }, 0);
+   }
 
    render() {
       const { MemberList } = this.props;
@@ -65,7 +73,11 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
 
 
       return (
-         <div>
+         <div style={{marginBottom: '10px', width: '600px',}}> {/* Space between each accordion */}
+            <div style={{paddingBottom: '5px',}}> {/* Space between the role name and bottom */}
+               <span style={{textAlign: 'left',}}>{MemberList[0].role}:</span>
+               <span style={{float: 'right',}}>{this.getPlayerOnlineCount().toString()} online</span>
+            </div>
             <Accordion styled>
                {MemberList.map((memberprops, index) => {
                   return (

@@ -7,16 +7,6 @@ interface MembersProps {
    Profiles: Profile[];
 }
 
-interface MemberListProps {
-   membershipId: string;
-   displayName: string;
-   membershipType: number;
-   favoriteClass: string;
-   totalTimePlayed: number;
-   onlineStatus: boolean;
-   getStringForTimePlayed: Function;
-};
-
 export default function Members(props: MembersProps) {
    const { Members, Profiles } = props;
    
@@ -37,12 +27,13 @@ export default function Members(props: MembersProps) {
    }
 
    // Break up members by their types. 
-   function GetByRole(role: string): MemberListProps[] {
-      let returnVal: MemberListProps[] = [];
+   function GetByRole(role: string): any[] {
+      let returnVal: any[] = [];
 
       Members.forEach((member, index) => {
          if(member.clanMemberType === role) {
             returnVal.push({
+               'role': role,
                'membershipId': member.membershipId,
                'displayName': member.displayName,
                'favoriteClass': Profiles[index].MostPlayedCharacter.class,
@@ -63,10 +54,7 @@ export default function Members(props: MembersProps) {
             let roleCount = GetByRole(role);
             if(roleCount.length > 0) {
                return (
-                  <div key={`Role: ${role}`} style={{marginBottom: '5px',}}>
-                     <span style={{marginBottom: '5px', display: 'inline-block',}}>{role}:</span>
-                     <MemberList MemberList={roleCount} />
-                  </div>
+                  <MemberList MemberList={roleCount} key={`Role: ${role}`}/>
                );
             }
             else {
