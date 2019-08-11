@@ -74,7 +74,7 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                            style={{position: 'relative',}}>
                            <Icon name='dropdown' />
                            <span>
-                              {memberprops.displayName}
+                              {/* Platform image */}
                               <img src={(function() {
                                  switch(memberprops.membershipType) {
                                     case 2:
@@ -86,7 +86,10 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     default:
                                        throw new Error(`Invalid membership type: ${memberprops.membershipType}`);
                                  }
-                              })()} alt="Temp" style={{width: '15px', height: '15px',}}/>
+                              })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
+
+                              {memberprops.displayName}
+                              
                            </span>
                            <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? ONLINESTATUS : OFFLINESTATUS}
                            </span>
