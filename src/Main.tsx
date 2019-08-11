@@ -23,8 +23,8 @@ const initialState = {
 	profiles: [] as Profile[],
 	clanInfo: {} as ClanInfo,
 	fetching: false,
-	activeItem: 'pve',
-	animation: 'fade left',
+	activeItem: 'home',
+	animation: 'fade',
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
