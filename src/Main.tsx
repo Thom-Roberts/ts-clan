@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetProfiles } from "./services/dynamodb";
-import { GetClanInfo } from "./services";
+import { GetClanInfo } from "./services/Clan";
 import { Member, ClanInfo, Profile } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
