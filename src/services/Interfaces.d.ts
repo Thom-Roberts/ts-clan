@@ -47,7 +47,7 @@ export interface Stats {
 		timePlayed: string; //secondsPlayed.basic.displayValue
 		timePlayedNumber: number; //secondsPlayed.basic.value
 		deaths: number; //deaths.basic.value
-		bestSingleGameKils: number; //bestSingleGameKills.basic.value
+		bestSingleGameKills: number; //bestSingleGameKills.basic.value
 		opponentsDefeated: number; //opponentsDefeated.basic.value
 		efficiency: string; //efficiency.basic.displayValue
 		kdRatio: string; //killsDeathsRatio.basic.displayValue
