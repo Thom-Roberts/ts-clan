@@ -24,7 +24,7 @@ const initialState = {
 	clanInfo: {} as ClanInfo,
 	fetching: false,
 	activeItem: 'home',
-	animation: 'fade',
+	animation: 'zoom',
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
@@ -71,16 +71,8 @@ class Main extends React.Component<{} ,MainState> {
 	}
 
 	private handleMenuClick(event: SyntheticEvent, { name }: any) {
-		let animation = 'fade right';
-		if(name === 'pve') {
-			animation = 'fade left';
-		}
-		else if(name === 'home') {
-			animation = 'fade';
-		}
 		this.setState({
 			activeItem: name,
-			animation: animation
 		});
 	}
 
