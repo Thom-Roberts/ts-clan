@@ -34,6 +34,11 @@ class Main extends React.Component<{} ,MainState> {
 
 		this.state = initialState;
 
+		this.handleClick = this.handleClick.bind(this);
+		this.handleMenuClick = this.handleMenuClick.bind(this);
+	}
+
+	componentDidMount() {
 		if(process.env.NODE_ENV === 'production') {
 			this.FetchFromDatabase();
 
@@ -45,9 +50,6 @@ class Main extends React.Component<{} ,MainState> {
 				console.error(err);
 			});
 		}
-
-		this.handleClick = this.handleClick.bind(this);
-		this.handleMenuClick = this.handleMenuClick.bind(this);
 	}
 
 	private handleClick(event: SyntheticEvent) {
