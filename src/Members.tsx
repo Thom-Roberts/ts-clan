@@ -1,6 +1,7 @@
 import React from 'react';
 import { Member, Profile } from "./services/Interfaces";
 import MemberList from "./MemberList";
+import _ from 'lodash';
 
 interface MembersProps {
    Members: Member[];
@@ -44,6 +45,8 @@ export default function Members(props: MembersProps) {
             });
          }
       });
+
+      returnVal = _.sortBy(returnVal, [function(o) { return o.displayName.toLowerCase(); }]);
 
       return returnVal;
    }
