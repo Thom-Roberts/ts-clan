@@ -1,12 +1,12 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetProfiles } from "./services/dynamodb";
-import { GetClanInfo } from "./services/Clan";
+import { GetClanInfo } from "./services";
 import { Member, ClanInfo, Profile } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
 import Members from './Members';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import Home from './Home';
 
 interface MainState {
@@ -122,7 +122,7 @@ class Main extends React.Component<{} ,MainState> {
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					
-					<Transition.Group animation={animation} duration='500'>
+					<Transition.Group animation={animation} duration='600'>
 						{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
 							<Home Info={clanInfo} />
 						}
