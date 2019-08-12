@@ -24,7 +24,7 @@ const initialState = {
 	clanInfo: {} as ClanInfo,
 	fetching: false,
 	activeItem: 'home',
-	animation: 'zoom',
+	animation: 'horizontal flip',
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
@@ -122,7 +122,7 @@ class Main extends React.Component<{} ,MainState> {
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					
-					<Transition.Group animation={animation} duration='600'>
+					<Transition.Group animation={animation} duration='500'>
 						{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
 							<Home Info={clanInfo} />
 						}
