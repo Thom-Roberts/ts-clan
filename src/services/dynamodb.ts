@@ -71,6 +71,9 @@ function ExtractProfilesObject(dbStats: any[]): Profile[] {
 		if(Object.prototype.hasOwnProperty.call(dbStat, 'pvp')) {
 			temp.Stats.pvp = JSON.parse(dbStat.pvp.S);
 		}
+		if(Object.prototype.hasOwnProperty.call(dbStat, 'pveCompetitive')) {
+			temp.Stats.pveCompetitive = JSON.parse(dbStat.pveCompetitive.S);
+		}
 		return temp;
 	});
 }

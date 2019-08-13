@@ -54,6 +54,26 @@ export interface Stats {
 		winLossRatio: string; //winLossRatio.basic.displayValue
 		longestKillSpree: number; //longestKillSpree.basic.value
 	};
+	pveCompetitive?: PveCompetitive;
+}
+
+export interface PveCompetitive {
+	activitesPlayed: number; // activitesEntered.basic.value
+	activitiesWon: number; // activitiesWon.basic.value
+	assists: number; // assists.basic.value
+	kills: number; // kills.basic.value
+	killsPerGame: string; // kills.pga.displayValue
+	timePlayed: string; // secondsPlayed.basic.displayValue
+	timePlayedNumber: number; // secondsPlayed.basic.value
+	deaths: number; // deaths.basic.value
+	bestSingleGameKills: number; // bestSingleGameKills.basic.value
+	kdRatio: string; // killsDeathsRatio.basic.displayValue
+	winLossRatio: string; // winLossRatio.basic.displayValue
+	longestKillSpree: number; // longestKillSpree.basic.value
+	invasionKills: number; // invasionKills.basic.value
+	invaderKills: number; // invaderKills.basic.value
+	motesDeposited: number; // motesDeposited.basic.value
+	motesLost: number; // motesLost.basic.value
 }
 
 export interface ClanInfo { // Response
