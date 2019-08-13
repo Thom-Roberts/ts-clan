@@ -5,6 +5,7 @@ import { Member, ClanInfo, Profile } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
+import PvECompTable from "./PvECompTable";
 import Members from './Members';
 import _ from 'lodash';
 import Home from './Home';
@@ -120,6 +121,7 @@ class Main extends React.Component<{} ,MainState> {
 						<Menu.Item name='members' active={activeItem === 'members'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
 						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
+						<Menu.Item name="pveComp" active={activeItem === 'pveComp'} onClick={this.handleMenuClick}/>
 					</Menu>
 					
 					<Transition.Group animation={animation} duration='600'>
@@ -153,6 +155,19 @@ class Main extends React.Component<{} ,MainState> {
 						<div>
 							PvP Stats
 							<PvPTable
+								members={members}
+								stats={(function() {
+									return profiles.map(value => {
+										return value.Stats;
+									});
+								})()}
+							/>
+						</div>
+						}
+						{activeItem === 'pveComp' && 
+						<div>
+							Gambit Stats
+							<PvECompTable
 								members={members}
 								stats={(function() {
 									return profiles.map(value => {
