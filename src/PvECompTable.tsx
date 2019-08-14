@@ -40,18 +40,18 @@ export default class PvECompTable extends React.Component<PvECompTableProps, PvE
 
       this.state = {
          column: null,
-         data: this.props.members.map((member, index): temp => {
+         data: this.props.stats.map((stat, index): temp => {
             return {
-               membershipType: member.membershipType,
-               name: member.displayName,
+               membershipType: this.props.members[index].membershipType,
+               name: this.props.members[index].displayName,
                timePlayed: {
-                  timePlayed: this.props.stats[index].pveCompetitive!.timePlayed,
-                  timePlayedNumber: this.props.stats[index].pveCompetitive!.timePlayedNumber,
+                  timePlayed: stat.pveCompetitive!.timePlayed,
+                  timePlayedNumber: stat.pveCompetitive!.timePlayedNumber,
                },
-               kdRatio: this.props.stats[index].pveCompetitive!.kdRatio,
-               activitiesPlayed: this.props.stats[index].pveCompetitive!.activitesPlayed,
-               winLossRatio: this.props.stats[index].pveCompetitive!.winLossRatio,
-               totalKills: this.props.stats[index].pveCompetitive!.kills,
+               kdRatio: stat.pveCompetitive!.kdRatio,
+               activitiesPlayed: stat.pveCompetitive!.activitesPlayed,
+               winLossRatio: stat.pveCompetitive!.winLossRatio,
+               totalKills: stat.pveCompetitive!.kills,
             };
          }),
          direction: null,
@@ -151,7 +151,7 @@ export default class PvECompTable extends React.Component<PvECompTableProps, PvE
                            <Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
                            <Table.Cell>{member.kdRatio}</Table.Cell>
                            <Table.Cell>{member.activitiesPlayed}</Table.Cell>
-                           <Table.Cell>{member.winLossRatio}</Table.Cell>
+                           <Table.Cell>{(parseFloat(member.winLossRatio) * 100).toFixed(0).toString()}%</Table.Cell>
                            <Table.Cell>{member.totalKills}</Table.Cell>
                         </Table.Row>
                      )
