@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetProfiles } from "./services/dynamodb";
 import { GetClanInfo } from "./services/Clan";
-import { Member, ClanInfo, Profile } from "./services/Interfaces";
+import { Member, ClanInfo, Profile, Stats } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
@@ -167,14 +167,26 @@ class Main extends React.Component<{} ,MainState> {
 						{activeItem === 'pveComp' && 
 						<div>
 							Gambit Stats
-							<PvECompTable
-								members={members}
-								stats={(function() {
-									return profiles.map(value => {
-										return value.Stats;
+							{ // Removing gambit stats where the activites played is 0
+								(function() {
+									let statsToPush: Stats[] = [];
+									let memberToPush: Member[] = [];
+									profiles.forEach((profile, index) => {
+										if(profile.Stats.pveCompetitive!.activitesPlayed !== 0) {
+											statsToPush.push(profile.Stats);
+											memberToPush.push(members[index]);
+										}
 									});
-								})()}
-							/>
+
+									return (
+										<PvECompTable
+											members={memberToPush}
+											stats={statsToPush}
+										/>
+									);
+								})()
+							}
+							
 						</div>
 						}
 					</Transition.Group>
