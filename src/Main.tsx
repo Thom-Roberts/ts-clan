@@ -126,7 +126,12 @@ class Main extends React.Component<{} ,MainState> {
 					
 					<Transition.Group animation={animation} duration='600'>
 						{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
-							<Home Info={clanInfo} />
+							<div>
+								<Home 
+									Info={clanInfo} 
+								/>
+							</div>
+							
 						}
 
 						{activeItem === 'members' && 
