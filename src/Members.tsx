@@ -42,6 +42,9 @@ export default function Members(props: MembersProps) {
                'onlineStatus': member.onlineStatus, // TODO: Change to valid online status
                'totalTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
+               'pve': Profiles[index].Stats.pve,
+               'pvp': Profiles[index].Stats.pvp,
+               'pveCompetitive': Profiles[index].Stats.pveCompetitive,
             });
          }
       });

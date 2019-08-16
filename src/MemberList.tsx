@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import { Accordion, Icon } from 'semantic-ui-react';
-// import { Member } from './services/Interfaces';
+import { pve, pvp, PveCompetitive } from './services/Interfaces';
 //import * as psnIcon from './images/psIcon.png';
 //import * as pcIcon from "./images/battleNet.png";
 const psnIcon = require('./images/psIcon.png');
@@ -16,6 +16,9 @@ interface MemberListProps {
    totalTimePlayed: number;
    onlineStatus: boolean;
    getStringForTimePlayed: Function;
+   pve: pve;
+   pvp: pvp;
+   pveCompetitive: PveCompetitive;
 };
 
 interface MemberListState {
@@ -121,27 +124,43 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                            <Accordion.Content active={activeIndex === index}>
 
                               <Accordion styled>
-                                 <Accordion.Title active={secondActiveIndex === `${index}a`} index={`${index}a`} onClick={this.handleInteriorClick}>
-                                    <Icon name='dropdown' />
-                                    PvE
-                                 </Accordion.Title>
-                                 <Accordion.Content active={secondActiveIndex === `${index}a`}>
-                                    Temp
-                                 </Accordion.Content>
-                                 <Accordion.Title active={secondActiveIndex === `${index}b`} index={`${index}b`} onClick={this.handleInteriorClick}>
-                                    <Icon name='dropdown' />
-                                    PvP
-                                 </Accordion.Title>
-                                 <Accordion.Content active={secondActiveIndex === `${index}b`}>
-                                    Temp2
-                                 </Accordion.Content>
-                                 <Accordion.Title active={secondActiveIndex === `${index}c`} index={`${index}c`} onClick={this.handleInteriorClick}>
-                                    <Icon name='dropdown' />
-                                    PvE Competitive
-                                 </Accordion.Title>
-                                 <Accordion.Content active={secondActiveIndex === `${index}c`}>
-                                    Temp3
-                                 </Accordion.Content>
+                                 {memberprops.pve !== undefined &&
+                                    <div>
+                                       <Accordion.Title active={secondActiveIndex === `${index}a`} index={`${index}a`} onClick={this.handleInteriorClick}>
+                                          <Icon name='dropdown' />
+                                          PvE
+                                       </Accordion.Title>
+                                       <Accordion.Content active={secondActiveIndex === `${index}a`}>
+                                          {memberprops.pve.kdRatio}
+                                       </Accordion.Content>
+                                    </div>
+                                 }
+                                 
+                                 {memberprops.pvp !== undefined &&
+                                    <div>
+                                       <Accordion.Title active={secondActiveIndex === `${index}b`} index={`${index}b`} onClick={this.handleInteriorClick}>
+                                          <Icon name='dropdown' />
+                                          PvP
+                                       </Accordion.Title>
+                                       <Accordion.Content active={secondActiveIndex === `${index}b`}>
+                                          {memberprops.pvp.kdRatio}
+                                       </Accordion.Content>
+                                    </div>
+                                 }
+                                 
+                                 {memberprops.pveCompetitive.activitesPlayed > 0 &&
+                                    <div>
+                                       <Accordion.Title active={secondActiveIndex === `${index}c`} index={`${index}c`} onClick={this.handleInteriorClick}>
+                                          <Icon name='dropdown' />
+                                          PvE Competitive
+                                       </Accordion.Title>
+                                       <Accordion.Content active={secondActiveIndex === `${index}c`}>
+                                          {memberprops.pveCompetitive.kdRatio}
+                                       </Accordion.Content>
+                                    </div>
+                                 }
+                                 
+
                               </Accordion>
                                  <p>
                                     {memberprops.favoriteClass}: {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}
