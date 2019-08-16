@@ -128,7 +128,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     <div>
                                        <Accordion.Title active={secondActiveIndex === `${index}a`} index={`${index}a`} onClick={this.handleInteriorClick}>
                                           <Icon name='dropdown' />
-                                          PvE
+                                          <span style={{textAlign: 'left',}}>PvE</span>
+                                          <span style={{float: 'right',}}>{memberprops.pve.timePlayed}</span>
                                        </Accordion.Title>
                                        <Accordion.Content active={secondActiveIndex === `${index}a`}>
                                           {memberprops.pve.kdRatio}
@@ -140,7 +141,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     <div>
                                        <Accordion.Title active={secondActiveIndex === `${index}b`} index={`${index}b`} onClick={this.handleInteriorClick}>
                                           <Icon name='dropdown' />
-                                          PvP
+                                          <span style={{textAlign: 'left',}}>PvP</span>
+                                          <span style={{float: 'right',}}>{memberprops.pvp.timePlayed}</span>
                                        </Accordion.Title>
                                        <Accordion.Content active={secondActiveIndex === `${index}b`}>
                                           {memberprops.pvp.kdRatio}
@@ -152,7 +154,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     <div>
                                        <Accordion.Title active={secondActiveIndex === `${index}c`} index={`${index}c`} onClick={this.handleInteriorClick}>
                                           <Icon name='dropdown' />
-                                          PvE Competitive
+                                          <span style={{textAlign: 'left',}}>PvE Competitive</span>
+                                          <span style={{float: 'right',}}>{memberprops.pveCompetitive.timePlayed}</span>
                                        </Accordion.Title>
                                        <Accordion.Content active={secondActiveIndex === `${index}c`}>
                                           {memberprops.pveCompetitive.kdRatio}
