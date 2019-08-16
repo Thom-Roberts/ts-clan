@@ -13,6 +13,7 @@ interface MemberListProps {
    displayName: string;
    membershipType: number;
    favoriteClass: string;
+   favoriteClassTimePlayed: number;
    totalTimePlayed: number;
    onlineStatus: boolean;
    getStringForTimePlayed: Function;
@@ -122,6 +123,10 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                               </span>
                            </Accordion.Title>
                            <Accordion.Content active={activeIndex === index}>
+                                 <p>
+                                    Favorite Class: {memberprops.favoriteClass}
+                                    <span style={{float: 'right',}}>{memberprops.getStringForTimePlayed(memberprops.favoriteClassTimePlayed)}</span>
+                                 </p>
 
                               <Accordion styled>
                                  {memberprops.pve !== undefined &&
@@ -165,10 +170,6 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                  
 
                               </Accordion>
-                                 <p>
-                                    {memberprops.favoriteClass}: {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}
-                                 </p>
-
                            </Accordion.Content>
                         </div>
                      );

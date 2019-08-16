@@ -38,6 +38,7 @@ export default function Members(props: MembersProps) {
                'membershipId': member.membershipId,
                'displayName': member.displayName,
                'favoriteClass': Profiles[index].MostPlayedCharacter.class,
+               'favoriteClassTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed,
                'membershipType': member.membershipType,
                'onlineStatus': member.onlineStatus, // TODO: Change to valid online status
                'totalTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed, // TODO: Change to be the sum of player time
