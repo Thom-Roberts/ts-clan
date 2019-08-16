@@ -117,7 +117,7 @@ export default class PvECompTable extends React.Component<PvECompTableProps, PvE
                      Activites Played
                   </Table.HeaderCell>
                   <Table.HeaderCell sorted={column === 'winLossRatio' ? direction : null} onClick={this.handleSort('winLossRatio')}>
-                     Win Loss Ratio
+                     Win Rate
                   </Table.HeaderCell>
                   <Table.HeaderCell sorted={column === 'totalKills' ? direction : null} onClick={this.handleSort('totalKills')}>
                      Total Kills
