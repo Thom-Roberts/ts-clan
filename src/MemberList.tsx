@@ -137,7 +137,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                           <span style={{float: 'right',}}>{memberprops.pve.timePlayed}</span>
                                        </Accordion.Title>
                                        <Accordion.Content active={secondActiveIndex === `${index}a`}>
-                                          {memberprops.pve.kdRatio}
+                                          <div style={{margin: '0px',}}>Time Played: {memberprops.pve.timePlayed}</div>
+                                          <div style={{margin: '0px',}}>KD ratio: {memberprops.pve.kdRatio}</div>
                                        </Accordion.Content>
                                     </div>
                                  }
@@ -150,7 +151,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                           <span style={{float: 'right',}}>{memberprops.pvp.timePlayed}</span>
                                        </Accordion.Title>
                                        <Accordion.Content active={secondActiveIndex === `${index}b`}>
-                                          {memberprops.pvp.kdRatio}
+                                          <div style={{margin: '0px',}}>Time Played: {memberprops.pvp.timePlayed}</div>
+                                          <div style={{margin: '0px',}}>Efficiency: {memberprops.pvp.efficiency}</div>
                                        </Accordion.Content>
                                     </div>
                                  }
@@ -163,7 +165,8 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                           <span style={{float: 'right',}}>{memberprops.pveCompetitive.timePlayed}</span>
                                        </Accordion.Title>
                                        <Accordion.Content active={secondActiveIndex === `${index}c`}>
-                                          {memberprops.pveCompetitive.kdRatio}
+                                          <div style={{margin: '0px',}}>Time Played: {memberprops.pveCompetitive.timePlayed}</div>
+                                          <div style={{margin: '0px',}}>KD Ratio: {memberprops.pveCompetitive.kdRatio}</div>
                                        </Accordion.Content>
                                     </div>
                                  }
