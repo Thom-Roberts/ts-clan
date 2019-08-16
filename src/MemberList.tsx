@@ -20,6 +20,7 @@ interface MemberListProps {
 
 interface MemberListState {
    activeIndex: number;
+   secondActiveIndex: string;
 };
 
 export default class MemberList extends React.Component<{MemberList: MemberListProps[]}, MemberListState> {
@@ -28,9 +29,11 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
 
       this.state = {
          activeIndex: -1,
+         secondActiveIndex: '',
       };
 
       this.handleClick = this.handleClick.bind(this);
+      this.handleInteriorClick = this.handleInteriorClick.bind(this);
    }
 
    private handleClick(e: SyntheticEvent, titleProps: any) {
@@ -39,6 +42,14 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
 
       const newIndex = activeIndex === index ? -1 : index;
       this.setState({ activeIndex: newIndex });
+   }
+
+   private handleInteriorClick(e: SyntheticEvent, titleProps: any) {
+      const { index } = titleProps;
+      const { secondActiveIndex } = this.state;
+
+      const newIndex = secondActiveIndex === index ? '' : index;
+      this.setState({ secondActiveIndex: newIndex });
    }
 
    private getPlayerOnlineCount(): number {
@@ -51,7 +62,7 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
 
    render() {
       const { MemberList } = this.props;
-      const { activeIndex } = this.state;
+      const { activeIndex, secondActiveIndex } = this.state;
 
       const ONLINESTATUS = (
          <span style={{display: 'inline-block', height: '100%',}}>
@@ -108,9 +119,34 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                               </span>
                            </Accordion.Title>
                            <Accordion.Content active={activeIndex === index}>
-                              <p>
-                                 {memberprops.favoriteClass}: {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}
-                              </p>
+
+                              <Accordion styled>
+                                 <Accordion.Title active={secondActiveIndex === `${index}a`} index={`${index}a`} onClick={this.handleInteriorClick}>
+                                    <Icon name='dropdown' />
+                                    PvE
+                                 </Accordion.Title>
+                                 <Accordion.Content active={secondActiveIndex === `${index}a`}>
+                                    Temp
+                                 </Accordion.Content>
+                                 <Accordion.Title active={secondActiveIndex === `${index}b`} index={`${index}b`} onClick={this.handleInteriorClick}>
+                                    <Icon name='dropdown' />
+                                    PvP
+                                 </Accordion.Title>
+                                 <Accordion.Content active={secondActiveIndex === `${index}b`}>
+                                    Temp2
+                                 </Accordion.Content>
+                                 <Accordion.Title active={secondActiveIndex === `${index}c`} index={`${index}c`} onClick={this.handleInteriorClick}>
+                                    <Icon name='dropdown' />
+                                    PvE Competitive
+                                 </Accordion.Title>
+                                 <Accordion.Content active={secondActiveIndex === `${index}c`}>
+                                    Temp3
+                                 </Accordion.Content>
+                              </Accordion>
+                                 <p>
+                                    {memberprops.favoriteClass}: {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}
+                                 </p>
+
                            </Accordion.Content>
                         </div>
                      );
@@ -120,5 +156,4 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
          </div>
       );
    }
-   
 }
