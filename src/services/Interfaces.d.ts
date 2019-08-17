@@ -99,3 +99,11 @@ export interface ClanInfo { // Response
 		gonfalonDetailColorId: number; // gonfalonDetailColorId
 	}
 }
+
+export interface ClanRewardState {
+	crucible: boolean;
+	nightfall: boolean;
+	raid: boolean;
+	gambit: boolean;
+	timeExpires: Date;
+}

@@ -1,12 +1,12 @@
 import * as request from 'request';
-import { Member, ClanInfo } from "./Interfaces";
+import { Member, ClanInfo, ClanRewardState } from "./Interfaces";
 import { BUNGIEAPIKEY } from "./APIKEYS";
-const ClanId = '407685';
+const CLANID = '407685';
 
 export function GetClanMembers() : Promise<Member[]> {
 	return new Promise((resolve, reject) => {
 		const options = {
-         'url': `https://www.bungie.net/Platform/GroupV2/${ClanId}/Members/`,
+         'url': `https://www.bungie.net/Platform/GroupV2/${CLANID}/Members/`,
          'headers': {
             'x-api-key': BUNGIEAPIKEY(),
          },
@@ -43,7 +43,7 @@ export function GetClanMembers() : Promise<Member[]> {
 export function GetClanInfo() : Promise<ClanInfo> {
 	return new Promise((resolve, reject) => {
 		const options = {
-			'url': `https://www.bungie.net/Platform/GroupV2/${ClanId}/`,
+			'url': `https://www.bungie.net/Platform/GroupV2/${CLANID}/`,
 			'headers': {
 				'x-api-key': BUNGIEAPIKEY(),
 			},
@@ -84,6 +84,60 @@ export function GetClanInfo() : Promise<ClanInfo> {
 					},
 				});
 
+			}
+		});
+	});
+}
+
+export function GetClanRewardState(): Promise<ClanRewardState> {
+	return new Promise((resolve, reject) => {
+		const OPTIONS = {
+			url: `https://www.bungie.net/Platform/Destiny2/Clan/${CLANID}/WeeklyRewardState/`,
+			headers: {
+				'x-api-key': BUNGIEAPIKEY(),
+			},
+		};
+		const NIGHTFALLENTRYHASH = 3789021730;
+		const GAMBITENTRYHASH = 248695599;
+		const RAIDENTRYHASH = 2043403989;
+		const CRUCIBLEENTRYHASH = 964120289;
+
+		request.get(OPTIONS, (err, res, body) => {
+			if(err) {
+				reject(err);
+			}
+			if(res.statusCode !== 200) {
+				reject(`Status code invalid: ${res.body}`);
+			}
+			else {
+				let temp = JSON.parse(body);
+				let easierTemp: any[] = temp.Response.rewards.entries;
+				let returnVal : ClanRewardState = {
+					crucible: false,
+					raid: false,
+					nightfall: false,
+					gambit: false,
+					timeExpires: new Date(),
+				}; 
+
+				easierTemp.forEach(entry => {
+					if(entry.rewardEntryHash === CRUCIBLEENTRYHASH) {
+						returnVal.crucible = entry.earned;
+					}
+					if(entry.rewardEntryHash === RAIDENTRYHASH) {
+						returnVal.raid = entry.earned;
+					}
+					if(entry.rewardEntryHash === NIGHTFALLENTRYHASH) {
+						returnVal.nightfall = entry.earned;
+					}
+					if(entry.rewardEntryHash === GAMBITENTRYHASH) {
+						returnVal.gambit = entry.earned;
+					}
+				});
+
+				returnVal.timeExpires = new Date(temp.Response.endDate);
+
+				resolve(returnVal);
 			}
 		});
 	});
