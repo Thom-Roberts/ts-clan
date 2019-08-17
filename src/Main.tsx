@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetProfiles } from "./services/dynamodb";
-import { GetClanInfo } from "./services/Clan";
-import { Member, ClanInfo, Profile, Stats } from "./services/Interfaces";
+import { GetClanInfo, GetClanRewardState } from "./services/Clan";
+import { Member, ClanInfo, Profile, Stats, ClanRewardState } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
@@ -14,6 +14,7 @@ interface MainState {
 	members: Member[];
 	profiles: Profile[];
 	clanInfo: ClanInfo;
+	clanRewardState: ClanRewardState;
 	fetching: boolean;
 	activeItem: string;
 	animation: string;
@@ -23,6 +24,7 @@ const initialState = {
 	members: [] as Member[],
 	profiles: [] as Profile[],
 	clanInfo: {} as ClanInfo,
+	clanRewardState: {} as ClanRewardState,
 	fetching: false,
 	activeItem: 'home',
 	animation: 'horizontal flip',
@@ -43,9 +45,13 @@ class Main extends React.Component<{} ,MainState> {
 		if(process.env.NODE_ENV === 'production') {
 			this.FetchFromDatabase();
 
-			GetClanInfo().then(value => {
+			let prom1 = GetClanInfo();
+			let prom2 = GetClanRewardState();
+
+			Promise.all([prom1, prom2]).then(values => {
 				this.setState({
-					clanInfo: value
+					clanInfo: values[0],
+					clanRewardState: values[1],
 				});
 			}).catch(err => {
 				console.error(err);
@@ -61,9 +67,14 @@ class Main extends React.Component<{} ,MainState> {
 			});
 			
 			this.FetchFromDatabase();
-			GetClanInfo().then(value => {
+			
+			let prom1 = GetClanInfo();
+			let prom2 = GetClanRewardState();
+
+			Promise.all([prom1, prom2]).then(values => {
 				this.setState({
-					clanInfo: value
+					clanInfo: values[0],
+					clanRewardState: values[1],
 				});
 			}).catch(err => {
 				console.error(err);
@@ -96,7 +107,7 @@ class Main extends React.Component<{} ,MainState> {
 	}
 
 	render() {
-		const { members, profiles, clanInfo, fetching, activeItem, animation } = this.state;
+		const { members, profiles, clanInfo, clanRewardState, fetching, activeItem, animation } = this.state;
 
 		return (
 		<div>
@@ -129,6 +140,7 @@ class Main extends React.Component<{} ,MainState> {
 							<div>
 								<Home 
 									Info={clanInfo} 
+									RewardState={clanRewardState}
 								/>
 							</div>
 							

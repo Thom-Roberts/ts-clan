@@ -1,9 +1,10 @@
 import React from 'react';
-import { ClanInfo } from "./services/Interfaces";
+import { ClanInfo, ClanRewardState } from "./services/Interfaces";
 const clanBanner = require('./images/banner.png');
 
 interface HomeProps {
 	Info: ClanInfo;
+	RewardState: ClanRewardState;
 }
 
 export default function Home(props: HomeProps) {

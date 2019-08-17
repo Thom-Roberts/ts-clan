@@ -111,7 +111,7 @@ export function GetClanRewardState(): Promise<ClanRewardState> {
 			}
 			else {
 				let temp = JSON.parse(body);
-				let easierTemp: any[] = temp.Response.rewards.entries;
+				let easierTemp: any[] = temp.Response.rewards[0].entries;
 				let returnVal : ClanRewardState = {
 					crucible: false,
 					raid: false,
