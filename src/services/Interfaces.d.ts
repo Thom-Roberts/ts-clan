@@ -9,6 +9,7 @@ export interface Member {
 	displayName: string;
 	clanMemberType: string;
 	onlineStatus: boolean;
+	dateLastOn: Date;
 };
 
 export interface Profile {

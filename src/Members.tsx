@@ -56,7 +56,7 @@ export default function Members(props: MembersProps) {
    }
    
    return (
-      <div>
+      <div style={{backgroundColor: 'white',}}>
          {SPLITORDER.map(role => {
             let roleCount = GetByRole(role);
             if(roleCount.length > 0) {

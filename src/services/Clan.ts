@@ -1,44 +1,7 @@
 import * as request from 'request';
-import { Member, ClanInfo, ClanRewardState } from "./Interfaces";
+import { ClanInfo, ClanRewardState } from "./Interfaces";
 import { BUNGIEAPIKEY } from "./APIKEYS";
 const CLANID = '407685';
-
-export function GetClanMembers() : Promise<Member[]> {
-	return new Promise((resolve, reject) => {
-		const options = {
-         'url': `https://www.bungie.net/Platform/GroupV2/${CLANID}/Members/`,
-         'headers': {
-            'x-api-key': BUNGIEAPIKEY(),
-         },
-      };
-
-		request.get(options, (err, res, body) => {
-			let members: Member[] = [];
-			if(err) {
-				reject(err);
-			}
-			if(res.statusCode !== 200) {
-				reject(`Could not resolve status code: ${res.statusCode}`);
-			}
-
-			let temp = JSON.parse(body);
-
-			temp['Response']['results'].forEach((val : any) => {
-				if(val.hasOwnProperty('destinyUserInfo')) {
-					members.push({
-						'membershipId': val['destinyUserInfo']['membershipId'],
-						'membershipType': val['destinyUserInfo']['membershipType'],
-						'displayName': val['destinyUserInfo']['displayName'],
-						'clanMemberType': val['memberType'],
-						'onlineStatus': val['isOnline'],
-					});
-				}
-			});
-
-			resolve(members);
-		});
-	});
-}
 
 export function GetClanInfo() : Promise<ClanInfo> {
 	return new Promise((resolve, reject) => {
@@ -71,6 +34,7 @@ export function GetClanInfo() : Promise<ClanInfo> {
 							displayName: temp.Response.founder.destinyUserInfo.displayName,
 							clanMemberType: 'Founder',
 							onlineStatus: temp.Response.founder.isOnline,
+							dateLastOn: new Date(),
 						},
 					},
 					flag: {

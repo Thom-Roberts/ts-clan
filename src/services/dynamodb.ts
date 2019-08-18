@@ -51,7 +51,8 @@ function ExtractMemberObjects(dbMembers: any[]): Member[] {
 			'membershipId': dbMember.membershipId.S,
 			'membershipType': parseInt(dbMember.membershipType.S),
 			'clanMemberType': dbMember.clanMemberType.S,
-			'onlineStatus': dbMember.onlineStatus.BOOL,
+			'onlineStatus':  dbMember.onlineStatus.S === 'true',
+			'dateLastOn': new Date(dbMember.dateLastOn.S),
 		};
 	});
 }
