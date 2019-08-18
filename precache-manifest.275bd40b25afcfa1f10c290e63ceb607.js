@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "db9a52a8f0a0e5a62fadfacc444ede62",
+    "revision": "13044e4167cba199377c5119e40c98d5",
     "url": "/ts-clan/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ts-clan/static/css/2.8df821e7.chunk.css"
   },
   {
-    "revision": "b20464c75eb01650c0ab",
+    "revision": "7bf6617922a2e3005b8d",
     "url": "/ts-clan/static/css/main.9b0adc1e.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ts-clan/static/js/2.fc14a107.chunk.js"
   },
   {
-    "revision": "b20464c75eb01650c0ab",
-    "url": "/ts-clan/static/js/main.7d926e40.chunk.js"
+    "revision": "7bf6617922a2e3005b8d",
+    "url": "/ts-clan/static/js/main.cdcf3aea.chunk.js"
   },
   {
     "revision": "bd45939f6f7b8f1a611f",
