@@ -1,5 +1,6 @@
 import React from 'react';
 import { ClanInfo, ClanRewardState } from "./services/Interfaces";
+import HomeRewardStatus from "./HomeRewardStatus";
 const clanBanner = require('./images/banner.png');
 
 interface HomeProps {
@@ -20,26 +21,17 @@ export default function Home(props: HomeProps) {
 			</p>
 			
 			<ul>
-				<li>Name: {name}</li>
-				<li>Creation Date: {creationDate.toString()}</li>
-				<li>About: {about}</li>
-				<li>Motto: {motto}</li>
-				<li>
-					Founder:
-					<ul>
-						<li>
-							Display name: {founder.destinyInfo.displayName}
-						</li>
-						<li>
-							Is Online: {founder.isOnline.toString()}
-						</li>
-					</ul>
-				</li>
 				<li>Nightfall: {nightfall.toString()}</li>
 				<li>Raid: {raid.toString()}</li>
 				<li>Crucible: {crucible.toString()}</li>
 				<li>Gambit: {gambit.toString()}</li>
 				<li>Next cycle: {timeExpires.toString()}</li>
+				<li>
+					<h3>Current rewards this week:</h3>
+				</li>
+				<HomeRewardStatus 
+					Reward={props.RewardState}
+				/>
 			</ul>
 		</div>
 	);
