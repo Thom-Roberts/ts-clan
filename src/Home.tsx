@@ -9,8 +9,8 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-	const { name, creationDate, about, motto, founder } = props.Info;
-	const { nightfall, raid, crucible, gambit, timeExpires } = props.RewardState;
+	const { name, creationDate, about, motto } = props.Info;
+
 	return (
 		<div>
 			<img src={clanBanner} alt={name} style={{width: '50px'}}/>
@@ -21,11 +21,6 @@ export default function Home(props: HomeProps) {
 			</p>
 			
 			<ul>
-				<li>Nightfall: {nightfall.toString()}</li>
-				<li>Raid: {raid.toString()}</li>
-				<li>Crucible: {crucible.toString()}</li>
-				<li>Gambit: {gambit.toString()}</li>
-				<li>Next cycle: {timeExpires.toString()}</li>
 				<li>
 					<h3>Current rewards this week:</h3>
 				</li>
