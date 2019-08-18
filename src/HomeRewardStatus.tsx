@@ -12,8 +12,11 @@ export default function HomeRewardStatus(props: HomeRewardStatusProps) {
       if(value === true) {
          return (
             <div>
-               <span style={{display: 'inline-block', backgroundColor: 'green', width: '14px', height: '14px',
-                              position: 'relative', top: '2px', marginRight: '5px',}}></span>
+               <span style={{display: 'inline-block', backgroundColor: 'black', width: '15px', height: '15px',
+                              position: 'relative', top: '2px', marginRight: '5px', border: '1px solid white',}}>
+                  <span style={{display: 'inline-block', backgroundColor: 'green', width: '11px', height: '11px',
+                                 position: 'relative', bottom: '3px', left: '1px',}}></span>
+               </span>
                {title}
             </div>
          );
@@ -21,8 +24,9 @@ export default function HomeRewardStatus(props: HomeRewardStatusProps) {
       else {
          return (
             <div>
-               <span style={{display: 'inline-block', backgroundColor: 'lightgray', width: '14px', height: '14px',
-                              position: 'relative', top: '2px', marginRight: '5px',}}></span>
+               <span style={{display: 'inline-block', backgroundColor: 'black', width: '15px', height: '15px',
+                              position: 'relative', top: '2px', marginRight: '5px', border: '1px solid white',}}>
+               </span>
                {title}
             </div>
          )
