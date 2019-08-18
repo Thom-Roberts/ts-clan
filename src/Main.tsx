@@ -110,7 +110,7 @@ class Main extends React.Component<{} ,MainState> {
 		const { members, profiles, clanInfo, clanRewardState, fetching, activeItem, animation } = this.state;
 
 		return (
-		<div>
+		<div style={{padding: '0px 5px',}}>
 			{process.env.NODE_ENV !== 'production' && 
 				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
 			}

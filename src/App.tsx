@@ -7,7 +7,7 @@ import { Container } from 'semantic-ui-react';
 const App: React.FC = () => {
 
   return (
-    <Container>
+    <Container style={{backgroundColor: 'white', height: '100%',}}>
       <Main />
     </Container>
   );
