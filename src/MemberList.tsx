@@ -16,6 +16,7 @@ interface MemberListProps {
    favoriteClassTimePlayed: number;
    totalTimePlayed: number;
    onlineStatus: boolean;
+   dateLastOn: Date;
    getStringForTimePlayed: Function;
    pve: pve;
    pvp: pvp;
@@ -64,6 +65,50 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       }, 0);
    }
 
+   private GetTimeToDisplay(dateLastOn: Date) : string {
+      let timeDifferenceMs = Date.now() - dateLastOn.valueOf(); // Time in milliseconds
+      let numMinutes = timeDifferenceMs / 60000; // 1000 ms in a second, 60 seconds in a minute
+      let numHours = numMinutes / 60; // 60 minutes in an hour
+      let numDays = numHours / 24; // 24 hours in a day
+      
+      let roundedMinutes = Math.floor(numMinutes);
+      let roundedHours = Math.floor(numHours);
+      let roundedDays = Math.floor(numDays);
+      let roundedMonths = Math.floor(numDays / 30);
+
+      if(roundedDays > 365) {
+         return `>1 year ago`;
+      }
+
+      if(roundedMonths > 0) {
+         if(roundedMonths > 1) {
+            return `${roundedMonths} months ago`;
+         }
+         return `${roundedMonths} month ago`;
+      }
+
+      if(roundedDays > 0) {
+         if(roundedDays > 1) {
+            return `${roundedDays} days ago`;
+         }
+         return `${roundedDays} day ago`;
+      }
+      if(roundedHours > 0) {
+         if(roundedHours > 1) {
+            return `${roundedHours} hours ago`;
+         }
+         return `${roundedHours} hour ago`;
+      }
+      if(roundedMinutes > 0) {
+         if(roundedMinutes > 1) {
+            return `${roundedMinutes} minutes ago`;
+         }
+         return `${roundedMinutes} minute ago`;
+      }
+      
+      return 'Just now';
+   }
+
    render() {
       const { MemberList } = this.props;
       const { activeIndex, secondActiveIndex } = this.state;
@@ -77,14 +122,16 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
          </span>
       );
 
-      const OFFLINESTATUS = (
-         <span style={{display: 'inline-block', height: '100%',}}>
-            <span style={{display: 'inline-block', width: '15px', height: '15px', 
-                           borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
-                           position: 'relative', top: '2px',}}></span>
-            Offline
-         </span>
-      );
+      const OFFLINESTATUS = (dateLastOn: Date) => {
+         return (
+            <span style={{display: 'inline-block', height: '100%',}}>
+               <span style={{display: 'inline-block', width: '15px', height: '15px', 
+                              borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
+                              position: 'relative', top: '2px',}}></span>
+               Last Online: {this.GetTimeToDisplay(dateLastOn)}
+            </span>
+         );
+      }
 
 
       return (
@@ -119,13 +166,13 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                  {memberprops.displayName}
                                  
                               </span>
-                              <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? ONLINESTATUS : OFFLINESTATUS}
+                              <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? ONLINESTATUS : OFFLINESTATUS(memberprops.dateLastOn)}
                               </span>
                            </Accordion.Title>
                            <Accordion.Content active={activeIndex === index}>
                                  <p>
                                     Favorite Class: {memberprops.favoriteClass}
-                                    <span style={{float: 'right',}}>{memberprops.getStringForTimePlayed(memberprops.favoriteClassTimePlayed)}</span>
+                                    <span style={{float: 'right',}}>{memberprops.getStringForTimePlayed(memberprops.favoriteClassTimePlayed * 60)} / {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}</span>
                                  </p>
 
                               <Accordion styled>

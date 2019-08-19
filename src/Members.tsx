@@ -15,13 +15,15 @@ export default function Members(props: MembersProps) {
    const SPLITORDER = ['Founder', 'Acting Founder', 'Admin', 'Member', 'Beginner', 'None']; 
 
    // Calculate the days and hours for displaying
-   function GetStringForTimePlayed(minutesPlayed: number): string {
+   // Boolean is only true if we're calculating the time for a character, since bungie returns that as minutes played
+   function GetStringForTimePlayed(secondsPlayed: number): string {
+      let minutesPlayed = secondsPlayed / 60;
       let hoursPlayed = minutesPlayed / 60;
       let numDays = Math.floor(hoursPlayed / 24);
       let numHours = Math.floor(hoursPlayed - (numDays * 24));
 
       if(numDays === 0 && numHours === 0) {
-         return `${minutesPlayed} minutes`;
+         return `${Math.floor(minutesPlayed)} minutes`;
       }
 
       return `${numDays}d ${numHours}h`;
@@ -33,6 +35,14 @@ export default function Members(props: MembersProps) {
 
       Members.forEach((member, index) => {
          if(member.clanMemberType === role) {
+            let totalMinutesPlayed = Profiles[index].Stats.pve!.timePlayedNumber; // All these stats were actually in seconds
+            if(Profiles[index].Stats.pvp !== undefined) {
+               totalMinutesPlayed += Profiles[index].Stats.pvp!.timePlayedNumber;
+            }
+            if(Profiles[index].Stats.pveCompetitive !== undefined) {
+               totalMinutesPlayed += Profiles[index].Stats.pveCompetitive!.timePlayedNumber;
+            }
+
             returnVal.push({
                'role': role,
                'membershipId': member.membershipId,
@@ -40,8 +50,9 @@ export default function Members(props: MembersProps) {
                'favoriteClass': Profiles[index].MostPlayedCharacter.class,
                'favoriteClassTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed,
                'membershipType': member.membershipType,
-               'onlineStatus': member.onlineStatus, // TODO: Change to valid online status
-               'totalTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed, // TODO: Change to be the sum of player time
+               'onlineStatus': member.onlineStatus,
+               'dateLastOn': member.dateLastOn,
+               'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
                'pve': Profiles[index].Stats.pve,
                'pvp': Profiles[index].Stats.pvp,
