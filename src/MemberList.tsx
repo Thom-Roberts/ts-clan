@@ -172,7 +172,10 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                            <Accordion.Content active={activeIndex === index}>
                                  <p>
                                     Favorite Class: {memberprops.favoriteClass}
-                                    <span style={{float: 'right',}}>{memberprops.getStringForTimePlayed(memberprops.favoriteClassTimePlayed * 60)} / {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}</span>
+                                    {
+                                       // TODO: Fix this time issue, add a / for character time / total time
+                                    }
+                                    <span style={{float: 'right',}}>{/*memberprops.getStringForTimePlayed(memberprops.favoriteClassTimePlayed * 60)*/}{memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}</span>
                                  </p>
 
                               <Accordion styled>
