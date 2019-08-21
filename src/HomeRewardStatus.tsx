@@ -41,7 +41,7 @@ export default function HomeRewardStatus(props: HomeRewardStatusProps) {
 
             // Credit here: https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects
             let numHours = Math.round(tempTime / 36e5);
-            let numDays = Math.floor(numHours / 24);
+            let numDays = Math.round(numHours / 24);
             if(numDays > 0) {
                if(numDays > 1) {
                   return `${numDays} days`;
@@ -51,7 +51,12 @@ export default function HomeRewardStatus(props: HomeRewardStatusProps) {
                }
             }
             else {
-               return `${numHours} hours`;
+               if(numHours > 1) {
+                  return `${numHours} hours`;   
+               }
+               else {
+                  return `${numHours} hour`;
+               }
             }
 
          })()}
