@@ -1,27 +1,11 @@
 import React, { SyntheticEvent } from 'react';
 import { Accordion, Icon } from 'semantic-ui-react';
-import { pve, pvp, PveCompetitive } from './services/Interfaces';
+import { MemberListProps } from "./services/MemberListProps";
 //import * as psnIcon from './images/psIcon.png';
 //import * as pcIcon from "./images/battleNet.png";
 const psnIcon = require('./images/psIcon.png');
 const xboxIcon = require('./images/xboxIcon.png');
 const pcIcon = require('./images/battleNet.png');
-
-interface MemberListProps {
-   role: string;
-   membershipIds: string[];
-   displayNames: string[];
-   membershipTypes: number[];
-   favoriteClass: string;
-   favoriteClassTimePlayed: number;
-   totalTimePlayed: number;
-   onlineStatuses: boolean[];
-   dateLastOn: Date;
-   getStringForTimePlayed: Function;
-   pve: pve;
-   pvp: pvp;
-   pveCompetitive: PveCompetitive;
-};
 
 interface MemberListState {
    activeIndex: number;
@@ -159,7 +143,7 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                        case 4:
                                           return pcIcon;
                                        default:
-                                          throw new Error(`Invalid membership type: ${memberprops.membershipTypes[0]}`); {/* TODO: Update */}
+                                          throw new Error(`Invalid membership type: ${memberprops.membershipTypes[0]}`);
                                     }
                                  })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
 

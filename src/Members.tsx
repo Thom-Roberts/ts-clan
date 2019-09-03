@@ -1,5 +1,6 @@
 import React from 'react';
 import { BungieAccount, Member, Profile, pve, pvp, PveCompetitive } from "./services/Interfaces";
+import { MemberListProps } from "./services/MemberListProps";
 import MemberList from "./MemberList";
 import _ from 'lodash';
 
@@ -8,22 +9,6 @@ interface MembersProps {
    Members: Member[];
    Profiles: Profile[];
 }
-
-interface MemberListProps { // Used when passing information down to MemberList
-   role: string;
-   membershipIds: string[];
-   displayNames: string[];
-   membershipTypes: number[];
-   favoriteClass: string;
-   favoriteClassTimePlayed: number;
-   totalTimePlayed: number;
-   onlineStatuses: boolean[];
-   dateLastOn: Date;
-   getStringForTimePlayed: Function;
-   pve: pve;
-   pvp: pvp;
-   pveCompetitive: PveCompetitive;
-};
 
 export default function Members(props: MembersProps) {
    const { BungieAccounts, Members, Profiles } = props;
@@ -87,7 +72,7 @@ export default function Members(props: MembersProps) {
                'dateLastOn': account.Memberships[0].dateLastOn,
                'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
-               'pve': account.Profiles[0].Stats.pve as any,
+               'pve': account.Profiles[0].Stats.pve as any, // TODO: Update to include all character stats
                'pvp': account.Profiles[0].Stats.pvp as any,
                'pveCompetitive': account.Profiles[0].Stats.pveCompetitive as any,
             });
