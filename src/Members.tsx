@@ -1,5 +1,5 @@
 import React from 'react';
-import { BungieAccount, Member, Profile } from "./services/Interfaces";
+import { BungieAccount, Member, Profile, pve, pvp, PveCompetitive } from "./services/Interfaces";
 import MemberList from "./MemberList";
 import _ from 'lodash';
 
@@ -8,6 +8,22 @@ interface MembersProps {
    Members: Member[];
    Profiles: Profile[];
 }
+
+interface MemberListProps { // Used when passing information down to MemberList
+   role: string;
+   membershipIds: string[];
+   displayNames: string[];
+   membershipTypes: number[];
+   favoriteClass: string;
+   favoriteClassTimePlayed: number;
+   totalTimePlayed: number;
+   onlineStatuses: boolean[];
+   dateLastOn: Date;
+   getStringForTimePlayed: Function;
+   pve: pve;
+   pvp: pvp;
+   pveCompetitive: PveCompetitive;
+};
 
 export default function Members(props: MembersProps) {
    const { BungieAccounts, Members, Profiles } = props;
@@ -31,8 +47,8 @@ export default function Members(props: MembersProps) {
    }
 
    // Break up members by their types. 
-   function GetByRole(role: string): any[] {
-      let returnVal: any[] = [];
+   function GetByRole(role: string): MemberListProps[] {
+      let returnVal: MemberListProps[] = [];
 
       BungieAccounts.forEach((account) => {
          if(account.Memberships[0].clanMemberType === role) { // TODO: Update to not only check the first membership
@@ -71,9 +87,9 @@ export default function Members(props: MembersProps) {
                'dateLastOn': account.Memberships[0].dateLastOn,
                'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
-               'pve': account.Profiles[0].Stats.pve,
-               'pvp': account.Profiles[0].Stats.pvp,
-               'pveCompetitive': account.Profiles[0].Stats.pveCompetitive,
+               'pve': account.Profiles[0].Stats.pve as any,
+               'pvp': account.Profiles[0].Stats.pvp as any,
+               'pveCompetitive': account.Profiles[0].Stats.pveCompetitive as any,
             });
          }
       });
