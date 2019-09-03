@@ -10,7 +10,7 @@ interface MembersProps {
 }
 
 export default function Members(props: MembersProps) {
-   const { Members, Profiles } = props;
+   const { BungieAccounts, Members, Profiles } = props;
    
    // The order that we grab display the accordions in
    const SPLITORDER = ['Founder', 'Acting Founder', 'Admin', 'Member', 'Beginner', 'None']; 
@@ -34,33 +34,65 @@ export default function Members(props: MembersProps) {
    function GetByRole(role: string): any[] {
       let returnVal: any[] = [];
 
-      Members.forEach((member, index) => {
-         if(member.clanMemberType === role) {
-            let totalMinutesPlayed = Profiles[index].Stats.pve!.timePlayedNumber; // All these stats were actually in seconds
-            if(Profiles[index].Stats.pvp !== undefined) {
-               totalMinutesPlayed += Profiles[index].Stats.pvp!.timePlayedNumber;
-            }
-            if(Profiles[index].Stats.pveCompetitive !== undefined) {
-               totalMinutesPlayed += Profiles[index].Stats.pveCompetitive!.timePlayedNumber;
-            }
-
+      BungieAccounts.forEach((account) => {
+         if(account.Memberships[0].clanMemberType === role) { // TODO: Update to not only check the first membership
+            let totalMinutesPlayed = account.Profiles.reduce((prev, curr) => {
+               prev += curr.Stats.pve!.timePlayedNumber;
+               if(curr.Stats.pvp !== undefined) {
+                  prev += curr.Stats.pvp.timePlayedNumber;
+               }
+               if(curr.Stats.pveCompetitive !== undefined) {
+                  prev += curr.Stats.pveCompetitive.timePlayedNumber;
+               }
+               return prev;
+            }, 0);
+         
+            // TODO: Update to use bungieaccount
             returnVal.push({
                'role': role,
-               'membershipId': member.membershipId,
-               'displayName': member.displayName,
-               'favoriteClass': Profiles[index].MostPlayedCharacter.class,
-               'favoriteClassTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed,
-               'membershipType': member.membershipType,
-               'onlineStatus': member.onlineStatus,
-               'dateLastOn': member.dateLastOn,
+               'membershipId': account.Memberships[0].membershipId,
+               'displayName': account.Memberships[0].displayName,
+               'favoriteClass': account.Profiles[0].MostPlayedCharacter.class,
+               'favoriteClassTimePlayed': account.Profiles[0].MostPlayedCharacter.minutesPlayed,
+               'membershipType': account.Memberships[0].membershipType,
+               'onlineStatus': account.Memberships[0].onlineStatus,
+               'dateLastOn': account.Memberships[0].dateLastOn,
                'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
-               'pve': Profiles[index].Stats.pve,
-               'pvp': Profiles[index].Stats.pvp,
-               'pveCompetitive': Profiles[index].Stats.pveCompetitive,
+               'pve': account.Profiles[0].Stats.pve,
+               'pvp': account.Profiles[0].Stats.pvp,
+               'pveCompetitive': account.Profiles[0].Stats.pveCompetitive,
             });
          }
       });
+
+      // Members.forEach((member, index) => {
+      //    if(member.clanMemberType === role) {
+      //       let totalMinutesPlayed = Profiles[index].Stats.pve!.timePlayedNumber; // All these stats were actually in seconds
+      //       if(Profiles[index].Stats.pvp !== undefined) {
+      //          totalMinutesPlayed += Profiles[index].Stats.pvp!.timePlayedNumber;
+      //       }
+      //       if(Profiles[index].Stats.pveCompetitive !== undefined) {
+      //          totalMinutesPlayed += Profiles[index].Stats.pveCompetitive!.timePlayedNumber;
+      //       }
+
+      //       returnVal.push({
+      //          'role': role,
+      //          'membershipId': member.membershipId,
+      //          'displayName': member.displayName,
+      //          'favoriteClass': Profiles[index].MostPlayedCharacter.class,
+      //          'favoriteClassTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed,
+      //          'membershipType': member.membershipType,
+      //          'onlineStatus': member.onlineStatus,
+      //          'dateLastOn': member.dateLastOn,
+      //          'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
+      //          'getStringForTimePlayed': GetStringForTimePlayed,
+      //          'pve': Profiles[index].Stats.pve,
+      //          'pvp': Profiles[index].Stats.pvp,
+      //          'pveCompetitive': Profiles[index].Stats.pveCompetitive,
+      //       });
+      //    }
+      // });
 
       returnVal = _.sortBy(returnVal, [function(o) { return o.displayName.toLowerCase(); }]);
 
