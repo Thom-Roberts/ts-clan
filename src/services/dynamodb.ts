@@ -47,11 +47,13 @@ export function GetProfiles(): Promise<Profile[]> {
 function ExtractMemberObjects(dbMembers: any[]): Member[] {
 	return dbMembers.map((dbMember) : Member => {
 		return {
+			'bungieMembershipId': dbMember.bungieMembershipId.S,
 			'displayName': dbMember.displayName.S,
 			'membershipId': dbMember.membershipId.S,
 			'membershipType': parseInt(dbMember.membershipType.S),
 			'clanMemberType': dbMember.clanMemberType.S,
 			'onlineStatus':  dbMember.onlineStatus.BOOL,
+			'isPrimary': dbMember.isPrimary.S === 'true',
 			'dateLastOn': new Date(dbMember.dateLastOn.S),
 		};
 	});

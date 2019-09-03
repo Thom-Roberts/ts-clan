@@ -29,11 +29,13 @@ export function GetClanInfo() : Promise<ClanInfo> {
 					founder: {
 						isOnline: temp.Response.founder.isOnline,
 						destinyInfo: {
+							bungieMembershipId: temp.Response.founder.bungieNetUserInfo.membershipId,
 							membershipId: temp.Response.founder.destinyUserInfo.membershipId,
 							membershipType: temp.Response.founder.destinyUserInfo.membershipType,
 							displayName: temp.Response.founder.destinyUserInfo.displayName,
 							clanMemberType: 'Founder',
 							onlineStatus: temp.Response.founder.isOnline,
+							isPrimary: false,
 							dateLastOn: new Date(),
 						},
 					},

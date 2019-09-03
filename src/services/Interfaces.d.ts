@@ -4,13 +4,15 @@ declare module '*.png'{ // Allows png's to be imported
 }
 
 export interface Member {
+	bungieMembershipId: string;
 	membershipId: string;
 	membershipType: number;
 	displayName: string;
 	clanMemberType: string;
 	onlineStatus: boolean;
+	isPrimary: boolean;
 	dateLastOn: Date;
-};
+}
 
 export interface Profile {
 	Stats: Stats;
