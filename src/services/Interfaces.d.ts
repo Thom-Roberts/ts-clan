@@ -3,6 +3,12 @@ declare module '*.png'{ // Allows png's to be imported
 	export = value;
 }
 
+export interface BungieAccount {
+	bungieMembershipId: string;
+	Memberships: Member[];
+	Profiles: Profile[];
+}
+
 export interface Member {
 	bungieMembershipId: string;
 	membershipId: string;
