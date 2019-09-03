@@ -12,7 +12,7 @@ import _ from 'lodash';
 import Home from './Home';
 
 interface MainState {
-	accounts: BungieAccount[];
+	bungieAccounts: BungieAccount[];
 	members: Member[];
 	profiles: Profile[];
 	clanInfo: ClanInfo;
@@ -23,7 +23,7 @@ interface MainState {
 }
 
 const initialState = {
-	accounts: [] as BungieAccount[],
+	bungieAccounts: [] as BungieAccount[],
 	members: [] as Member[],
 	profiles: [] as Profile[],
 	clanInfo: {} as ClanInfo,
@@ -77,7 +77,7 @@ class Main extends React.Component<{} ,MainState> {
 			
 			const BUNGIEACCOUNTS = GroupByBungieAccount(values[0], values[1]);
 			this.setState({
-				accounts: BUNGIEACCOUNTS,
+				bungieAccounts: BUNGIEACCOUNTS,
 				members: values[0],
 				profiles: values[1],
 			});
@@ -107,7 +107,7 @@ class Main extends React.Component<{} ,MainState> {
 	}
 
 	render() {
-		const { members, profiles, clanInfo, clanRewardState, fetching, activeItem, animation } = this.state;
+		const { bungieAccounts, members, profiles, clanInfo, clanRewardState, fetching, activeItem, animation } = this.state;
 
 		return (
 		<div style={{padding: '0px 5px',}}>
@@ -149,6 +149,7 @@ class Main extends React.Component<{} ,MainState> {
 						{activeItem === 'members' && 
 							<div>
 								<Members 
+									BungieAccounts={bungieAccounts}
 									Members={members} 
 									Profiles={profiles}
 								/>

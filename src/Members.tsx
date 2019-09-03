@@ -1,9 +1,10 @@
 import React from 'react';
-import { Member, Profile } from "./services/Interfaces";
+import { BungieAccount, Member, Profile } from "./services/Interfaces";
 import MemberList from "./MemberList";
 import _ from 'lodash';
 
 interface MembersProps {
+   BungieAccounts: BungieAccount[];
    Members: Member[];
    Profiles: Profile[];
 }
