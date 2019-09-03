@@ -19,8 +19,8 @@ export function GetMembers(): Promise<Member[]> {
 				reject(err);
 			}
 			else {
-				let temp = ExtractMemberObjects(data.Items as any[]);
-				resolve(temp);
+				let members = ExtractMemberObjects(data.Items as any[]);
+				resolve(members);
 			}
 		});
 	});
@@ -37,8 +37,8 @@ export function GetProfiles(): Promise<Profile[]> {
 				reject(err);
 			}
 			else {
-				let temp = ExtractProfilesObject(data.Items as any[]);
-				resolve(temp);
+				let profiles = ExtractProfilesObject(data.Items as any[]);
+				resolve(profiles);
 			}
 		});
 	});
@@ -61,22 +61,22 @@ function ExtractMemberObjects(dbMembers: any[]): Member[] {
 
 function ExtractProfilesObject(dbStats: any[]): Profile[] {
 	return dbStats.map((dbStat) : any => {
-		let temp: Profile;
-		temp = {
+		let profile: Profile;
+		profile = {
 			Stats: {
 				membershipId: dbStat.membershipId.S,
 			},
 			MostPlayedCharacter: JSON.parse(dbStat.mostPlayedCharacter.S) as Character,
 		};
 		if(Object.prototype.hasOwnProperty.call(dbStat, 'pve')) {
-			temp.Stats.pve = JSON.parse(dbStat.pve.S);
+			profile.Stats.pve = JSON.parse(dbStat.pve.S);
 		}
 		if(Object.prototype.hasOwnProperty.call(dbStat, 'pvp')) {
-			temp.Stats.pvp = JSON.parse(dbStat.pvp.S);
+			profile.Stats.pvp = JSON.parse(dbStat.pvp.S);
 		}
 		if(Object.prototype.hasOwnProperty.call(dbStat, 'pveCompetitive')) {
-			temp.Stats.pveCompetitive = JSON.parse(dbStat.pveCompetitive.S);
+			profile.Stats.pveCompetitive = JSON.parse(dbStat.pveCompetitive.S);
 		}
-		return temp;
+		return profile;
 	});
 }
