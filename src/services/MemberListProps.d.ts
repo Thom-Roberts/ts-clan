@@ -9,6 +9,7 @@ export interface MemberListProps {
    favoriteClassTimePlayed: number;
    totalTimePlayed: number;
    onlineStatuses: boolean[];
+   isPrimary: boolean[];
    dateLastOn: Date;
    getStringForTimePlayed: Function;
    pve: pve;

@@ -53,12 +53,14 @@ export default function Members(props: MembersProps) {
             let displayNames: string[] = [];
             let membershipTypes: number[] = [];
             let onlineStatuses: boolean[] = [];
+            let isPrimary: boolean[] = [];
 
             account.Memberships.forEach(member => {
                membershipIds.push(member.membershipId);
                displayNames.push(member.displayName);
                membershipTypes.push(member.membershipType);
                onlineStatuses.push(member.onlineStatus);
+               isPrimary.push(member.isPrimary);
             });
 
             returnVal.push({
@@ -69,6 +71,7 @@ export default function Members(props: MembersProps) {
                'favoriteClassTimePlayed': account.Profiles[0].MostPlayedCharacter.minutesPlayed,
                'membershipTypes': membershipTypes,
                'onlineStatuses': onlineStatuses,
+               'isPrimary': isPrimary,
                'dateLastOn': account.Memberships[0].dateLastOn,
                'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
