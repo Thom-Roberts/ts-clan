@@ -1,7 +1,8 @@
 import React, { SyntheticEvent } from 'react';
 import { GetMembers, GetProfiles } from "./services/dynamodb";
 import { GetClanInfo, GetClanRewardState } from "./services/Clan";
-import { Member, ClanInfo, Profile, Stats, ClanRewardState } from "./services/Interfaces";
+import { GroupByBungieAccount } from "./services/Helper";
+import { BungieAccount, Member, ClanInfo, Profile, Stats, ClanRewardState } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
 import PvETable from './PvETable';
 import PvPTable from './PvPTable';
@@ -11,6 +12,7 @@ import _ from 'lodash';
 import Home from './Home';
 
 interface MainState {
+	accounts: BungieAccount[];
 	members: Member[];
 	profiles: Profile[];
 	clanInfo: ClanInfo;
@@ -21,6 +23,7 @@ interface MainState {
 }
 
 const initialState = {
+	accounts: [] as BungieAccount[],
 	members: [] as Member[],
 	profiles: [] as Profile[],
 	clanInfo: {} as ClanInfo,
@@ -44,18 +47,7 @@ class Main extends React.Component<{} ,MainState> {
 	componentDidMount() {
 		if(process.env.NODE_ENV === 'production') {
 			this.FetchFromDatabase();
-
-			let prom1 = GetClanInfo();
-			let prom2 = GetClanRewardState();
-
-			Promise.all([prom1, prom2]).then(values => {
-				this.setState({
-					clanInfo: values[0],
-					clanRewardState: values[1],
-				});
-			}).catch(err => {
-				console.error(err);
-			});
+			this.FetchClanInfo();
 		}
 	}
 
@@ -67,18 +59,7 @@ class Main extends React.Component<{} ,MainState> {
 			});
 			
 			this.FetchFromDatabase();
-			
-			let prom1 = GetClanInfo();
-			let prom2 = GetClanRewardState();
-
-			Promise.all([prom1, prom2]).then(values => {
-				this.setState({
-					clanInfo: values[0],
-					clanRewardState: values[1],
-				});
-			}).catch(err => {
-				console.error(err);
-			});
+			this.FetchClanInfo();
 		}
 	}
 
@@ -93,7 +74,10 @@ class Main extends React.Component<{} ,MainState> {
 		let profiles = GetProfiles();
 		Promise.all([members, profiles]).then(values => {
 			console.log(values);
+			
+			const BUNGIEACCOUNTS = GroupByBungieAccount(values[0], values[1]);
 			this.setState({
+				accounts: BUNGIEACCOUNTS,
 				members: values[0],
 				profiles: values[1],
 			});
@@ -103,6 +87,22 @@ class Main extends React.Component<{} ,MainState> {
 			this.setState({
 				fetching: false,
 			});
+		});
+	}
+
+	private FetchClanInfo() {
+		let prom1 = GetClanInfo();
+		let prom2 = GetClanRewardState();
+
+		Promise.all([prom1, prom2]).then(values => {
+			console.log("Clan info:");
+			console.log(values);
+			this.setState({
+				clanInfo: values[0],
+				clanRewardState: values[1],
+			});
+		}).catch(err => {
+			console.error(err);
 		});
 	}
 
