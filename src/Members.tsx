@@ -48,14 +48,26 @@ export default function Members(props: MembersProps) {
             }, 0);
          
             // TODO: Update to use bungieaccount
+            let membershipIds: string[] = [];
+            let displayNames: string[] = [];
+            let membershipTypes: number[] = [];
+            let onlineStatuses: boolean[] = [];
+
+            account.Memberships.forEach(member => {
+               membershipIds.push(member.membershipId);
+               displayNames.push(member.displayName);
+               membershipTypes.push(member.membershipType);
+               onlineStatuses.push(member.onlineStatus);
+            });
+
             returnVal.push({
                'role': role,
-               'membershipId': account.Memberships[0].membershipId,
-               'displayName': account.Memberships[0].displayName,
+               'membershipIds': membershipIds,
+               'displayNames': displayNames,
                'favoriteClass': account.Profiles[0].MostPlayedCharacter.class,
                'favoriteClassTimePlayed': account.Profiles[0].MostPlayedCharacter.minutesPlayed,
-               'membershipType': account.Memberships[0].membershipType,
-               'onlineStatus': account.Memberships[0].onlineStatus,
+               'membershipTypes': membershipTypes,
+               'onlineStatuses': onlineStatuses,
                'dateLastOn': account.Memberships[0].dateLastOn,
                'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
                'getStringForTimePlayed': GetStringForTimePlayed,
@@ -94,8 +106,10 @@ export default function Members(props: MembersProps) {
       //    }
       // });
 
-      returnVal = _.sortBy(returnVal, [function(o) { return o.displayName.toLowerCase(); }]);
-
+      if(returnVal.length > 0) {
+         returnVal = _.sortBy(returnVal, [function(o) { return o.displayNames[0].toLowerCase(); }]); // TODO: Update
+      }
+      
       return returnVal;
    }
    

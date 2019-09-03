@@ -9,13 +9,13 @@ const pcIcon = require('./images/battleNet.png');
 
 interface MemberListProps {
    role: string;
-   membershipId: string;
-   displayName: string;
-   membershipType: number;
+   membershipIds: string[];
+   displayNames: string[];
+   membershipTypes: number[];
    favoriteClass: string;
    favoriteClassTimePlayed: number;
    totalTimePlayed: number;
-   onlineStatus: boolean;
+   onlineStatuses: boolean[];
    dateLastOn: Date;
    getStringForTimePlayed: Function;
    pve: pve;
@@ -61,7 +61,7 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       const { MemberList } = this.props;
       // Condense the online count
       return MemberList.reduce((total, curr): number => {
-         return curr.onlineStatus ? total + 1 : total;
+         return curr.onlineStatuses[0] ? total + 1 : total; // TODO: Update
       }, 0);
    }
 
@@ -144,14 +144,14 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                <Accordion styled>
                   {MemberList.map((memberprops, index) => {
                      return (
-                        <div key={`MemberList: ${memberprops.membershipId}`}>
+                        <div key={`MemberList: ${memberprops.membershipIds[0]}`}> {/* TODO: Update */}
                            <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}
                               style={{position: 'relative',}}>
                               <Icon name='dropdown' />
                               <span>
                                  {/* Platform image */}
                                  <img src={(function() {
-                                    switch(memberprops.membershipType) {
+                                    switch(memberprops.membershipTypes[0]) { /* TODO: Update */
                                        case 2:
                                           return psnIcon;
                                        case 3:
@@ -159,14 +159,14 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                        case 4:
                                           return pcIcon;
                                        default:
-                                          throw new Error(`Invalid membership type: ${memberprops.membershipType}`);
+                                          throw new Error(`Invalid membership type: ${memberprops.membershipTypes[0]}`); {/* TODO: Update */}
                                     }
                                  })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
 
-                                 {memberprops.displayName}
+                                 {memberprops.displayNames[0]} {/* TODO: Update */}
                                  
                               </span>
-                              <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatus ? ONLINESTATUS : OFFLINESTATUS(memberprops.dateLastOn)}
+                              <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatuses[0] ? ONLINESTATUS : OFFLINESTATUS(memberprops.dateLastOn)} {/* TODO: Update */}
                               </span>
                            </Accordion.Title>
                            <Accordion.Content active={activeIndex === index}>
