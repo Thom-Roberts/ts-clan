@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from 'react';
-import { Accordion, Icon } from 'semantic-ui-react';
+import { Accordion, Icon, Segment} from 'semantic-ui-react';
 import { MemberListProps } from "./services/MemberListProps";
 //import * as psnIcon from './images/psIcon.png';
 //import * as pcIcon from "./images/battleNet.png";
@@ -94,13 +94,12 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
    }
 
    private getOnlineStatus(onlineStatuses: boolean[]): boolean {
-      onlineStatuses.forEach(status => {
+      onlineStatuses.forEach(status => { // return true if one of the online statuses is true
          if(status === true) {
             return true;
          }
       });
-
-      return false;
+      return false; // false if none of them are true
    }
 
    private getDisplayName(displayNames: string[], isPrimary: boolean[]): string {
@@ -131,6 +130,17 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                               borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
                               position: 'relative', top: '2px',}}></span>
                Last Online: {this.getTimeToDisplay(dateLastOn)}
+            </span>
+         );
+      }
+
+      const OFFLINESTATUSTEMP = () => {
+         return (
+            <span style={{display: 'inline-block', height: '100%',}}>
+               <span style={{display: 'inline-block', width: '15px', height: '15px', 
+                              borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
+                              position: 'relative', top: '2px',}}></span>
+               Offline
             </span>
          );
       }
@@ -178,7 +188,31 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     }
                                     <span style={{float: 'right',}}>{memberprops.getStringForTimePlayed(memberprops.favoriteClassTimePlayed * 60)} / {memberprops.getStringForTimePlayed(memberprops.totalTimePlayed)}</span>
                                  </p>
-
+                                 { /* Display each platform they own with their online status here */}
+                                 <Segment.Group>
+                                    {memberprops.membershipIds.map((membershipId, index) => {
+                                       return (
+                                          <Segment key={`MemberListSegment: ${membershipId}`}>
+                                             <img src={(function() { // The icon
+                                                switch(memberprops.membershipTypes[index]) { /* TODO: Update */
+                                                   case 2:
+                                                      return psnIcon;
+                                                   case 3:
+                                                      return xboxIcon;
+                                                   case 4:
+                                                      return pcIcon;
+                                                   default:
+                                                      throw new Error(`Invalid membership type: ${memberprops.membershipTypes[0]}`);
+                                                }
+                                             })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
+                                             <span>{memberprops.displayNames[index]}</span>
+                                             <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatuses[index] ? ONLINESTATUS : OFFLINESTATUSTEMP()} {/* TODO: Update and remove the time last on calculation */}
+                                             </span>
+                                          </Segment>
+                                       );
+                                    })}
+                                 </Segment.Group>
+                                 
                               <Accordion styled>
                                  {memberprops.pve !== undefined &&
                                     <div>
