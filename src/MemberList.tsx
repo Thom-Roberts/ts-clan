@@ -49,7 +49,7 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       }, 0);
    }
 
-   private GetTimeToDisplay(dateLastOn: Date) : string {
+   private getTimeToDisplay(dateLastOn: Date) : string {
       let timeDifferenceMs = Date.now() - dateLastOn.valueOf(); // Time in milliseconds
       let numMinutes = timeDifferenceMs / 60000; // 1000 ms in a second, 60 seconds in a minute
       let numHours = numMinutes / 60; // 60 minutes in an hour
@@ -93,6 +93,24 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       return 'Just now';
    }
 
+   private getOnlineStatus(onlineStatuses: boolean[]): boolean {
+      onlineStatuses.forEach(status => {
+         if(status === true) {
+            return true;
+         }
+      });
+
+      return false;
+   }
+
+   private getDisplayName(displayNames: string[], isPrimary: boolean[]): string {
+      const index =  isPrimary.findIndex(value => { // searches for the primary account
+         return value;
+      });
+
+      return displayNames[index];
+   }
+
    render() {
       const { MemberList } = this.props;
       const { activeIndex, secondActiveIndex } = this.state;
@@ -112,11 +130,10 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                <span style={{display: 'inline-block', width: '15px', height: '15px', 
                               borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
                               position: 'relative', top: '2px',}}></span>
-               Last Online: {this.GetTimeToDisplay(dateLastOn)}
+               Last Online: {this.getTimeToDisplay(dateLastOn)}
             </span>
          );
       }
-
 
       return (
          <div style={{marginBottom: '10px', width: '100%',}}> {/* Space between each accordion */}
@@ -147,10 +164,10 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     }
                                  })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
 
-                                 {memberprops.displayNames[0]} {/* TODO: Update */}
+                                 {this.getDisplayName(memberprops.displayNames, memberprops.isPrimary)} {/* TODO: Update to primary name*/}
                                  
                               </span>
-                              <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatuses[0] ? ONLINESTATUS : OFFLINESTATUS(memberprops.dateLastOn)} {/* TODO: Update */}
+                              <span style={{position: 'absolute', right: '10px',}}>{/*memberprops.onlineStatuses[0]*/this.getOnlineStatus(memberprops.onlineStatuses) ? ONLINESTATUS : OFFLINESTATUS(memberprops.dateLastOn)} {/* TODO: Update */}
                               </span>
                            </Accordion.Title>
                            <Accordion.Content active={activeIndex === index}>
