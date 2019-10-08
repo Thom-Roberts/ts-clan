@@ -1,19 +1,21 @@
 {
   "files": {
-    "main.css": "/ts-clan/static/css/main.9b0adc1e.chunk.css",
-    "main.js": "/ts-clan/static/js/main.aa7d1571.chunk.js",
-    "main.js.map": "/ts-clan/static/js/main.aa7d1571.chunk.js.map",
+    "main.css": "/ts-clan/static/css/main.d391de3a.chunk.css",
+    "main.js": "/ts-clan/static/js/main.e5f21050.chunk.js",
+    "main.js.map": "/ts-clan/static/js/main.e5f21050.chunk.js.map",
     "runtime~main.js": "/ts-clan/static/js/runtime~main.3ed0bf7c.js",
     "runtime~main.js.map": "/ts-clan/static/js/runtime~main.3ed0bf7c.js.map",
     "static/css/2.fb4908fe.chunk.css": "/ts-clan/static/css/2.fb4908fe.chunk.css",
-    "static/js/2.da6f0985.chunk.js": "/ts-clan/static/js/2.da6f0985.chunk.js",
-    "static/js/2.da6f0985.chunk.js.map": "/ts-clan/static/js/2.da6f0985.chunk.js.map",
+    "static/js/2.dbfb9195.chunk.js": "/ts-clan/static/js/2.dbfb9195.chunk.js",
+    "static/js/2.dbfb9195.chunk.js.map": "/ts-clan/static/js/2.dbfb9195.chunk.js.map",
     "index.html": "/ts-clan/index.html",
-    "precache-manifest.335bb90766fbfd88aa387abac2efde8b.js": "/ts-clan/precache-manifest.335bb90766fbfd88aa387abac2efde8b.js",
+    "precache-manifest.661304d6f98bcf84e87536d12b620eed.js": "/ts-clan/precache-manifest.661304d6f98bcf84e87536d12b620eed.js",
     "service-worker.js": "/ts-clan/service-worker.js",
     "static/css/2.fb4908fe.chunk.css.map": "/ts-clan/static/css/2.fb4908fe.chunk.css.map",
-    "static/css/main.9b0adc1e.chunk.css.map": "/ts-clan/static/css/main.9b0adc1e.chunk.css.map",
+    "static/css/main.d391de3a.chunk.css.map": "/ts-clan/static/css/main.d391de3a.chunk.css.map",
     "static/media/banner.png": "/ts-clan/static/media/banner.fc7e81a9.png",
-    "static/media/semantic.min.css": "/ts-clan/static/media/outline-icons.ef60a4f6.woff"
+    "static/media/semantic.min.css": "/ts-clan/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/stadiaIcon.png": "/ts-clan/static/media/stadiaIcon.cb2c0648.png",
+    "static/media/steamIcon.png": "/ts-clan/static/media/steamIcon.4d722827.png"
   }
 }
