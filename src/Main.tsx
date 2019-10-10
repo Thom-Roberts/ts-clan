@@ -4,12 +4,12 @@ import { GetClanInfo, GetClanRewardState } from "./services/Clan";
 import { GroupByBungieAccount } from "./services/Helper";
 import { BungieAccount, Member, ClanInfo, Profile, Stats, ClanRewardState } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
-import PvETable from './PvETable';
-import PvPTable from './PvPTable';
-import PvECompTable from "./PvECompTable";
-import Members from './Members';
+import PvETable from './views/StatTables/PvETable';
+import PvPTable from './views/StatTables/PvPTable';
+import PvECompTable from "./views/StatTables/PvECompTable";
+import Members from './views/Members/Members';
 import _ from 'lodash';
-import Home from './Home';
+import Home from './views/Home/Home';
 
 interface MainState {
 	bungieAccounts: BungieAccount[];

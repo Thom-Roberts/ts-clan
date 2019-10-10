@@ -1,11 +1,11 @@
 import React, { SyntheticEvent } from 'react';
 import { Accordion, Icon, Segment} from 'semantic-ui-react';
-import { MemberListProps } from "./services/MemberListProps";
+import { MemberListProps } from "../../services/MemberListProps";
 //import * as psnIcon from './images/psIcon.png';
 //import * as pcIcon from "./images/battleNet.png";
-const psnIcon = require('./images/psIcon.png');
-const xboxIcon = require('./images/xboxIcon.png');
-const pcIcon = require('./images/battleNet.png');
+const psnIcon = require('../../images/psIcon.png');
+const xboxIcon = require('../../images/xboxIcon.png');
+const pcIcon = require('../../images/battleNet.png');
 
 interface MemberListState {
    activeIndex: number;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { BungieAccount, Member, Profile, pve, pvp, PveCompetitive } from "./services/Interfaces";
-import { MemberListProps } from "./services/MemberListProps";
+import { BungieAccount, Member, Profile, pve, pvp, PveCompetitive } from "../../services/Interfaces";
+import { MemberListProps } from "../../services/MemberListProps";
 import MemberList from "./MemberList";
 import _ from 'lodash';
 

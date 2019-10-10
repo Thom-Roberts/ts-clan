@@ -1,13 +1,13 @@
 import React from 'react';
 import { Table } from "semantic-ui-react";
-import { Member, Stats } from "./services/Interfaces";
+import { Member, Stats } from "../../services/Interfaces";
 // import * as psnIcon from './images/psIcon.png';
 // import * as pcIcon from './images/battleNet.png';
 import _ from 'lodash';
 
-const psnIcon = require('./images/psIcon.png');
-const xboxIcon = require('./images/xboxIcon.png');
-const pcIcon = require('./images/battleNet.png');
+const psnIcon = require('../../images/psIcon.png');
+const xboxIcon = require('../../images/xboxIcon.png');
+const pcIcon = require('../../images/battleNet.png');
 
 interface PvECompTableProps {
    members: Member[];

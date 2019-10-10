@@ -1,5 +1,5 @@
 import React from "react";
-import { ClanRewardState } from "./services/Interfaces";
+import { ClanRewardState } from "../../services/Interfaces";
 import './RewardStatus.css';
 interface HomeRewardStatusProps {
    Reward: ClanRewardState;

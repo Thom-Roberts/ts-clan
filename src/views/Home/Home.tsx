@@ -1,7 +1,7 @@
 import React from 'react';
-import { ClanInfo, ClanRewardState } from "./services/Interfaces";
+import { ClanInfo, ClanRewardState } from "../../services/Interfaces";
 import HomeRewardStatus from "./HomeRewardStatus";
-const clanBanner = require('./images/banner.png');
+const clanBanner = require('../../images/banner.png');
 
 interface HomeProps {
 	Info: ClanInfo;
