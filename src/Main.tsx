@@ -129,9 +129,9 @@ class Main extends React.Component<{} ,MainState> {
 						<Menu pointing secondary>
 							<Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleMenuClick}/>
 							<Menu.Item name='members' active={activeItem === 'members'} onClick={this.handleMenuClick}/>
-							<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
-							<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
-							<Menu.Item name="pveComp" active={activeItem === 'pveComp'} onClick={this.handleMenuClick}/>
+							<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}>PvE</Menu.Item>
+							<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}>PvP</Menu.Item>
+							<Menu.Item name="pveComp" active={activeItem === 'pveComp'} onClick={this.handleMenuClick}>Gambit</Menu.Item>
 						</Menu>
 						
 						<Transition.Group animation={animation} duration='600'>
