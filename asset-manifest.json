@@ -1,21 +1,28 @@
 {
   "files": {
-    "main.css": "/ts-clan/static/css/main.d391de3a.chunk.css",
-    "main.js": "/ts-clan/static/js/main.e5f21050.chunk.js",
-    "main.js.map": "/ts-clan/static/js/main.e5f21050.chunk.js.map",
-    "runtime~main.js": "/ts-clan/static/js/runtime~main.3ed0bf7c.js",
-    "runtime~main.js.map": "/ts-clan/static/js/runtime~main.3ed0bf7c.js.map",
-    "static/css/2.fb4908fe.chunk.css": "/ts-clan/static/css/2.fb4908fe.chunk.css",
-    "static/js/2.dbfb9195.chunk.js": "/ts-clan/static/js/2.dbfb9195.chunk.js",
-    "static/js/2.dbfb9195.chunk.js.map": "/ts-clan/static/js/2.dbfb9195.chunk.js.map",
+    "main.css": "/ts-clan/static/css/main.143b87fe.chunk.css",
+    "main.js": "/ts-clan/static/js/main.987353f9.chunk.js",
+    "main.js.map": "/ts-clan/static/js/main.987353f9.chunk.js.map",
+    "runtime-main.js": "/ts-clan/static/js/runtime-main.79dc4cc3.js",
+    "runtime-main.js.map": "/ts-clan/static/js/runtime-main.79dc4cc3.js.map",
+    "static/css/2.acb891d0.chunk.css": "/ts-clan/static/css/2.acb891d0.chunk.css",
+    "static/js/2.b4f57098.chunk.js": "/ts-clan/static/js/2.b4f57098.chunk.js",
+    "static/js/2.b4f57098.chunk.js.map": "/ts-clan/static/js/2.b4f57098.chunk.js.map",
     "index.html": "/ts-clan/index.html",
-    "precache-manifest.661304d6f98bcf84e87536d12b620eed.js": "/ts-clan/precache-manifest.661304d6f98bcf84e87536d12b620eed.js",
+    "precache-manifest.f1e40493c1f1e2f6af1ac4a6cce8e193.js": "/ts-clan/precache-manifest.f1e40493c1f1e2f6af1ac4a6cce8e193.js",
     "service-worker.js": "/ts-clan/service-worker.js",
-    "static/css/2.fb4908fe.chunk.css.map": "/ts-clan/static/css/2.fb4908fe.chunk.css.map",
-    "static/css/main.d391de3a.chunk.css.map": "/ts-clan/static/css/main.d391de3a.chunk.css.map",
-    "static/media/banner.png": "/ts-clan/static/media/banner.fc7e81a9.png",
+    "static/css/2.acb891d0.chunk.css.map": "/ts-clan/static/css/2.acb891d0.chunk.css.map",
+    "static/css/main.143b87fe.chunk.css.map": "/ts-clan/static/css/main.143b87fe.chunk.css.map",
+    "static/js/2.b4f57098.chunk.js.LICENSE.txt": "/ts-clan/static/js/2.b4f57098.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/ts-clan/static/media/banner.fc7e81a9.png",
     "static/media/semantic.min.css": "/ts-clan/static/media/outline-icons.ef60a4f6.woff",
-    "static/media/stadiaIcon.png": "/ts-clan/static/media/stadiaIcon.cb2c0648.png",
-    "static/media/steamIcon.png": "/ts-clan/static/media/steamIcon.4d722827.png"
-  }
+    "static/media/steam.png": "/ts-clan/static/media/steam.b4a41b84.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.79dc4cc3.js",
+    "static/css/2.acb891d0.chunk.css",
+    "static/js/2.b4f57098.chunk.js",
+    "static/css/main.143b87fe.chunk.css",
+    "static/js/main.987353f9.chunk.js"
+  ]
 }
