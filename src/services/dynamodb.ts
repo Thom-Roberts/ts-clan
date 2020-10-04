@@ -3,7 +3,7 @@ import { Member, Character, Profile } from './Interfaces';
 // Configuring credentials to read/write from app (unauthorized user)
 AWS.config.region = 'us-east-1'; // Region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'us-east-1:ae54b554-e785-4778-91a6-fb40ce7fd5b2',
+	 IdentityPoolId: 'us-east-1:ae54b554-e785-4778-91a6-fb40ce7fd5b2',
 });
 
 const dynamoDb = new AWS.DynamoDB();

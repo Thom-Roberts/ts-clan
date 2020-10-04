@@ -1,17 +1,17 @@
 .outer {
-   display: inline-block;
-   background-color: #131414;
-   width: 15px;
-   height: 15px;
-   position: relative;
-   top: 2px;
-   margin-right: 5px;
-   border: 1px solid white;
-   opacity: 0.9;
+	display: inline-block;
+	background-color: #131414;
+	width: 15px;
+	height: 15px;
+	position: relative;
+	top: 2px;
+	margin-right: 5px;
+	border: 1px solid white;
+	opacity: 0.9;
 }
 
 .remaining-text {
-   font-weight: normal;
-   font-style: italic;
-   font-size: 14px;
+	font-weight: normal;
+	font-style: italic;
+	font-size: 14px;
 }

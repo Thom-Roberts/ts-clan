@@ -1,17 +1,12 @@
 import React from 'react';
 import { Table } from "semantic-ui-react";
 import { Member, Stats } from "../../services/Interfaces";
-// import * as psnIcon from './images/psIcon.png';
-// import * as pcIcon from './images/battleNet.png';
+import { GetMembershipIcon } from '../../services/Helper';
 import _ from 'lodash';
 
-const psnIcon = require('../../images/psIcon.png');
-const xboxIcon = require('../../images/xboxIcon.png');
-const pcIcon = require('../../images/battleNet.png');
-
 interface PvPTableProps {
-   members: Member[];
-   stats: Stats[];
+	members: Member[];
+	stats: Stats[];
 }
 
 interface PvPTableState {
@@ -33,45 +28,45 @@ interface temp {
 }
 
 export default class PvPTable extends React.Component<PvPTableProps, PvPTableState> {
-   constructor(props: any) {
-      super(props);
+	constructor(props: any) {
+		super(props);
 
-      this.state = {
-         column: null,
-         data: this.props.members.map((member, index) => {
-            if(Object.prototype.hasOwnProperty.call(this.props.stats[index], 'pvp')) {
-               return {
-                  'membershipType': member.membershipType,
-                  'name': member.displayName,
-                  'timePlayed': {
-                     'timePlayed': this.props.stats[index].pvp!.timePlayed,
-                     'timePlayedNumber': this.props.stats[index].pvp!.timePlayedNumber
-                  },
-                  'kdRatio': this.props.stats[index].pvp!.kdRatio,
-                  'activitiesWon': this.props.stats[index].pvp!.activitiesWon,
-                  'totalKills': this.props.stats[index].pvp!.kills,
-               };
-            }
-            else {
-               return {
-                  'membershipType': member.membershipType,
-                  'name': member.displayName,
-                  'timePlayed': {
-                     'timePlayed': 'null',
-                     'timePlayedNumber': 0
-                  },
-                  'kdRatio': 'null',
-                  'activitiesWon': 0,
-                  'totalKills': 0,
-               }
-            }
-            
-         }),
-         direction: null,
-      };
-   }
+		this.state = {
+			column: null,
+			data: this.props.members.map((member, index) => {
+				if(Object.prototype.hasOwnProperty.call(this.props.stats[index], 'pvp')) {
+					return {
+						'membershipType': member.membershipType,
+						'name': member.displayName,
+						'timePlayed': {
+							'timePlayed': this.props.stats[index].pvp!.timePlayed,
+							'timePlayedNumber': this.props.stats[index].pvp!.timePlayedNumber
+						},
+						'kdRatio': this.props.stats[index].pvp!.kdRatio,
+						'activitiesWon': this.props.stats[index].pvp!.activitiesWon,
+						'totalKills': this.props.stats[index].pvp!.kills,
+					};
+				}
+				else {
+					return {
+						'membershipType': member.membershipType,
+						'name': member.displayName,
+						'timePlayed': {
+							'timePlayed': 'null',
+							'timePlayedNumber': 0
+						},
+						'kdRatio': 'null',
+						'activitiesWon': 0,
+						'totalKills': 0,
+					}
+				}
+				
+			}),
+			direction: null,
+		};
+	}
 
-   componentDidMount() {
+	componentDidMount() {
 		// Set the initial column sort to descending
 		const { data } = this.state;
 		const temp = _.sortBy(data, [(item: any) => {
@@ -85,52 +80,55 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
 		});
 	}
 
-   // Double function here to make sure that set state isn't called continously
-   handleSort = (clickedColumn: string) => () => {
-      const { column, data, direction } = this.state;
+	// Double function here to make sure that set state isn't called continously
+	handleSort = (clickedColumn: string) => () => {
+		const { column, data, direction } = this.state;
 
-      if(column !== clickedColumn) {
-         this.setState({
-            column: clickedColumn,
-            data: _.sortBy(data, [(item: any) => {
-               if(clickedColumn === 'timePlayed') {
-                  return item['timePlayed'].timePlayedNumber;
-               }
-               else if(clickedColumn === 'kdRatio') {
-                  return parseInt(item['kdRatio']);
-               }
-               else if(clickedColumn === 'name') {
-                  return item[clickedColumn].toLowerCase();
-               }
-               else {
-                  return item[clickedColumn];
-               }
-            }]),
-            direction: 'ascending'
-         });
-         return;
-      }
+		if(clickedColumn === 'membershipType')
+			return;
 
-      this.setState({
-         data: data.reverse(),
-         direction: direction === 'ascending' ? 'descending' : 'ascending',
-      });
-   }
+		if(column !== clickedColumn) {
+			this.setState({
+				column: clickedColumn,
+				data: _.sortBy(data, [(item: any) => {
+					if(clickedColumn === 'timePlayed') {
+						return item['timePlayed'].timePlayedNumber;
+					}
+					else if(clickedColumn === 'kdRatio') {
+						return parseInt(item['kdRatio']);
+					}
+					else if(clickedColumn === 'name') {
+						return item[clickedColumn].toLowerCase();
+					}
+					else {
+						return item[clickedColumn];
+					}
+				}]),
+				direction: 'ascending'
+			});
+			return;
+		}
 
-   render() {
-      const { column, data, direction } = this.state;
+		this.setState({
+			data: data.reverse(),
+			direction: direction === 'ascending' ? 'descending' : 'ascending',
+		});
+	}
 
-      return (
-         <Table sortable celled>
-            <Table.Header>
-               <Table.Row>
-                  <Table.HeaderCell sorted={column === 'membershipType' ? direction : null}>
-                     Platform
-                  </Table.HeaderCell>
-                  <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
+	render() {
+		const { column, data, direction } = this.state;
+
+		return (
+			<Table sortable celled>
+				<Table.Header>
+					<Table.Row>
+						<Table.HeaderCell sorted={column === 'membershipType' ? direction : null}>
+							Platform
+						</Table.HeaderCell>
+						<Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>
 							Name
 						</Table.HeaderCell>
-                  <Table.HeaderCell sorted={column === 'timePlayed' ? direction : null} onClick={this.handleSort('timePlayed')}>
+						<Table.HeaderCell sorted={column === 'timePlayed' ? direction : null} onClick={this.handleSort('timePlayed')}>
 							Time Played
 						</Table.HeaderCell>
 						<Table.HeaderCell sorted={column === 'kdRatio' ? direction : null} onClick={this.handleSort('kdRatio')}>
@@ -142,42 +140,31 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
 						<Table.HeaderCell sorted={column === 'totalKills' ? direction : null} onClick={this.handleSort('totalKills')}>
 							Total Kills
 						</Table.HeaderCell>
-               </Table.Row>
-            </Table.Header>
+					</Table.Row>
+				</Table.Header>
 
-            <Table.Body>
-               {
-                  data.map((member, index) => {
-                     return (
-                        <Table.Row key={`Pvp: ${this.props.members[index].membershipId}`}>
-                           <Table.Cell>
-                              <img src={(function() {
-                              switch(member.membershipType) {
-                                 case 2:
-                                    return psnIcon;
-                                 case 3:
-                                    return xboxIcon;
-                                 case 4:
-                                    return pcIcon;
-                                 default:
-                                    throw new Error(`Invalid membership type: ${member.membershipType}`);
-                              }
-                              })()}
-                              alt={member.membershipType.toString()}
-                              style={{'width': '15px', 'height': '15px'}}
-                              />
-                           </Table.Cell>
-                           <Table.Cell>{member.name}</Table.Cell>
-                           <Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
-                           <Table.Cell>{member.kdRatio}</Table.Cell>
-                           <Table.Cell>{member.activitiesWon}</Table.Cell>
-                           <Table.Cell>{member.totalKills}</Table.Cell>
-                        </Table.Row>
-                     );
-                  })
-               }
-            </Table.Body>
-         </Table>
-      );
-   }
+				<Table.Body>
+					{
+						data.map((member, index) => {
+							return (
+								<Table.Row key={`Pvp: ${this.props.members[index].membershipId}`}>
+									<Table.Cell>
+										<img src={GetMembershipIcon(member.membershipType)}
+											alt={member.membershipType.toString()}
+											style={{'width': '15px', 'height': '15px'}}
+										/>
+									</Table.Cell>
+									<Table.Cell>{member.name}</Table.Cell>
+									<Table.Cell>{member.timePlayed.timePlayed}</Table.Cell>
+									<Table.Cell>{member.kdRatio}</Table.Cell>
+									<Table.Cell>{member.activitiesWon}</Table.Cell>
+									<Table.Cell>{member.totalKills}</Table.Cell>
+								</Table.Row>
+							);
+						})
+					}
+				</Table.Body>
+			</Table>
+		);
+	}
 }

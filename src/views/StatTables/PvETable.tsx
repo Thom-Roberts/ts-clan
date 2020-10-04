@@ -1,13 +1,9 @@
 import React from 'react';
 import { Table } from "semantic-ui-react";
 import { Member, Stats } from "../../services/Interfaces";
-// import * as psnIcon from './images/psIcon.png';
-// import * as pcIcon from './images/battleNet.png';
+import { GetMembershipIcon } from '../../services/Helper';
 import _ from 'lodash';
 
-const psnIcon = require('../../images/psIcon.png');
-const xboxIcon = require('../../images/xboxIcon.png');
-const pcIcon = require('../../images/battleNet.png');
 interface PvETableProps {
 	members: Member[];
 	stats: Stats[];
@@ -73,8 +69,10 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 
 	// Double function here to make sure that set state isn't called continously
 	handleSort = (clickedColumn: string) => () => {
-
 		const { column, data, direction } = this.state;
+
+		if(clickedColumn === 'membershipType')
+			return;
 
 		if(column !== clickedColumn) {
 			this.setState({
@@ -143,20 +141,9 @@ export default class PvETable extends React.Component<PvETableProps, PvETableSta
 						return (
 							<Table.Row key={'pve ' + this.props.members[index].membershipId}>
 								<Table.Cell>
-									<img src={(function() {
-									switch(member.membershipType) {
-										case 2:
-											return psnIcon;
-										case 3:
-											return xboxIcon;
-										case 4:
-											return pcIcon;
-										default:
-											throw new Error(`Invalid membership type: ${member.membershipType}`);
-									}
-									})()}
-									alt={member.membershipType.toString()}
-									style={{'width': '15px', 'height': '15px'}}
+									<img src={GetMembershipIcon(member.membershipType)}
+										alt={member.membershipType.toString()}
+										style={{'width': '15px', 'height': '15px'}}
 									/>
 								</Table.Cell>
 								<Table.Cell>{member.name}</Table.Cell>
