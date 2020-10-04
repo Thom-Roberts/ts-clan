@@ -1,13 +1,15 @@
 import React, { SyntheticEvent } from 'react';
 import { Accordion, Icon, Segment} from 'semantic-ui-react';
 import { MemberListProps } from "../../services/MemberListProps";
-//import * as psnIcon from './images/psIcon.png';
-//import * as pcIcon from "./images/battleNet.png";
+import { GetMembershipIcon } from '../../services/Helper';
+
+
 import './memberList.css';
 
 const psnIcon = require('../../images/psIcon.png');
 const xboxIcon = require('../../images/xboxIcon.png');
-const pcIcon = require('../../images/battleNet.png');
+const steamIcon = require('../../images/steam.png');
+const bnetIcon = require('../../images/battleNet.png');
 
 
 interface MemberListState {
@@ -163,18 +165,7 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                     {memberprops.membershipIds.map((membershipId, index) => {
                                        return (
                                           <Segment key={`MemberListSegment: ${membershipId}`}>
-                                             <img src={(function() { // The icon
-                                                switch(memberprops.membershipTypes[index]) { /* TODO: Update */
-                                                   case 2:
-                                                      return psnIcon;
-                                                   case 3:
-                                                      return xboxIcon;
-                                                   case 4:
-                                                      return pcIcon;
-                                                   default:
-                                                      throw new Error(`Invalid membership type: ${memberprops.membershipTypes[0]}`);
-                                                }
-                                             })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
+                                             <img src={GetMembershipIcon(memberprops.membershipTypes[index])} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
                                              <span>{memberprops.displayNames[index]}</span>
                                              <span className='right-pushed'>
                                                 <span className='online-status-circle-wrapper'>
