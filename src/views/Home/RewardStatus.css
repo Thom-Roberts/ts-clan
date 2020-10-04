@@ -9,3 +9,9 @@
    border: 1px solid white;
    opacity: 0.9;
 }
+
+.remaining-text {
+   font-weight: normal;
+   font-style: italic;
+   font-size: 14px;
+}

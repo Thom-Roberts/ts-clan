@@ -1,14 +1,16 @@
 import React, { SyntheticEvent } from 'react';
+import _ from 'lodash';
+
 import { GetMembers, GetProfiles } from "./services/dynamodb";
 import { GetClanInfo, GetClanRewardState } from "./services/Clan";
 import { GroupByBungieAccount } from "./services/Helper";
 import { BungieAccount, Member, ClanInfo, Profile, Stats, ClanRewardState } from "./services/Interfaces";
 import { Button, Menu, Transition, Segment, Dimmer, Loader } from "semantic-ui-react";
+
 import PvETable from './views/StatTables/PvETable';
 import PvPTable from './views/StatTables/PvPTable';
 import PvECompTable from "./views/StatTables/PvECompTable";
 import Members from './views/Members/Members';
-import _ from 'lodash';
 import Home from './views/Home/Home';
 
 interface MainState {
@@ -30,7 +32,7 @@ const initialState = {
 	clanRewardState: {} as ClanRewardState,
 	fetching: false,
 	activeItem: 'home',
-	animation: 'horizontal flip',
+	animation: 'fade',
 };
 
 // Personal note for later: First {} is props, second {} is state. Each should be an interface
@@ -73,7 +75,6 @@ class Main extends React.Component<{} ,MainState> {
 		let members = GetMembers();
 		let profiles = GetProfiles();
 		Promise.all([members, profiles]).then(values => {
-			console.log(values);
 			
 			const BUNGIEACCOUNTS = GroupByBungieAccount(values[0], values[1]);
 			this.setState({
@@ -95,8 +96,6 @@ class Main extends React.Component<{} ,MainState> {
 		let prom2 = GetClanRewardState();
 
 		Promise.all([prom1, prom2]).then(values => {
-			console.log("Clan info:");
-			console.log(values);
 			this.setState({
 				clanInfo: values[0],
 				clanRewardState: values[1],
@@ -110,111 +109,98 @@ class Main extends React.Component<{} ,MainState> {
 		const { bungieAccounts, members, profiles, clanInfo, clanRewardState, fetching, activeItem, animation } = this.state;
 
 		return (
-		<div style={{padding: '0px 5px',}}>
-			{process.env.NODE_ENV !== 'production' && 
-				<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
-			}
-			
-			{fetching && 
-				<div>
-					<Segment style={{height: '100px',}}>
-						<Dimmer active>
-							<Loader>Loading...</Loader>
-						</Dimmer>
-					</Segment>
-				</div>
-			}
+			<div style={{padding: '0px 5px',}}>
+				{process.env.NODE_ENV !== 'production' && 
+					<Button loading={fetching} onClick={this.handleClick}>Click me</Button>
+				}
+				
+				{fetching && 
+					<div>
+						<Segment style={{height: '100px',}}>
+							<Dimmer active>
+								<Loader>Loading...</Loader>
+							</Dimmer>
+						</Segment>
+					</div>
+				}
 
-			{members.length > 0 && profiles.length > 0 &&
-				<div>
-					<Menu pointing secondary>
-						<Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleMenuClick}/>
-						<Menu.Item name='members' active={activeItem === 'members'} onClick={this.handleMenuClick}/>
-						<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
-						<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
-						<Menu.Item name="pveComp" active={activeItem === 'pveComp'} onClick={this.handleMenuClick}/>
-					</Menu>
-					
-					<Transition.Group animation={animation} duration='600'>
-						{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
-							<div>
-								<Home 
-									Info={clanInfo} 
-									RewardState={clanRewardState}
-								/>
-							</div>
-							
-						}
+				{members.length > 0 && profiles.length > 0 &&
+					<div>
+						<Menu pointing secondary>
+							<Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleMenuClick}/>
+							<Menu.Item name='members' active={activeItem === 'members'} onClick={this.handleMenuClick}/>
+							<Menu.Item name='pve' active={activeItem === 'pve'} onClick={this.handleMenuClick}/>
+							<Menu.Item name='pvp' active={activeItem === 'pvp'} onClick={this.handleMenuClick}/>
+							<Menu.Item name="pveComp" active={activeItem === 'pveComp'} onClick={this.handleMenuClick}/>
+						</Menu>
+						
+						<Transition.Group animation={animation} duration='600'>
+							<div style={{padding: '0px 20px',}}>
+								{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
+									<Home 
+										Info={clanInfo} 
+										RewardState={clanRewardState}
+									/>
+								}
 
-						{activeItem === 'members' && 
-							<div>
-								<Members 
-									BungieAccounts={bungieAccounts}
-									Members={members} 
-									Profiles={profiles}
-								/>
-							</div>
-						}
+								{activeItem === 'members' && 
+									<Members 
+										BungieAccounts={bungieAccounts}
+										Members={members} 
+										Profiles={profiles}
+									/>
+								}
 
-						{activeItem === 'pve' && 
-						<div>
-							PvE Stats
-							<PvETable
-								members={members}
-								stats={(function() {
-									return profiles.map(value => {
-										return value.Stats;
-									});
-								})()}
-							/>
-						</div>
-						}
-						{activeItem === 'pvp' && 
-						<div>
-							PvP Stats
-							<PvPTable
-								members={members}
-								stats={(function() {
-									return profiles.map(value => {
-										return value.Stats;
-									});
-								})()}
-							/>
-						</div>
-						}
-						{activeItem === 'pveComp' && 
-						<div>
-							Gambit Stats
-							{ // Removing gambit stats where the activites played is 0
-								(function() {
-									let statsToPush: Stats[] = [];
-									let memberToPush: Member[] = [];
-									profiles.forEach((profile, index) => {
-										if(profile.Stats.pveCompetitive!.activitesPlayed !== 0) {
-											statsToPush.push(profile.Stats);
-											memberToPush.push(members[index]);
+								{activeItem === 'pve' && 
+									<PvETable
+										members={members}
+										stats={(function() {
+											return profiles.map(value => {
+												return value.Stats;
+											});
+										})()}
+									/>
+								}
+								{activeItem === 'pvp' && 
+									<PvPTable
+										members={members}
+										stats={(function() {
+											return profiles.map(value => {
+												return value.Stats;
+											});
+										})()}
+									/>
+								}
+								{activeItem === 'pveComp' && 
+									<div>
+										{ // Removing gambit stats where the activites played is 0
+											(function() {
+												let statsToPush: Stats[] = [];
+												let memberToPush: Member[] = [];
+												profiles.forEach((profile, index) => {
+													if(profile.Stats.pveCompetitive!.activitesPlayed !== 0) {
+														statsToPush.push(profile.Stats);
+														memberToPush.push(members[index]);
+													}
+												});
+
+												return (
+													<PvECompTable
+														members={memberToPush}
+														stats={statsToPush}
+													/>
+												);
+											})()
 										}
-									});
-
-									return (
-										<PvECompTable
-											members={memberToPush}
-											stats={statsToPush}
-										/>
-									);
-								})()
-							}
-							
-						</div>
-						}
-					</Transition.Group>
-				</div>
-			}
-
-		</div>
+									</div>
+								}
+							</div>
+						</Transition.Group>
+					</div>
+				}
+			</div>
 		);
 	}
-
 }
 
 export default Main;

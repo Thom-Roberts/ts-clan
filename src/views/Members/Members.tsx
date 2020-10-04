@@ -1,5 +1,5 @@
 import React from 'react';
-import { BungieAccount, Member, Profile, pve, pvp, PveCompetitive } from "../../services/Interfaces";
+import { BungieAccount, Member, Profile } from "../../services/Interfaces";
 import { MemberListProps } from "../../services/MemberListProps";
 import MemberList from "./MemberList";
 import _ from 'lodash';
@@ -11,7 +11,7 @@ interface MembersProps {
 }
 
 export default function Members(props: MembersProps) {
-   const { BungieAccounts, Members, Profiles } = props;
+   const { BungieAccounts, } = props;
    
    // The order that we grab display the accordions in
    const SPLITORDER = ['Founder', 'Acting Founder', 'Admin', 'Member', 'Beginner', 'None']; 
@@ -82,34 +82,6 @@ export default function Members(props: MembersProps) {
          }
       });
 
-      // Members.forEach((member, index) => {
-      //    if(member.clanMemberType === role) {
-      //       let totalMinutesPlayed = Profiles[index].Stats.pve!.timePlayedNumber; // All these stats were actually in seconds
-      //       if(Profiles[index].Stats.pvp !== undefined) {
-      //          totalMinutesPlayed += Profiles[index].Stats.pvp!.timePlayedNumber;
-      //       }
-      //       if(Profiles[index].Stats.pveCompetitive !== undefined) {
-      //          totalMinutesPlayed += Profiles[index].Stats.pveCompetitive!.timePlayedNumber;
-      //       }
-
-      //       returnVal.push({
-      //          'role': role,
-      //          'membershipId': member.membershipId,
-      //          'displayName': member.displayName,
-      //          'favoriteClass': Profiles[index].MostPlayedCharacter.class,
-      //          'favoriteClassTimePlayed': Profiles[index].MostPlayedCharacter.minutesPlayed,
-      //          'membershipType': member.membershipType,
-      //          'onlineStatus': member.onlineStatus,
-      //          'dateLastOn': member.dateLastOn,
-      //          'totalTimePlayed': totalMinutesPlayed, // TODO: Change to be the sum of player time
-      //          'getStringForTimePlayed': GetStringForTimePlayed,
-      //          'pve': Profiles[index].Stats.pve,
-      //          'pvp': Profiles[index].Stats.pvp,
-      //          'pveCompetitive': Profiles[index].Stats.pveCompetitive,
-      //       });
-      //    }
-      // });
-
       if(returnVal.length > 0) {
          returnVal = _.sortBy(returnVal, [function(o) { return o.displayNames[0].toLowerCase(); }]); // TODO: Update
       }
@@ -118,7 +90,7 @@ export default function Members(props: MembersProps) {
    }
    
    return (
-      <div style={{backgroundColor: 'white',}}>
+      <div>
          {SPLITORDER.map(role => {
             let roleCount = GetByRole(role);
             if(roleCount.length > 0) {
@@ -127,7 +99,7 @@ export default function Members(props: MembersProps) {
                );
             }
             else {
-               return null;
+               return <div />;
             }
          })}
 

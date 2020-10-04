@@ -6,8 +6,10 @@ import { Container } from 'semantic-ui-react';
 const App: React.FC = () => {
 
   return (
-    <Container style={{backgroundColor: 'white', height: '100%',}}>
-      <Main />
+    <Container className='background'>
+      <div className='background-gradient'>
+        <Main />
+      </div>
     </Container>
   );
 }
