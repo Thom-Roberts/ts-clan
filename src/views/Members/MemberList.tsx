@@ -3,9 +3,12 @@ import { Accordion, Icon, Segment} from 'semantic-ui-react';
 import { MemberListProps } from "../../services/MemberListProps";
 //import * as psnIcon from './images/psIcon.png';
 //import * as pcIcon from "./images/battleNet.png";
+import './memberList.css';
+
 const psnIcon = require('../../images/psIcon.png');
 const xboxIcon = require('../../images/xboxIcon.png');
 const pcIcon = require('../../images/battleNet.png');
+
 
 interface MemberListState {
    activeIndex: number;
@@ -114,37 +117,6 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
       const { MemberList } = this.props;
       const { activeIndex, secondActiveIndex } = this.state;
 
-      const ONLINESTATUS = (
-         <span style={{display: 'inline-block', height: '100%',}}>
-            <span style={{display: 'inline-block', width: '15px', height: '15px', 
-                           borderRadius: '15px', marginRight: '3px', backgroundColor: 'green', 
-                           position: 'relative', top: '2px',}}></span>
-            Online
-         </span>
-      );
-
-      const OFFLINESTATUS = (dateLastOn: Date) => {
-         return (
-            <span style={{display: 'inline-block', height: '100%',}}>
-               <span style={{display: 'inline-block', width: '15px', height: '15px', 
-                              borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
-                              position: 'relative', top: '2px',}}></span>
-               Last Online: {this.getTimeToDisplay(dateLastOn)}
-            </span>
-         );
-      }
-
-      const OFFLINESTATUSTEMP = () => {
-         return (
-            <span style={{display: 'inline-block', height: '100%',}}>
-               <span style={{display: 'inline-block', width: '15px', height: '15px', 
-                              borderRadius: '15px', marginRight: '3px', border: '3px solid lightgrey',
-                              position: 'relative', top: '2px',}}></span>
-               Offline
-            </span>
-         );
-      }
-
       return (
          <div style={{marginBottom: '10px', width: '100%',}}> {/* Space between each accordion */}
             <div style={{maxWidth: '600px', margin: '0 auto',}}>
@@ -155,14 +127,27 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                <Accordion styled>
                   {MemberList.map((memberprops, index) => {
                      return (
-                        <div key={`MemberList: ${memberprops.membershipIds[0]}`}> {/* TODO: Update */}
+                        <div key={`MemberList: ${memberprops.membershipIds[0]}`}>
                            <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}
-                              style={{position: 'relative',}}>
+                                 style={{position: 'relative',}}>
                               <Icon name='dropdown' />
+                              <span className='online-status-circle-wrapper'>
+                                 <div className={`online-status-circle ${this.getOnlineStatus(memberprops.onlineStatuses) ? 'online' : 'offline'}`} />
+                              </span>
                               <span>
                                  {this.getDisplayName(memberprops.displayNames, memberprops.isPrimary)} 
                               </span>
-                              <span style={{position: 'absolute', right: '10px',}}>{/*memberprops.onlineStatuses[0]*/this.getOnlineStatus(memberprops.onlineStatuses) ? ONLINESTATUS : OFFLINESTATUS(memberprops.dateLastOn)} {/* TODO: Update */}
+                              <span className='right-pushed'>
+                                 <span style={{fontWeight: 'normal'}}>
+
+                                 </span>
+                                 {this.getOnlineStatus(memberprops.onlineStatuses) ? (
+                                    'Online'
+                                 ) : (
+                                    <span>
+                                       Last Online: {this.getTimeToDisplay(memberprops.dateLastOn)}
+                                    </span>
+                                 )}
                               </span>
                            </Accordion.Title>
                            <Accordion.Content active={activeIndex === index}>
@@ -191,7 +176,11 @@ export default class MemberList extends React.Component<{MemberList: MemberListP
                                                 }
                                              })()} alt="Temp" style={{width: '15px', height: '15px', marginRight: '5px', position: 'relative', top: '2px',}}/>
                                              <span>{memberprops.displayNames[index]}</span>
-                                             <span style={{position: 'absolute', right: '10px',}}>{memberprops.onlineStatuses[index] ? ONLINESTATUS : OFFLINESTATUSTEMP()} {/* TODO: Update and remove the time last on calculation */}
+                                             <span className='right-pushed'>
+                                                <span className='online-status-circle-wrapper'>
+                                                   <div className={`online-status-circle ${memberprops.onlineStatuses[index] ? 'online' : 'offline'}`} />
+                                                </span>
+                                                {memberprops.onlineStatuses[index] ? 'Online' : 'Offline'}
                                              </span>
                                           </Segment>
                                        );

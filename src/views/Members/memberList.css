@@ -1,0 +1,27 @@
+.online-status-circle-wrapper {
+    display: inline-block;
+    height: 100%;
+    padding-right: 10px;
+}
+
+.online-status-circle {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    position: relative;
+    top: 2px;
+}
+
+.online {
+    background-color: green;
+}
+
+.offline {
+    border: 3px solid lightgrey;
+}
+
+.right-pushed {
+    position: absolute;
+    right: 10px;
+}

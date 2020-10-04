@@ -99,7 +99,7 @@ export default function Members(props: MembersProps) {
                );
             }
             else {
-               return <div />;
+               return null;
             }
          })}
 
