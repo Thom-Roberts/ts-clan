@@ -98,7 +98,7 @@ export default class PvECompTable extends React.Component<PvECompTableProps, PvE
 		const { column, data, direction } = this.state;
 
 		return (
-			<Table sortable celled>
+			<Table sortable basic unstackable>
 				<Table.Header>
 					<Table.Row>
 						<Table.HeaderCell sorted={column === 'membershipType' ? direction : null} onClick={this.handleSort('membershipType')}>

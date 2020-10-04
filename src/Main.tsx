@@ -13,6 +13,8 @@ import PvECompTable from "./views/StatTables/PvECompTable";
 import Members from './views/Members/Members';
 import Home from './views/Home/Home';
 
+import './main.css';
+
 interface MainState {
 	bungieAccounts: BungieAccount[];
 	members: Member[];
@@ -135,7 +137,7 @@ class Main extends React.Component<{} ,MainState> {
 						</Menu>
 						
 						<Transition.Group animation={animation} duration='600'>
-							<div style={{padding: '0px 20px',}}>
+							<div className='transition-container'>
 								{activeItem === 'home' && !(_.isEmpty(clanInfo)) && 
 									<Home 
 										Info={clanInfo} 

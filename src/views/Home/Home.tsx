@@ -12,7 +12,7 @@ export default function Home(props: HomeProps) {
 
 	return (
 		<div>
-			<div style={{textAlign: 'center',}}>
+			<div style={{textAlign: 'center', paddingBottom: '20px',}}>
 				<h2 style={{marginBottom: '0px'}}>
 					{name} 
 				</h2>

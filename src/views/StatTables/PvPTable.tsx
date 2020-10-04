@@ -4,6 +4,8 @@ import { Member, Stats } from "../../services/Interfaces";
 import { GetMembershipIcon } from '../../services/Helper';
 import _ from 'lodash';
 
+import './table.css';
+
 interface PvPTableProps {
 	members: Member[];
 	stats: Stats[];
@@ -119,7 +121,7 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
 		const { column, data, direction } = this.state;
 
 		return (
-			<Table sortable celled>
+			<Table sortable basic unstackable>
 				<Table.Header>
 					<Table.Row>
 						<Table.HeaderCell sorted={column === 'membershipType' ? direction : null}>
@@ -143,7 +145,7 @@ export default class PvPTable extends React.Component<PvPTableProps, PvPTableSta
 					</Table.Row>
 				</Table.Header>
 
-				<Table.Body>
+				<Table.Body className='table-body-custom'>
 					{
 						data.map((member, index) => {
 							return (

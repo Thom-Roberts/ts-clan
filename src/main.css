@@ -1,0 +1,11 @@
+.transition-container {
+	padding: 0px 20px;
+	overflow-x: scroll;
+
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.transition-container::-webkit-scrollbar {
+	display: none;
+}
