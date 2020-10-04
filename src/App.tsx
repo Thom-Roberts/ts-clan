@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import "./Main";
 import Main from './Main';
 import { Container } from 'semantic-ui-react';
 
