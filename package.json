@@ -12,7 +12,7 @@
     "aws-sdk": "^2.496.0",
     "axios": "^0.20.0",
     "gh-pages": "^2.0.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.4.3",
